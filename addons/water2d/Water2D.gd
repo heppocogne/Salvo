@@ -36,10 +36,11 @@ signal water_splashed(water, impact_pos, body_id, body, body_shape, area_shape)
 
 # Called when the node enters the scene tree for the first time.
 func _enter_tree():
-	texture = preload("icon.png")
+#	texture = preload("icon.png")
 	material = preload("water2D_material.tres")
 	add_shape()
-	
+
+
 func add_shape():
 	if not Engine.editor_hint:
 		area2d = Area2D.new()
@@ -51,7 +52,8 @@ func add_shape():
 		area2d.connect("area_shape_exited", self, "_on_Area2D_body_shape_exited") 
 		area2d.connect("body_shape_exited", self, "_on_Area2D_body_shape_exited")
 		add_child(area2d)	
-	
+
+
 func adjust_water_area():
 	if not Engine.editor_hint:
 		var new_rect = RectangleShape2D.new()
@@ -64,16 +66,19 @@ func adjust_water_area():
 		collision_shape.set_shape(new_rect)
 		area2d.position.y = half_water_level
 
+
 func _ready() :
 	material.set_shader_param("scale", scale)
-	
+
+
 func compute_impact_pos(body):
 	var size = get_rect().size * scale
 	var sprite_top_left = global_position - size / 2;
 	var body_pos_relative_top_left = body.global_position - sprite_top_left
 	var surface_y = material.get_shader_param("water_level")
 	return Vector2(body_pos_relative_top_left.x, surface_y)
-	
+
+
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, area_shape):
 	var impact_pos = compute_impact_pos(body)
 	if impact_pos.y <= body.global_position.y :
@@ -81,18 +86,21 @@ func _on_Area2D_body_shape_entered(body_id, body, body_shape, area_shape):
 			add_impact(impact_pos, 10.0, 5.0)
 		emit_signal("water_splashed", self, impact_pos, body_id, body, body_shape, area_shape)
 	emit_signal("water_entered", self, impact_pos, body_id, body, body_shape, area_shape)
-	
+
+
 func _on_Area2D_body_shape_exited(body_id, body, body_shape, area_shape):
 	var impact_pos = compute_impact_pos(body)
 	emit_signal("water_exited", self, impact_pos, body_id, body, body_shape, area_shape)
-	
+
+
 func add_impact(pos, length, height):
 	material.set_shader_param("impact_height_" + str(drop_index), height)
 	material.set_shader_param("impact_length_" + str(drop_index), length)
 	material.set_shader_param("impact_pos_" + str(drop_index), pos)
 	material.set_shader_param("impact_time_" + str(drop_index), OS.get_ticks_msec() / 1000.0)
 	drop_index = (drop_index + 1) % 8
-	
+
+
 func _process(delta):
 	var current_time = OS.get_ticks_msec() / 1000.0
 	material.set_shader_param("current_time", current_time)
@@ -102,58 +110,72 @@ func _process(delta):
 		material.set_shader_param("scale", scale)
 		adjust_water_area()
 
+
 func _on_Water2D_item_rect_changed():
 	adjust_water_area()
 	material.set_shader_param("scale", scale)
-	
+
+
 func set_surface_type(_value):
 	surface_type = _value
 	material.set_shader_param("surface_type", _value)
-	
+
+
 func set_deformation_speed_1( _value ):
 	deformation_speed_1 = _value
 	material.set_shader_param("deformation_speed_1", _value)
-	
+
+
 func set_deformation_speed_2( _value ):
 	deformation_speed_2 = _value
 	material.set_shader_param("deformation_speed_2", _value)
-	
+
+
 func set_deformation_strength( _value ):
 	deformation_strength = _value
 	material.set_shader_param("deformation_strength", _value)
-	
+
+
 func set_deformation_size( _value ):
 	deformation_size = _value
 	material.set_shader_param("tile_factor", Vector2(1.0 / _value.x, 1.0 / _value.y))
-	
+
+
 func set_water_level( _value ):
 	water_level = _value
 	material.set_shader_param("water_level", _value)
-	
+
+
 func set_water_color( _value ):
 	water_color = _value
 	material.set_shader_param("water_color", _value)
-	
+
+
 func set_surface_width( _value ):
 	surface_width = _value
 	material.set_shader_param("surface_width", _value)
-	
+
+
 func set_surface_color( _value ):
 	surface_color = _value
 	material.set_shader_param("surface_color", _value)
-	
+
+
 func set_surface_deformation_strength( _value ):
 	surface_deformation_strength = _value
 	material.set_shader_param("surface_deformation_strength", _value)
-	
+
+
 func set_wave_speed( _value ):
 	wave_speed = _value
 	material.set_shader_param("wave_speed", _value)
-	
+
+
 func set_wave_distance_attenuation( _value ):
 	wave_distance_attenuation = _value
 	material.set_shader_param("wave_distance_attenuation", _value)
-	
+
+
 func set_wave_time_attenuation( _value ):
 	wave_time_attenuation = _value
 	material.set_shader_param("wave_time_attenuation", _value)

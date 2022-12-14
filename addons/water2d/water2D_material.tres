@@ -98,7 +98,7 @@ void fragment() {
 	vec2 deformation = offset * deformation_strength * 0.01;
 	vec2 real_pos = (UV * scale / TEXTURE_PIXEL_SIZE) + (deformation * 500.0 * surface_deformation_strength);
 	if( real_pos.y < water_level) {
-		return;
+		// return;
 	} else if( real_pos.y < water_level + surface_width) {
 		if(surface_type == 0) {
 			COLOR = surface_color;
@@ -131,10 +131,10 @@ shader_param/deformation_speed_1 = Vector2( 1, 1 )
 shader_param/deformation_speed_2 = Vector2( -2, -2 )
 shader_param/deformation_strength = Vector2( 1, 1 )
 shader_param/tile_factor = Vector2( 0.2, 0.2 )
-shader_param/water_level = 20.0
-shader_param/water_color = Color( 0, 0, 1, 0.75 )
-shader_param/surface_width = 2.0
-shader_param/surface_color = Color( 1, 1, 1, 0.75 )
+shader_param/water_level = 0.0
+shader_param/water_color = Color( 0, 0, 1, 0.54902 )
+shader_param/surface_width = 0.0
+shader_param/surface_color = Color( 1, 1, 1, 0 )
 shader_param/surface_deformation_strength = 1.0
 shader_param/surface_type = 1
 shader_param/wave_speed = 1.0
@@ -172,7 +172,7 @@ shader_param/impact_pos_4 = Vector2( -1, -1 )
 shader_param/impact_pos_5 = Vector2( -1, -1 )
 shader_param/impact_pos_6 = Vector2( -1, -1 )
 shader_param/impact_pos_7 = Vector2( -1, -1 )
-shader_param/scale = Vector2( 3.96755, 2.50071 )
-shader_param/current_time = 17953.2
+shader_param/scale = Vector2( 1, 1 )
+shader_param/current_time = 49.353
 shader_param/noise1 = SubResource( 7 )
 shader_param/noise2 = SubResource( 5 )
