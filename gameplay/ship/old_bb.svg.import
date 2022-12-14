@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/old_bb.svg-f1b5154510cb250074e783697e168f9b.stex"
+path="res://.import/old_bb.svg-b0391c404b549414327ea60fceb7224f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gameplay/ships/old_bb.svg"
-dest_files=[ "res://.import/old_bb.svg-f1b5154510cb250074e783697e168f9b.stex" ]
+source_file="res://gameplay/ship/old_bb.svg"
+dest_files=[ "res://.import/old_bb.svg-b0391c404b549414327ea60fceb7224f.stex" ]
 
 [params]
 
