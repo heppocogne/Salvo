@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://gameplay/ship/player/player.gd"
 }, {
 "base": "Area2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://gameplay/projectile/projectile.gd"
+}, {
+"base": "Area2D",
 "class": "Ship",
 "language": "GDScript",
 "path": "res://gameplay/ship/ship.gd"
 } ]
 _global_script_class_icons={
 "Player": "",
+"Projectile": "",
 "Ship": ""
 }
 
