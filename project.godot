@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Ship",
 "language": "GDScript",
 "path": "res://gameplay/ship/ship.gd"
+}, {
+"base": "Node2D",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://gameplay/weapon/weapon.gd"
 } ]
 _global_script_class_icons={
 "Player": "",
 "Projectile": "",
-"Ship": ""
+"Ship": "",
+"Weapon": ""
 }
 
 [application]
