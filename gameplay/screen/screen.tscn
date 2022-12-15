@@ -4,7 +4,7 @@
 [ext_resource path="res://addons/water2d/Water2D.gd" type="Script" id=2]
 [ext_resource path="res://gameplay/screen/simple.png" type="Texture" id=3]
 [ext_resource path="res://addons/water2d/water2D_material.tres" type="Material" id=4]
-[ext_resource path="res://gameplay/ship/player/old_bb.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gameplay/ship/player/player.tscn" type="PackedScene" id=5]
 
 [node name="Screen" type="Control"]
 anchor_right = 1.0
@@ -46,7 +46,7 @@ wave_speed = 0.0
 wave_distance_attenuation = 0.0
 wave_time_attenuation = 0.0
 
-[node name="OldBB" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" instance=ExtResource( 5 )]
+[node name="Player" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" instance=ExtResource( 5 )]
 position = Vector2( 100, 500 )
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
