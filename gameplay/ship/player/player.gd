@@ -1,3 +1,4 @@
+tool
 class_name Player
 extends Ship
 
@@ -7,6 +8,9 @@ func _ready():
 
 
 func _physics_process(delta:float):
+	if Engine.editor_hint:
+		return
+	
 	var l:=Input.is_action_pressed("game_left")
 	var r:=Input.is_action_pressed("game_right")
 	

@@ -1,9 +1,7 @@
-tool
 class_name Weapon
 extends Node2D
 
 export var projectile_scene:PackedScene
-export var base_reload:float setget set_base_reload
 export var base_muzzle_velocity:float
 export var base_dispersion:float
 export var base_accuracy:float
@@ -17,14 +15,6 @@ var _range:float=-1
 func _ready():
 	assert(get_parent().has_method("get_projectile_prototype"))
 	_prototype=get_parent().get_projectile_prototype
-
-
-func get_reload()->float:
-	return base_reload
-
-
-func set_base_reload(r:float):
-	$ReloadTimer.wait_time=base_reload
 
 
 func get_muzzle_velocity()->float:
