@@ -6,6 +6,4 @@
 script = ExtResource( 1 )
 base_muzzle_velocity = 1.0
 
-[node name="ReloadTimer" type="Timer" parent="."]
-
 [connection signal="tree_exited" from="." to="." method="_on_Weapon_tree_exited"]

@@ -1,3 +1,4 @@
+tool
 class_name Ship
 extends Area2D
 
@@ -6,6 +7,7 @@ const water_level:=500
 export var base_speed:=0.0
 export var base_hp:=100
 export var protection:Vector2
+export var base_main_weapon_reload:float=1.0 setget set_base_main_weapon_reload
 
 var hp:=base_hp
 
@@ -24,6 +26,14 @@ func get_max_hp()->int:
 
 func get_speed()->float:
 	return base_speed
+
+
+func get_main_weapon_reload()->float:
+	return base_main_weapon_reload
+
+
+func set_base_main_weapon_reload(t:float):
+	$MainWeaponReloadTimer.wait_time=t
 
 
 # enemy by default
