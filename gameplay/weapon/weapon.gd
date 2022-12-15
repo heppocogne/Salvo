@@ -10,11 +10,13 @@ export var base_accuracy:float
 export var muzzle_position:Vector2
 export var num_barrels:int=1
 
+var _prototype:Projectile
 var _range:float=-1
 
 
 func _ready():
-	pass
+	assert(get_parent().has_method("get_projectile_prototype"))
+	_prototype=get_parent().get_projectile_prototype
 
 
 func get_reload()->float:
@@ -39,7 +41,7 @@ func get_accuracy()->float:
 
 func get_range()->float:
 	if _range<0.0:
-		var instance:Projectile=projectile_scene.instance()
+		var instance:Projectile=_prototype
 		if instance:
 			var v:=get_muzzle_velocity()
 			_range=v*v/(2.0*instance.gravity)
@@ -50,7 +52,7 @@ func get_range()->float:
 
 func put_projectile(rot:float):
 	for _i in num_barrels:
-		var instance:Projectile=projectile_scene.instance()
+		var instance:Projectile=_prototype.duplicate()
 		if instance:
 			GlobalScript.node2d_root.add_child(instance)
 			instance.global_position=to_global(muzzle_position)

@@ -72,6 +72,15 @@ game_right={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Water"
+2d_physics/layer_2="Terrain"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="Enemy"
+2d_physics/layer_5="PlayerProjectile"
+2d_physics/layer_6="EnemyProjectile"
+
 [physics]
 
 common/enable_pause_aware_picking=true

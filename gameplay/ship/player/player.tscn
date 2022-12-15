@@ -5,6 +5,8 @@
 [ext_resource path="res://gameplay/ship/bb.svg" type="Texture" id=3]
 
 [node name="Player" instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 35
 script = ExtResource( 2 )
 base_speed = 17.0
 
