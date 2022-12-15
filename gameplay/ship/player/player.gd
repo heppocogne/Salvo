@@ -30,7 +30,6 @@ func _input(event:InputEvent):
 		var mb:=event as InputEventMouseButton
 		if mb.pressed:
 			if mb.button_index==BUTTON_LEFT and main_weapon_ready:
-				print_debug("mouse_pos.angle()=",mouse_pos.angle())
 				fire_main_weapon(mouse_pos.angle())
 
 
