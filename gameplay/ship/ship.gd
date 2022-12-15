@@ -12,7 +12,8 @@ export var protection:Vector2
 export(Array,NodePath) var main_weapon_nodepaths:Array
 export var base_main_weapon_reload:float=1.0 setget set_base_main_weapon_reload
 
-var hp:=base_hp
+onready var main_weapon_reload_timer:Timer=$MainWeaponReloadTimer
+var hp:=get_max_hp()
 var main_weapons:Array
 var main_weapon_ready:=false
 
@@ -57,6 +58,7 @@ func fire_main_weapon(a:float):
 	for w in main_weapons:
 		w.put_projectile(a)
 	main_weapon_ready=false
+	main_weapon_reload_timer.start(get_main_weapon_reload())
 
 
 func _on_MainWeaponReloadTimer_timeout():
