@@ -6,8 +6,9 @@
 collision_layer = 8
 collision_mask = 19
 script = ExtResource( 1 )
-base_main_battery_reload = 1.0
 
 [node name="MainWeaponReloadTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[connection signal="timeout" from="MainWeaponReloadTimer" to="." method="_on_MainWeaponReloadTimer_timeout"]
