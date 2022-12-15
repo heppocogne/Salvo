@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Salvo"
-run/main_scene="res://gameplay/screen/battle_screen.tscn"
+run/main_scene="res://main/main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
