@@ -58,3 +58,8 @@ func put_projectile(rot:float):
 			instance.global_position=to_global(muzzle_position)
 			# TODO: consider dispersion & accuracy
 			instance.rotation=rot
+
+
+func _on_Weapon_tree_exited():
+	if _prototype:
+		_prototype.queue_free()
