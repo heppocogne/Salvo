@@ -16,7 +16,7 @@ func _physics_process(delta:float):
 	if sync_rotation and velocity.length_squared()!=0:
 		rotation=velocity.angle()
 	
-	velocity+=gravity*gravity_vec
+	velocity+=gravity*gravity_vec*delta
 
 
 func get_damage()->int:
@@ -24,6 +24,6 @@ func get_damage()->int:
 
 
 func _on_Projectile_area_entered(area:Area2D):
-	if area is Ship:
-		(area as Ship).hp-=get_damage()
+	if "hp" in area:
+		area.hp-=get_damage()
 	queue_free()
