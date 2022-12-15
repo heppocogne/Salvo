@@ -34,6 +34,8 @@ scale = Vector2( 1, 6 )
 texture = ExtResource( 3 )
 centered = false
 
+[node name="Tween" type="Tween" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot"]
+
 [node name="WaterArea" type="Area2D" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot"]
 
 [node name="Sprite" type="Sprite" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea"]
