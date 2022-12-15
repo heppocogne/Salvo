@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "BattleScreen",
+"language": "GDScript",
+"path": "res://gameplay/screen/battle_screen.gd"
+}, {
 "base": "Weapon",
 "class": "Gun",
 "language": "GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://gameplay/weapon/weapon.gd"
 } ]
 _global_script_class_icons={
+"BattleScreen": "",
 "Gun": "",
 "Player": "",
 "Projectile": "",
@@ -45,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Salvo"
-run/main_scene="res://gameplay/screen/screen.tscn"
+run/main_scene="res://gameplay/screen/battle_screen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -55,6 +61,7 @@ GlobalScript="*res://global_script.gd"
 [display]
 
 window/size/height=768
+window/size/resizable=false
 
 [gui]
 
