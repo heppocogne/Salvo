@@ -55,10 +55,6 @@ GlobalScript="*res://global_script.gd"
 
 window/size/height=768
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/water2d/plugin.cfg" )
-
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
