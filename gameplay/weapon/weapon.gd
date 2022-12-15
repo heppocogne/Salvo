@@ -46,4 +46,6 @@ func put_projectile(rot:float):
 			GlobalScript.node2d_root.add_child(instance)
 			instance.global_position=to_global(muzzle_position)
 			# TODO: consider dispersion & accuracy
-			instance.rotation=rot
+			if instance.sync_rotation:
+				instance.rotation=rot
+			instance.velocity=Vector2(cos(rot),sin(rot))*get_muzzle_velocity()

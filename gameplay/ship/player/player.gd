@@ -2,9 +2,36 @@ tool
 class_name Player
 extends Ship
 
+const line_color:=Color.darkgray
+const line_length:=32.0
+
+var mouse_pos:Vector2
+
 
 func _ready():
 	pass
+
+
+func _draw():
+	var dir:=mouse_pos.normalized()
+	draw_line(Vector2.ZERO,line_length*dir,line_color)
+	pass
+
+
+func _process(_delta:float):
+	pass
+
+
+func _input(event:InputEvent):
+	if event is InputEventMouseMotion:
+		mouse_pos=get_local_mouse_position()
+		update()
+	elif event is InputEventMouseButton:
+		var mb:=event as InputEventMouseButton
+		if mb.pressed:
+			if mb.button_index==BUTTON_LEFT and main_weapon_ready:
+				print_debug("mouse_pos.angle()=",mouse_pos.angle())
+				fire_main_weapon(mouse_pos.angle())
 
 
 func _physics_process(delta:float):
