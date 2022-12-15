@@ -37,7 +37,7 @@ func set_base_main_weapon_reload(t:float):
 
 
 # enemy by default
-func get_projectile_prototype(projectile_scene:PackedScene)->Projectile:
+func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	var i:Projectile=projectile_scene.instance()
 	i.set_collision_layer_bit(5,true)
 	i.set_collision_mask_bit(2,true)

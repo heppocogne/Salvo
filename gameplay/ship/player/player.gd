@@ -25,7 +25,7 @@ func _physics_process(delta:float):
 	position.x=clamp(position.x+v*delta,0,OS.window_size.x)
 
 
-func get_projectile_prototype(projectile_scene:PackedScene)->Projectile:
+func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	var i:Projectile=projectile_scene.instance()
 	i.set_collision_layer_bit(4,true)
 	i.set_collision_mask_bit(3,true)
