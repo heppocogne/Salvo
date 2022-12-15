@@ -19,5 +19,11 @@ func _physics_process(delta:float):
 	velocity+=gravity*gravity_vec
 
 
+func get_damage()->int:
+	return base_damage
+
+
 func _on_Projectile_area_entered(area:Area2D):
-	pass
+	if area is Ship:
+		(area as Ship).hp-=get_damage()
+	queue_free()

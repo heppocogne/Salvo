@@ -1,8 +1,9 @@
+tool
 class_name Weapon
 extends Node2D
 
 export var projectile_scene:PackedScene
-export var base_reload:float
+export var base_reload:float setget set_base_reload
 export var base_muzzle_velocity:float
 export var base_dispersion:float
 export var base_accuracy:float
@@ -18,6 +19,10 @@ func _ready():
 
 func get_reload()->float:
 	return base_reload
+
+
+func set_base_reload(r:float):
+	$ReloadTimer.wait_time=base_reload
 
 
 func get_muzzle_velocity()->float:
