@@ -3,6 +3,8 @@ class_name Ship
 extends Area2D
 
 signal main_weapon_reloaded()
+signal damaged()
+signal killed()
 
 const water_level:=500
 
@@ -13,7 +15,7 @@ export(Array,NodePath) var main_weapon_nodepaths:Array
 export var base_main_weapon_reload:float=1.0 setget set_base_main_weapon_reload
 
 onready var main_weapon_reload_timer:Timer=$MainWeaponReloadTimer
-var hp:=get_max_hp()
+onready var hp:=get_max_hp()
 var main_weapons:Array
 var main_weapon_ready:=false
 
@@ -59,6 +61,19 @@ func fire_main_weapon(a:float):
 		w.put_projectile(a)
 	main_weapon_ready=false
 	main_weapon_reload_timer.start(get_main_weapon_reload())
+
+
+func damage(p:Projectile):
+	var v_norm:=p.velocity.normalized()
+	var raw_dmg:=v_norm*p.get_damage()-protection
+	raw_dmg.x=max(0,raw_dmg.x)
+	raw_dmg.y=max(0,raw_dmg.y)
+	var dmg_mod:=max(raw_dmg.length(),0.05*p.get_damage())
+	hp-=dmg_mod
+	emit_signal("damaged")
+	if hp<=0:
+		emit_signal("killed")
+		queue_free()
 
 
 func _on_MainWeaponReloadTimer_timeout():

@@ -24,6 +24,6 @@ func get_damage()->int:
 
 
 func _on_Projectile_area_entered(area:Area2D):
-	if "hp" in area:
-		area.hp-=get_damage()
+	if area.has_method("damage"):
+		area.damage(self)
 	queue_free()
