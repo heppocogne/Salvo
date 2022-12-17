@@ -44,6 +44,7 @@ func _physics_process(_delta:float):
 			if !flag:
 				set_label_text("敵を撃沈して下さい")
 				step=KILL_TUTORIAL
+				spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),500)
 		
 		if Input.is_mouse_button_pressed(BUTTON_LEFT):
 			left_clicked=true
