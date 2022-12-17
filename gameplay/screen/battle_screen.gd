@@ -12,7 +12,7 @@ func _process(_delta:float):
 	pass
 
 
-func spawn_enemy_ship(scene:PackedScene, x:float):
+func spawn_enemy_ship(scene:PackedScene, x:float)->Ship:
 	var ship:Ship=scene.instance()
 	GlobalScript.node2d_root.add_child(ship)
 	ship.position.y=500
@@ -26,3 +26,4 @@ func spawn_enemy_ship(scene:PackedScene, x:float):
 		Tween.EASE_OUT
 	)
 	tween.start()
+	return ship

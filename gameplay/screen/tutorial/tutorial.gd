@@ -5,11 +5,13 @@ enum{
 	MOVE_TUTORIAL,
 	FIRE_TUTORIAL,
 	KILL_TUTORIAL,
+	TUTORIAL_END,
 }
 var step:=NONE
 var move_left:=false
 var move_right:=false
 var left_clicked:=false
+var enemy_killed:=false
 
 
 func _ready():
@@ -44,10 +46,20 @@ func _physics_process(_delta:float):
 			if !flag:
 				set_label_text("敵を撃沈して下さい")
 				step=KILL_TUTORIAL
-				spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),500)
+				var ship:=spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),500)
+				ship.connect("killed",self,"_on_Enemy_Killed")
 		
 		if Input.is_mouse_button_pressed(BUTTON_LEFT):
 			left_clicked=true
+	
+	if step==KILL_TUTORIAL:
+		if enemy_killed:
+			set_label_text("")
+			step=TUTORIAL_END
+
+
+func _on_Enemy_Killed():
+	enemy_killed=true
 
 
 func set_label_text(text:String):
