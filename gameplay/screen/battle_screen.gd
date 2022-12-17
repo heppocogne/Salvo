@@ -6,6 +6,7 @@ onready var tween:Tween=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Twe
 
 func _ready():
 	GlobalScript.node2d_root=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot
+	GlobalScript.water_area=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea
 
 
 func _process(_delta:float):

@@ -26,4 +26,8 @@ func get_damage()->int:
 func _on_Projectile_area_entered(area:Area2D):
 	if area.has_method("damage"):
 		area.damage(self)
+	elif area==GlobalScript.water_area:
+		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
+		GlobalScript.node2d_root.add_child(splash)
+		splash.global_position=global_position
 	queue_free()
