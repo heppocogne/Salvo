@@ -14,6 +14,7 @@ base_speed = 17.0
 base_hp = 1000
 protection = Vector2( 254, 25 )
 main_weapon_nodepaths = [ NodePath("MainGun1"), NodePath("MainGun2"), NodePath("MainGun3"), NodePath("MainGun4") ]
+base_main_weapon_reload = 10.0
 base_main_weapon_dispersion = 0.2
 
 [node name="MainGun1" parent="." index="0" instance=ExtResource( 4 )]
@@ -36,3 +37,6 @@ position = Vector2( 0, -10.5 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 flip_h = false
+
+[node name="MainWeaponReloadTimer" parent="." index="6"]
+wait_time = 10.0

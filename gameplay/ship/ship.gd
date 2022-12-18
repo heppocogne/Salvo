@@ -48,6 +48,7 @@ func get_main_weapon_reload()->float:
 
 
 func set_base_main_weapon_reload(t:float):
+	base_main_weapon_reload=t
 	$MainWeaponReloadTimer.wait_time=t
 
 
