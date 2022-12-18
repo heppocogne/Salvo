@@ -30,6 +30,7 @@ func _on_Projectile_area_entered(area:Area2D):
 		GlobalScript.node2d_root.add_child(explosion)
 		explosion.global_position=global_position
 		explosion.scale=0.05*Vector2(1,1)
+		explosion.speed_scale=2.0
 	elif area==GlobalScript.water_area:
 		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
 		GlobalScript.node2d_root.add_child(splash)
