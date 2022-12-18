@@ -4,6 +4,7 @@ extends Area2D
 export var base_damage:int=1
 export var sync_rotation:bool=true
 
+var invalid:=false
 var velocity:Vector2
 
 
@@ -24,6 +25,10 @@ func get_damage()->int:
 
 
 func _on_Projectile_area_entered(area:Area2D):
+	if invalid:
+		return
+	invalid=true
+	
 	if "is_enemy" in area and !area.is_enemy:
 		GlobalScript.enemy_hit+=1
 	

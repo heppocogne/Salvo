@@ -12,4 +12,4 @@ func _on_Tutorial_pressed():
 
 
 func _on_Stage_1_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to(preload("res://gameplay/screen/stage_1/stage_1.tscn"))

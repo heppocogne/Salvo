@@ -67,6 +67,7 @@ func fire_main_weapon(rot:float):
 	var c:=global_position.y-500
 	var t:=(-b+sqrt(b*b-4*a*c))/(2*a)
 	var pos:=Vector2(main_weapons[0].get_muzzle_velocity()*cos(rot)*t+global_position.x,500)
+	i.queue_free()
 	
 	var dist2_min:float=INF
 	for n in GlobalScript.node2d_root.get_children():
