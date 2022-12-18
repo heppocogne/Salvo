@@ -39,8 +39,12 @@ func _on_Projectile_area_entered(area:Area2D):
 		explosion.global_position=global_position
 		explosion.scale=0.05*Vector2(1,1)
 		explosion.speed_scale=2.0
+		
+		GlobalScript.play_sound("res://gameplay/effect/tm2_bom001.wav")
 	elif area==GlobalScript.water_area:
 		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
 		GlobalScript.node2d_root.add_child(splash)
 		splash.global_position=global_position
+		
+		GlobalScript.play_sound("res://gameplay/effect/bom00.wav")
 	queue_free()

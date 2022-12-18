@@ -10,3 +10,12 @@ var enemy_hit:=0
 
 func _ready():
 	player_salvo_diff=[]
+
+
+func play_sound(path:String):
+	var a:=AudioStreamPlayer2D.new()
+	node2d_root.add_child(a)
+	a.stream=load(path)
+	a.play()
+	yield(a,"finished")
+	a.queue_free()
