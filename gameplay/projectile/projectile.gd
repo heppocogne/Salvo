@@ -24,6 +24,9 @@ func get_damage()->int:
 
 
 func _on_Projectile_area_entered(area:Area2D):
+	if "is_enemy" in area and !area.is_enemy:
+		GlobalScript.enemy_hit+=1
+	
 	if area.has_method("damage"):
 		area.damage(self)
 		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
