@@ -2,7 +2,9 @@ extends Control
 
 
 func _ready():
-	pass
+	for b in $Panel/VBoxContainer/HBoxContainer/GridContainer.get_children():
+		if SaveData.has_key(b.save_data_key):
+			b.unlocked=SaveData.read(b.save_data_key)
 
 
 func _on_Tutorial_pressed():

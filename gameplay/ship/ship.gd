@@ -12,7 +12,9 @@ export var base_speed:=0.0
 export var base_hp:=100
 export var protection:Vector2
 export(Array,NodePath) var main_weapon_nodepaths:Array
-export var base_main_weapon_reload:float=1.0 setget set_base_main_weapon_reload
+export var base_main_weapon_reload:=1.0 setget set_base_main_weapon_reload
+export var base_main_weapon_accuracy:=0.0
+export var base_main_weapon_dispersion:=0.0
 
 onready var main_weapon_reload_timer:Timer=$MainWeaponReloadTimer
 onready var hp:=get_max_hp()
@@ -48,6 +50,14 @@ func set_base_main_weapon_reload(t:float):
 	$MainWeaponReloadTimer.wait_time=t
 
 
+func get_main_weapon_accuracy()->float:
+	return base_main_weapon_accuracy
+
+
+func get_main_weapon_dispersion()->float:
+	return base_main_weapon_dispersion
+
+
 # enemy by default
 func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	var i:Projectile=projectile_scene.instance()
@@ -58,7 +68,7 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 
 func fire_main_weapon(a:float):
 	for w in main_weapons:
-		w.put_projectile(a)
+		w.put_projectile(a,get_main_weapon_dispersion(),get_main_weapon_accuracy())
 	main_weapon_ready=false
 	main_weapon_reload_timer.start(get_main_weapon_reload())
 

@@ -44,7 +44,7 @@ func _physics_process(_delta:float):
 					return
 			
 			if !flag:
-				set_label_text("敵を撃沈して下さい")
+				set_label_text("敵を撃沈せよ")
 				step=KILL_TUTORIAL
 				var ship:=spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),500)
 				ship.connect("killed",self,"_on_Enemy_Killed")
@@ -82,4 +82,4 @@ func set_label_text(text:String):
 
 
 func _on_Button_pressed():
-	get_tree().change_scene_to(preload("res://main/main.tscn"))
+	get_tree().change_scene_to(load("res://main/main.tscn"))
