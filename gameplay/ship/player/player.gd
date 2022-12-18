@@ -63,6 +63,14 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	return i
 
 
+func _damage_popup(d:int,pos:Vector2):
+	var popup:DamageIndicator=preload("res://gameplay/ship/damage_indicator.tscn").instance()
+	popup.text=str(d)
+	popup.font_color=Color.red
+	popup.rect_position=pos+Vector2(0,-64)
+	GlobalScript.node2d_root.add_child(popup)
+
+
 func _add_sinking_ship():
 	var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
 	sinking.texture=$Sprite.texture
