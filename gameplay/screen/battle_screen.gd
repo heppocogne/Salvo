@@ -28,3 +28,11 @@ func spawn_enemy_ship(scene:PackedScene, x:float)->Ship:
 	)
 	tween.start()
 	return ship
+
+
+func _on_Timer_timeout():
+	pass
+
+
+func _on_Button_pressed():
+	pass

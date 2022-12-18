@@ -16,6 +16,8 @@ func _ready():
 			"upgrade_point":0,
 			"stage_1_unlocked":true,
 		}
+	
+	print_debug("save_data=",_data)
 
 
 func _on_SaveData_tree_exiting():

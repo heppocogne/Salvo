@@ -44,7 +44,7 @@ func _physics_process(_delta:float):
 					return
 			
 			if !flag:
-				set_label_text("敵を撃沈して下さい")
+				set_label_text("敵を撃沈せよ")
 				step=KILL_TUTORIAL
 				var ship:=spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),500)
 				ship.connect("killed",self,"_on_Enemy_Killed")
@@ -54,8 +54,10 @@ func _physics_process(_delta:float):
 	
 	if step==KILL_TUTORIAL:
 		if enemy_killed:
-			set_label_text("")
+			set_label_text("チュートリアル完了")
+			$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
 			step=TUTORIAL_END
+			SaveData.store("stage_1_unlocked",true)
 
 
 func _on_Enemy_Killed():
@@ -63,7 +65,7 @@ func _on_Enemy_Killed():
 
 
 func set_label_text(text:String):
-	var l:Label=$VBoxContainer/ViewportContainer/CenterContainer/Label
+	var l:Label=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label
 	l.text=text
 	l.percent_visible=0.0
 	var t:Tween=l.get_node("Tween")
@@ -77,3 +79,7 @@ func set_label_text(text:String):
 		Tween.EASE_IN_OUT
 	)
 	t.start()
+
+
+func _on_Button_pressed():
+	get_tree().change_scene_to(load("res://main/main.tscn"))
