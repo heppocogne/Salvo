@@ -73,6 +73,17 @@ func damage(p:Projectile):
 	emit_signal("damaged")
 	if hp<=0:
 		emit_signal("killed")
+		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
+		GlobalScript.node2d_root.add_child(explosion)
+		explosion.global_position=global_position
+		explosion.scale=0.15*Vector2(1,1)
+		
+		var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
+		sinking.texture=$Sprite.texture
+		sinking.get_node("Sprite").flip_h=true
+		GlobalScript.node2d_root.add_child(sinking)
+		sinking.global_position=global_position
+		
 		queue_free()
 
 
