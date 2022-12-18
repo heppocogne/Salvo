@@ -3,8 +3,8 @@
 [ext_resource path="res://gameplay/projectile/shell.svg" type="Texture" id=1]
 [ext_resource path="res://gameplay/projectile/projectile.tscn" type="PackedScene" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 1.25
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2.5, 1 )
 
 [node name="Shell" instance=ExtResource( 2 )]
 base_damage = 127

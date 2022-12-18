@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://gameplay/ship/ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gameplay/ship/enemy/old_bb.svg" type="Texture" id=2]
+[ext_resource path="res://gameplay/weapon/gun/large_gun.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gameplay/ship/enemy/ai_ship.gd" type="Script" id=4]
+
+[node name="OlbBattleship" instance=ExtResource( 1 )]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 4 )
+base_hp = 1000
+protection = Vector2( 200, 60 )
+main_weapon_nodepaths = [ NodePath("LargeGun"), NodePath("LargeGun2") ]
+base_main_weapon_reload = 8.0
+base_main_weapon_dispersion = 0.25
+
+[node name="CollisionPolygon2D" parent="." index="0"]
+polygon = PoolVector2Array( -120, 0, 120, 0, 118, -10, 51, -10, 51, -22, -41, -22, -41, -10, -118, -10 )
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2( 0, -36 )
+texture = ExtResource( 2 )
+
+[node name="LargeGun" parent="." index="3" instance=ExtResource( 3 )]
+position = Vector2( 62, -14 )
+
+[node name="LargeGun2" parent="." index="4" instance=ExtResource( 3 )]
+position = Vector2( -52, -14 )

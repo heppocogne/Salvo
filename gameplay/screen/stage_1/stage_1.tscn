@@ -5,3 +5,8 @@
 
 [node name="Stage1" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" index="4"]
+one_shot = true
+
+[connection signal="timeout" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Timer" to="." method="_on_Timer_timeout2"]

@@ -8,6 +8,8 @@ func _ready():
 
 
 func _physics_process(delta:float):
+	if !GlobalScript.node2d_root.get_node("Player"):
+		return
 	if main_weapon_ready and position.distance_to(GlobalScript.node2d_root.get_node("Player").position)<=main_weapons[0].get_range():
 		var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
 		var p_diff:Vector2=GlobalScript.node2d_root.get_node("Player").global_position-main_weapons[0].global_position
