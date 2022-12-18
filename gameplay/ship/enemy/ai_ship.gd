@@ -19,6 +19,5 @@ func _physics_process(delta:float):
 		var d:=b*b-4*a*c
 #		print_debug("d=",d)
 		var tan_th:=(-b-sqrt(b*b-4*a*c))/(2*a)
-		print_debug("atan_th=",atan(tan_th))
 		i.queue_free()
 		fire_main_weapon(PI+atan(tan_th))
