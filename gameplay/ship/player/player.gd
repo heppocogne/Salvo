@@ -2,6 +2,8 @@ tool
 class_name Player
 extends Ship
 
+signal main_weapon_relaod_time_left_changed(t)
+
 const line_color:=Color.darkgray
 const line_length:=64.0
 
@@ -19,7 +21,10 @@ func _draw():
 
 
 func _process(_delta:float):
-	pass
+	if Engine.editor_hint:
+		return
+	if !main_weapon_reload_timer.is_stopped():
+		emit_signal("main_weapon_relaod_time_left_changed",main_weapon_reload_timer.time_left)
 
 
 func _input(event:InputEvent):
