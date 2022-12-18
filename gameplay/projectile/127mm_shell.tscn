@@ -7,7 +7,7 @@
 extents = Vector2( 2.5, 1 )
 
 [node name="Shell" instance=ExtResource( 2 )]
-base_damage = 305
+base_damage = 127
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )

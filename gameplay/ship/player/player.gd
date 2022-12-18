@@ -3,7 +3,7 @@ class_name Player
 extends Ship
 
 const line_color:=Color.darkgray
-const line_length:=32.0
+const line_length:=64.0
 
 var mouse_pos:Vector2
 
@@ -58,6 +58,14 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	return i
 
 
+func _add_sinking_ship():
+	var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
+	sinking.texture=$Sprite.texture
+	sinking.get_node("Sprite").scale=scale*get_node("Sprite").scale
+	GlobalScript.node2d_root.add_child(sinking)
+	sinking.global_position=global_position
+
+
 func fire_main_weapon(rot:float):
 	.fire_main_weapon(rot)
 	
@@ -67,6 +75,7 @@ func fire_main_weapon(rot:float):
 	var c:=global_position.y-500
 	var t:=(-b+sqrt(b*b-4*a*c))/(2*a)
 	var pos:=Vector2(main_weapons[0].get_muzzle_velocity()*cos(rot)*t+global_position.x,500)
+	i.queue_free()
 	
 	var dist2_min:float=INF
 	for n in GlobalScript.node2d_root.get_children():

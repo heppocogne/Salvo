@@ -22,7 +22,7 @@ func get_range()->float:
 		var instance:Projectile=get_parent().get_projectile_instance(projectile_scene)
 		if instance:
 			var v:=get_muzzle_velocity()
-			_range=v*v/(2.0*instance.gravity)
+			_range=v*v/instance.gravity
 			instance.queue_free()
 		else:
 			_range=0.0

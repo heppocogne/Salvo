@@ -76,6 +76,9 @@ func fire_main_weapon(a:float):
 
 
 func damage(p:Projectile):
+	if hp<=0:
+		return
+	
 	var v_norm:=p.velocity.normalized()
 	var raw_dmg:=v_norm*p.get_damage()-protection
 	raw_dmg.x=max(0,raw_dmg.x)
@@ -90,13 +93,18 @@ func damage(p:Projectile):
 		explosion.global_position=global_position
 		explosion.scale=0.15*Vector2(1,1)
 		
-		var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
-		sinking.texture=$Sprite.texture
-		sinking.get_node("Sprite").flip_h=true
-		GlobalScript.node2d_root.add_child(sinking)
-		sinking.global_position=global_position
+		_add_sinking_ship()
 		
 		queue_free()
+
+
+func _add_sinking_ship():
+	var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
+	sinking.texture=$Sprite.texture
+	sinking.get_node("Sprite").flip_h=true
+	sinking.get_node("Sprite").scale=scale*get_node("Sprite").scale
+	GlobalScript.node2d_root.add_child(sinking)
+	sinking.global_position=global_position
 
 
 func _on_MainWeaponReloadTimer_timeout():

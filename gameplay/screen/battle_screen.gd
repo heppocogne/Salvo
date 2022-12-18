@@ -30,6 +30,23 @@ func spawn_enemy_ship(scene:PackedScene, x:float)->Ship:
 	return ship
 
 
+func set_label_text(text:String):
+	var l:Label=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label
+	l.text=text
+	l.percent_visible=0.0
+	var t:Tween=l.get_node("Tween")
+	t.interpolate_property(
+		l,
+		"percent_visible",
+		0.0,
+		1.0,
+		0.5,	# duration
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
+	)
+	t.start()
+
+
 func _on_Timer_timeout():
 	pass
 
