@@ -56,3 +56,22 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	i.set_collision_layer_bit(4,true)
 	i.set_collision_mask_bit(3,true)
 	return i
+
+
+func fire_main_weapon(rot:float):
+	.fire_main_weapon(rot)
+	
+	var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
+	var a:=0.5*i.gravity
+	var b:float=main_weapons[0].get_muzzle_velocity()*sin(rot)
+	var c:=global_position.y-500
+	var t:=(-b+sqrt(b*b-4*a*c))/(2*a)
+	var pos:=Vector2(main_weapons[0].get_muzzle_velocity()*cos(rot)*t+global_position.x,500)
+	
+	var dist2_min:float=INF
+	for n in GlobalScript.node2d_root.get_children():
+		if "is_enemy" in n and n!=self:
+			if n.global_position.distance_squared_to(pos)<dist2_min:
+				dist2_min=n.global_position.distance_squared_to(pos)
+	if dist2_min!=INF:
+		GlobalScript.player_salvo_diff.push_back(dist2_min)

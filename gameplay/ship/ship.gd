@@ -8,6 +8,7 @@ signal killed()
 
 const water_level:=500
 
+export var is_enemy:=true
 export var base_speed:=0.0
 export var base_hp:=100
 export var protection:Vector2
