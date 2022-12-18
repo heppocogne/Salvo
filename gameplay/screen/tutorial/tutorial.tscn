@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://gameplay/screen/battle_screen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/screen/tutorial/tutorial.gd" type="Script" id=2]
 [ext_resource path="res://fonts/SourceHanSansHW-Regular.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -15,20 +16,32 @@ script = ExtResource( 2 )
 margin_right = 1024.0
 margin_bottom = 576.0
 
-[node name="Label" type="Label" parent="VBoxContainer/ViewportContainer/CenterContainer" index="0"]
-modulate = Color( 0, 0, 0, 1 )
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ViewportContainer/CenterContainer" index="0"]
 margin_left = 512.0
 margin_top = 264.0
 margin_right = 512.0
 margin_bottom = 312.0
+
+[node name="Label" type="Label" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer" index="0"]
+modulate = Color( 0, 0, 0, 1 )
+margin_bottom = 48.0
 custom_fonts/font = SubResource( 1 )
 percent_visible = 0.0
 
-[node name="Tween" type="Tween" parent="VBoxContainer/ViewportContainer/CenterContainer/Label" index="0"]
+[node name="Tween" type="Tween" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label" index="0"]
 
-[node name="Timer" type="Timer" parent="VBoxContainer/ViewportContainer/CenterContainer/Label" index="1"]
+[node name="Timer" type="Timer" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label" index="1"]
 wait_time = 0.5
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="VBoxContainer/ViewportContainer/CenterContainer/Label/Timer" to="." method="_on_Timer_timeout"]
+[node name="Button" type="Button" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer" index="1"]
+visible = false
+margin_top = 52.0
+margin_right = 44.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 4 )
+text = "戻る"
+
+[connection signal="timeout" from="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
