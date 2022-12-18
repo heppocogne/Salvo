@@ -86,6 +86,7 @@ func damage(p:Projectile):
 	var dmg_mod:=max(raw_dmg.length(),0.05*p.get_damage())
 	hp-=dmg_mod
 	emit_signal("damaged")
+	_damage_popup(dmg_mod,p.position)
 	if hp<=0:
 		emit_signal("killed")
 		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
@@ -95,7 +96,16 @@ func damage(p:Projectile):
 		
 		_add_sinking_ship()
 		
+		GlobalScript.play_sound("res://gameplay/effect/tm2_bom002.wav")
 		queue_free()
+
+
+func _damage_popup(d:int,pos:Vector2):
+	var popup:DamageIndicator=preload("res://gameplay/ship/damage_indicator.tscn").instance()
+	popup.text=str(d)
+	popup.font_color=Color.black
+	popup.rect_position=pos+Vector2(0,-64)
+	GlobalScript.node2d_root.add_child(popup)
 
 
 func _add_sinking_ship():

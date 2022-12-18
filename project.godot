@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gameplay/screen/battle_screen.gd"
 }, {
+"base": "Label",
+"class": "DamageIndicator",
+"language": "GDScript",
+"path": "res://gameplay/ship/damage_indicator.gd"
+}, {
 "base": "Weapon",
 "class": "Gun",
 "language": "GDScript",
@@ -56,6 +61,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "BattleScreen": "",
+"DamageIndicator": "",
 "Gun": "",
 "LockableButton": "",
 "OneshotParticles2D": "",
