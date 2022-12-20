@@ -90,10 +90,10 @@ func fire_main_weapon(rot:float):
 	var pos:=Vector2(main_weapons[0].get_muzzle_velocity()*cos(rot)*t+global_position.x,500)
 	i.queue_free()
 	
-	var dist2_min:float=INF
+	var dist_min:float=INF
 	for n in GlobalScript.node2d_root.get_children():
 		if "is_enemy" in n and n!=self:
-			if n.global_position.distance_squared_to(pos)<dist2_min:
-				dist2_min=n.global_position.distance_squared_to(pos)
-	if dist2_min!=INF:
-		GlobalScript.player_salvo_diff.push_back(dist2_min)
+			if n.global_position.distance_to(pos)<dist_min:
+				dist_min=n.global_position.distance_to(pos)
+	if dist_min!=INF:
+		GlobalScript.player_salvo_diff.push_back(dist_min)

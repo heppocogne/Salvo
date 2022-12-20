@@ -68,9 +68,9 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	return i
 
 
-func fire_main_weapon(a:float):
+func fire_main_weapon(rot:float):
 	for w in main_weapons:
-		w.put_projectile(a,get_main_weapon_dispersion(),get_main_weapon_accuracy())
+		w.put_projectile(rot,get_main_weapon_dispersion(),get_main_weapon_accuracy())
 	main_weapon_ready=false
 	main_weapon_reload_timer.start(get_main_weapon_reload())
 
