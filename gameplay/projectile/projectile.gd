@@ -6,6 +6,7 @@ export var sync_rotation:bool=true
 
 var invalid:=false
 var velocity:Vector2
+var _class_Ship=load("res://gameplay/ship/ship.gd")
 
 
 func _ready():
@@ -39,7 +40,7 @@ func _on_Projectile_area_entered(area:Area2D):
 		
 		GlobalScript.play_sound("res://gameplay/effect/tm2_bom001.wav")
 		
-		if "is_enemy" in area and !area.is_enemy:
+		if area is _class_Ship and !area.is_enemy:
 			GlobalScript.enemy_hit+=1
 	elif area==GlobalScript.water_area:
 		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()

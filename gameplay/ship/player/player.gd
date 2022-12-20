@@ -8,6 +8,7 @@ const line_color:=Color.darkgray
 const line_length:=64.0
 
 var mouse_pos:Vector2
+var _class_Ship=load("res://gameplay/ship/ship.gd")
 
 
 func _ready():
@@ -92,7 +93,7 @@ func fire_main_weapon(rot:float):
 	
 	var dist_min:float=INF
 	for n in GlobalScript.node2d_root.get_children():
-		if "is_enemy" in n and n!=self:
+		if n is _class_Ship and n!=self:
 			if n.global_position.distance_to(pos)<dist_min:
 				dist_min=n.global_position.distance_to(pos)
 	if dist_min!=INF:
