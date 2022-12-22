@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/white_pixel.png-d01423a7d1cd36e4406168c2f2882230.stex"
+path="res://.import/white_pixel.png-a20ee248cdba4cfb983e77f8873c40d0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://main/white_pixel.png"
-dest_files=[ "res://.import/white_pixel.png-d01423a7d1cd36e4406168c2f2882230.stex" ]
+source_file="res://gameplay/screen/main/white_pixel.png"
+dest_files=[ "res://.import/white_pixel.png-a20ee248cdba4cfb983e77f8873c40d0.stex" ]
 
 [params]
 

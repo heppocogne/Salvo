@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "Button",
 "class": "LockableButton",
 "language": "GDScript",
-"path": "res://main/lockable_button.gd"
+"path": "res://gameplay/screen/main/lockable_button.gd"
 }, {
 "base": "Particles2D",
 "class": "OneshotParticles2D",
@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "HBoxContainer",
 "class": "StageDescription",
 "language": "GDScript",
-"path": "res://main/stage_description.gd"
+"path": "res://gameplay/screen/main/stage_description.gd"
 }, {
 "base": "Node2D",
 "class": "Weapon",
@@ -81,7 +81,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Salvo"
-run/main_scene="res://main/main.tscn"
+run/main_scene="res://gameplay/screen/main/main.tscn"
 config/icon="res://icon.png"
 
 [autoload]

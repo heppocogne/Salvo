@@ -62,7 +62,3 @@ func _physics_process(_delta:float):
 
 func _on_Enemy_Killed():
 	enemy_killed=true
-
-
-func _on_Button_pressed():
-	get_tree().change_scene_to(load("res://main/main.tscn"))

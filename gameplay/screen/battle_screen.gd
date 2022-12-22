@@ -52,4 +52,4 @@ func _on_Timer_timeout():
 
 
 func _on_Button_pressed():
-	pass
+	get_tree().change_scene_to(load("res://gameplay/screen/main/main.tscn"))

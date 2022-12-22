@@ -49,7 +49,3 @@ func _on_Timer_timeout2():
 	s.connect("killed",self,"_on_Enemy_killed")
 	s=spawn_enemy_ship(preload("res://gameplay/ship/enemy/old_dd.tscn"),950)
 	s.connect("killed",self,"_on_Enemy_killed")
-
-
-func _on_Button_pressed():
-	get_tree().change_scene_to(load("res://main/main.tscn"))
