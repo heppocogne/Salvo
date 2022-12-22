@@ -1,0 +1,115 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://main/ship_upgrade/ship_upgrade.gd" type="Script" id=1]
+[ext_resource path="res://fonts/SourceHanSansHW-Regular.32.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=3]
+[ext_resource path="res://main/plus.svg" type="Texture" id=4]
+[ext_resource path="res://main/minus.svg" type="Texture" id=5]
+[ext_resource path="res://main/ship_upgrade/upgrade_item.gd" type="Script" id=6]
+
+[node name="ShipUpgrade" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+margin_right = 774.0
+margin_bottom = 126.0
+custom_constants/margin_top = 30
+custom_constants/margin_left = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 774.0
+margin_bottom = 166.0
+custom_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+margin_right = 744.0
+margin_bottom = 48.0
+custom_fonts/font = ExtResource( 2 )
+text = "艦艇の強化"
+
+[node name="Header" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+margin_top = 64.0
+margin_right = 744.0
+margin_bottom = 88.0
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/Header"]
+margin_right = 32.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 3 )
+text = "項目"
+valign = 1
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer/Header"]
+margin_left = 36.0
+margin_right = 696.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 660, 0 )
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/VBoxContainer/Header"]
+margin_left = 700.0
+margin_right = 732.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 3 )
+text = "費用"
+valign = 1
+
+[node name="Speed" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 744.0
+margin_bottom = 136.0
+script = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/Speed"]
+margin_top = 4.0
+margin_right = 32.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 3 )
+text = "速度"
+valign = 1
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer/Speed"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 0 )
+
+[node name="MinusButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Speed"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+icon = ExtResource( 5 )
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/MarginContainer/VBoxContainer/Speed"]
+margin_left = 108.0
+margin_right = 620.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 512, 32 )
+percent_visible = false
+
+[node name="PlusButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Speed"]
+margin_left = 624.0
+margin_right = 656.0
+margin_bottom = 32.0
+icon = ExtResource( 4 )
+
+[node name="Control2" type="Control" parent="Panel/MarginContainer/VBoxContainer/Speed"]
+margin_left = 660.0
+margin_right = 692.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 0 )
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/VBoxContainer/Speed"]
+margin_left = 696.0
+margin_top = 4.0
+margin_right = 744.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 3 )
+text = "100 pt"
