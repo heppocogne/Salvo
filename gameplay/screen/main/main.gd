@@ -5,6 +5,9 @@ func _ready():
 	for b in $Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer.get_children():
 		if SaveData.has_key(b.save_data_key):
 			b.set_unlocked(SaveData.read(b.save_data_key))
+		else:
+			SaveData.store(b.save_data_key,false)
+			b.set_unlocked(false)
 
 
 func _on_Stage_button_pressed(n:String):
