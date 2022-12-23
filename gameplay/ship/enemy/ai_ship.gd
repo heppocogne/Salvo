@@ -20,4 +20,4 @@ func _physics_process(delta:float):
 #		print_debug("d=",d)
 		var tan_th:=(-b-sqrt(b*b-4*a*c))/(2*a)
 		i.queue_free()
-		fire_main_weapon(PI+atan(tan_th))
+		fire_main_weapon(GlobalScript.node2d_root.get_node("Player").position)
