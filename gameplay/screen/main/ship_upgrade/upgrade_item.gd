@@ -20,17 +20,18 @@ func _ready():
 	set_max_level(max_level)
 	set_costs(costs)
 	
-	if !SaveData.has_key(save_data_key):
-		SaveData.store(save_data_key,0)
-	var lvl:int=SaveData.read(save_data_key)
-	var pt:int=SaveData.read(pt_save_data_key)
-	if lvl==0:
-		$MinusButton.disabled=true
-	if lvl==max_level or pt<costs[lvl]:
-		$PlusButton.disabled=true
+	if !Engine.editor_hint:
+		if !SaveData.has_key(save_data_key):
+			SaveData.store(save_data_key,0)
+		var lvl:int=SaveData.read(save_data_key)
+		var pt:int=SaveData.read(pt_save_data_key)
+		if lvl==0:
+			$MinusButton.disabled=true
+		if lvl==max_level or pt<costs[lvl]:
+			$PlusButton.disabled=true
 	
-	_update_cost_text()
-	_update_cost_color()
+		_update_cost_text()
+		_update_cost_color()
 
 
 func set_status_name(n:String):
