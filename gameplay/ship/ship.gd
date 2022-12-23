@@ -68,8 +68,23 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	return i
 
 
-func fire_main_weapon(rot:float):
+func fire_main_weapon(pos:Vector2):
 	for w in main_weapons:
+		var v_diff:=pos-position
+		var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
+		var v:float=w.get_muzzle_velocity()
+		var a:=0.5*i.gravity*v_diff.x*v_diff.x/(v*v)
+		var b:=v_diff.x
+		var c:=a-v_diff.y
+		var tan_theta:float
+		var rot:float
+		var sqrt_d:=sqrt(b*b-4*a*c)
+		if abs(-b+sqrt_d)>abs(-b-sqrt_d):
+			tan_theta=(-b-sqrt_d)/(2*a)
+			rot=atan(tan_theta)+PI
+		else:
+			tan_theta=(-b+sqrt_d)/(2*a)
+			rot=atan(tan_theta)
 		w.put_projectile(rot,get_main_weapon_dispersion(),get_main_weapon_accuracy())
 	main_weapon_ready=false
 	main_weapon_reload_timer.start(get_main_weapon_reload())
