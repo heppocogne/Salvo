@@ -100,17 +100,17 @@ margin_right = 1017.0
 margin_bottom = 185.0
 custom_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Durability" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 margin_right = 1010.0
 margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
 margin_right = 48.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = "耐久: "
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
 margin_left = 52.0
 margin_right = 502.0
 margin_bottom = 24.0
@@ -118,18 +118,18 @@ rect_min_size = Vector2( 450, 24 )
 percent_visible = false
 script = ExtResource( 6 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="MainWeapon" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 margin_top = 34.0
 margin_right = 1010.0
 margin_bottom = 58.0
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon"]
 margin_right = 48.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = "主砲: "
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon"]
 margin_left = 52.0
 margin_right = 352.0
 margin_bottom = 24.0
@@ -137,9 +137,9 @@ rect_min_size = Vector2( 300, 24 )
 percent_visible = false
 script = ExtResource( 7 )
 
-[connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/ProgressBar" method="_on_Player_damaged"]
-[connection signal="main_weapon_relaod_time_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/ProgressBar" method="_on_Player_main_weapon_relaod_time_left_changed"]
-[connection signal="main_weapon_reloaded" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/ProgressBar" method="_on_Player_main_weapon_reloaded"]
+[connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/ProgressBar" method="_on_Player_damaged"]
+[connection signal="main_weapon_relaod_time_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_main_weapon_relaod_time_left_changed"]
+[connection signal="main_weapon_reloaded" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_main_weapon_reloaded"]
 [connection signal="player_fired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_player_fired"]
 [connection signal="timeout" from="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="pressed" from="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
