@@ -19,3 +19,7 @@ func _on_Stage_button_pressed(n:String):
 
 func _on_Exit_pressed():
 	get_tree().quit(0)
+
+
+func _on_Upgrade_pressed():
+	get_tree().change_scene_to(preload("res://gameplay/screen/main/ship_upgrade/ship_upgrade.tscn"))

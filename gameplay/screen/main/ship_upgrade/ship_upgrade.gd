@@ -17,3 +17,7 @@ func _on_upgraded_or_donwgraded():
 	var pt:int=SaveData.read(pt_save_data_key)
 	$Panel/MarginContainer/VBoxContainer/HBoxContainer2/Label3.text=str(pt)+" pt"
 	emit_signal("upgrade_point_changed",pt)
+
+
+func _on_Return_pressed():
+	get_tree().change_scene_to(load("res://gameplay/screen/main/main.tscn"))
