@@ -84,8 +84,9 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 
 
 func fire_main_weapon2(pos:Vector2,approx_rot:float):
+	print_debug("approx_rot=",approx_rot)
 	for w in main_weapons:
-		var v_diff:=pos-position
+		var v_diff:Vector2=pos-w.global_position
 		var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
 		var rot:float
 		var v:float=w.get_muzzle_velocity()
@@ -93,23 +94,37 @@ func fire_main_weapon2(pos:Vector2,approx_rot:float):
 		if a!=0.0:
 			var b:=v_diff.x
 			var c:=a-v_diff.y
-			var tan_theta:float
-			var sqrt_d:=sqrt(b*b-4*a*c)
-			tan_theta=(-b-sqrt_d)/(2*a)
-			var rot1:=atan((-b-sqrt_d)/(2*a))
-			var rot2:=atan((-b+sqrt_d)/(2*a))
-			if approx_rot<-PI/2:
-				rot1-=PI
-				rot2-=PI
-			if abs(rot1-approx_rot)<abs(rot2-approx_rot):
-				rot=rot1
+			var d:=b*b-4*a*c
+			if 0<=d:
+				var sqrt_d:=sqrt(d)
+				var tan_theta:float
+				tan_theta=(-b-sqrt_d)/(2*a)
+				var rot_candidates:=[
+						atan((-b-sqrt_d)/(2*a)),
+						atan((-b+sqrt_d)/(2*a)),
+					]
+				rot_candidates.push_back(rot_candidates[0]-PI)
+				rot_candidates.push_back(rot_candidates[1]-PI)
+				print_debug("rot_candidates=",rot_candidates)
+				var diff_min_idx:=-1
+				var diff_min:=INF
+				for idx in range(4):
+					var diff:=abs(rot_candidates[idx]-approx_rot)
+					if diff<diff_min:
+						diff_min=diff
+						diff_min_idx=idx
+				rot=rot_candidates[diff_min_idx]
 			else:
-				rot=rot2
+				if 0<v_diff.x:
+					rot=-PI/4
+				else:
+					rot=-3*PI/4
 		else:
 			if 0<v_diff.y:
 				rot=-PI/2
 			else:
 				rot=PI/2
+		print_debug("rot=",rot)
 		w.put_projectile(rot,get_main_weapon_dispersion(),get_main_weapon_accuracy())
 	main_weapon_ready=false
 	main_weapon_reload_timer.start(get_main_weapon_reload())

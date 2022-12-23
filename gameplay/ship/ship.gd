@@ -70,21 +70,34 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 
 func fire_main_weapon(pos:Vector2):
 	for w in main_weapons:
-		var v_diff:=pos-position
+		var v_diff:Vector2=pos-w.global_position
 		var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
 		var v:float=w.get_muzzle_velocity()
 		var a:=0.5*i.gravity*v_diff.x*v_diff.x/(v*v)
-		var b:=v_diff.x
-		var c:=a-v_diff.y
-		var tan_theta:float
 		var rot:float
-		var sqrt_d:=sqrt(b*b-4*a*c)
-		if abs(-b+sqrt_d)>abs(-b-sqrt_d):
-			tan_theta=(-b-sqrt_d)/(2*a)
-			rot=atan(tan_theta)+PI
+		if a!=0.0:
+			var b:=v_diff.x
+			var c:=a-v_diff.y
+			var d:=b*b-4*a*c
+			if 0<=d:
+				var tan_theta:float
+				var sqrt_d:=sqrt(b*b-4*a*c)
+				if abs(-b+sqrt_d)>abs(-b-sqrt_d):
+					tan_theta=(-b-sqrt_d)/(2*a)
+					rot=atan(tan_theta)+PI
+				else:
+					tan_theta=(-b+sqrt_d)/(2*a)
+					rot=atan(tan_theta)
+			else:
+				if 0<v_diff.x:
+					rot=-PI/4
+				else:
+					rot=-3*PI/4
 		else:
-			tan_theta=(-b+sqrt_d)/(2*a)
-			rot=atan(tan_theta)
+			if 0<v_diff.y:
+				rot=-PI/2
+			else:
+				rot=PI/2
 		w.put_projectile(rot,get_main_weapon_dispersion(),get_main_weapon_accuracy())
 	main_weapon_ready=false
 	main_weapon_reload_timer.start(get_main_weapon_reload())
