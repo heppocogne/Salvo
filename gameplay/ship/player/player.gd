@@ -133,11 +133,3 @@ func _damage_popup(d:int,pos:Vector2):
 	popup.font_color=Color.red
 	popup.rect_position=pos+Vector2(0,-64)
 	GlobalScript.node2d_root.add_child(popup)
-
-
-func _add_sinking_ship():
-	var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
-	sinking.texture=$Sprite.texture
-	sinking.get_node("Sprite").scale=scale*get_node("Sprite").scale
-	GlobalScript.node2d_root.add_child(sinking)
-	sinking.global_position=global_position

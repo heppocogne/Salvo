@@ -138,10 +138,9 @@ func _damage_popup(d:int,pos:Vector2):
 
 func _add_sinking_ship():
 	var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
-	sinking.texture=$Sprite.texture
-	sinking.get_node("Sprite").flip_h=true
-	sinking.get_node("Sprite").scale=scale*get_node("Sprite").scale
+	var s:Sprite=$Sprite
 	GlobalScript.node2d_root.add_child(sinking)
+	sinking.setup(s.texture, s.offset, s.scale*scale, s.flip_h)
 	sinking.global_position=global_position
 
 
