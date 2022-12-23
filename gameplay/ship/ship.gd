@@ -3,7 +3,7 @@ class_name Ship
 extends Area2D
 
 signal main_weapon_reloaded()
-signal damaged()
+signal damaged(d)
 signal killed()
 
 const water_level:=500
@@ -85,7 +85,7 @@ func damage(p:Projectile):
 	raw_dmg.y=max(0,raw_dmg.y)
 	var dmg_mod:=max(raw_dmg.length(),0.05*p.get_damage())
 	hp-=dmg_mod
-	emit_signal("damaged")
+	emit_signal("damaged",dmg_mod)
 	_damage_popup(dmg_mod,p.position)
 	if hp<=0:
 		emit_signal("killed")

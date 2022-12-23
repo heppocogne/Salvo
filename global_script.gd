@@ -4,13 +4,8 @@ var node2d_root:Node2D
 var water_area:Area2D
 
 # ~30: S, 30~50:A, 50~70:B, 70~:C
-var player_salvo_diff:Array
 var enemy_shoot:=0
 var enemy_hit:=0
-
-
-func _ready():
-	player_salvo_diff=[]
 
 
 func play_sound(path:String):

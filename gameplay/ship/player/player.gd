@@ -2,6 +2,7 @@ tool
 class_name Player
 extends Ship
 
+signal player_fired(diff)
 signal main_weapon_relaod_time_left_changed(t)
 
 const line_color:=Color.darkgray
@@ -97,4 +98,4 @@ func fire_main_weapon(rot:float):
 			if n.global_position.distance_to(pos)<dist_min:
 				dist_min=n.global_position.distance_to(pos)
 	if dist_min!=INF:
-		GlobalScript.player_salvo_diff.push_back(dist_min)
+		emit_signal("player_fired",dist_min)
