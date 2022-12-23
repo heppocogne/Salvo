@@ -84,7 +84,6 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 
 
 func fire_main_weapon2(pos:Vector2,approx_rot:float):
-	print_debug("approx_rot=",approx_rot)
 	for w in main_weapons:
 		var v_diff:Vector2=pos-w.global_position
 		var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
@@ -105,7 +104,6 @@ func fire_main_weapon2(pos:Vector2,approx_rot:float):
 					]
 				rot_candidates.push_back(rot_candidates[0]-PI)
 				rot_candidates.push_back(rot_candidates[1]-PI)
-				print_debug("rot_candidates=",rot_candidates)
 				var diff_min_idx:=-1
 				var diff_min:=INF
 				for idx in range(4):
@@ -124,7 +122,6 @@ func fire_main_weapon2(pos:Vector2,approx_rot:float):
 				rot=-PI/2
 			else:
 				rot=PI/2
-		print_debug("rot=",rot)
 		w.put_projectile(rot,get_main_weapon_dispersion(),get_main_weapon_accuracy())
 	main_weapon_ready=false
 	main_weapon_reload_timer.start(get_main_weapon_reload())
