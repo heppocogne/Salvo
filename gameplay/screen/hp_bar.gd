@@ -9,5 +9,5 @@ func _ready():
 	value=player_node.hp
 
 
-func _on_Player_damaged():
+func _on_Player_damaged(_d:int):
 	value=player_node.hp
