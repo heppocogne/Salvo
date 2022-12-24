@@ -9,6 +9,7 @@
 margin_right = 744.0
 margin_bottom = 32.0
 script = ExtResource( 2 )
+max_level = 9
 costs = PoolIntArray( 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 )
 
 [node name="StatusName" type="Label" parent="."]
@@ -30,7 +31,7 @@ margin_left = 120.0
 margin_right = 632.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 512, 32 )
-max_value = 10.0
+max_value = 9.0
 percent_visible = false
 
 [node name="PlusButton" type="Button" parent="."]

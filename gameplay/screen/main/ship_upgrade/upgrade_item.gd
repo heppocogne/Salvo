@@ -13,7 +13,7 @@ export var costs:PoolIntArray setget set_costs
 
 
 func _ready():
-	assert(max_level==costs.size())
+	assert(max_level+1==costs.size())
 	
 	set_status_name(status_name)
 	set_max_level(max_level)
@@ -23,6 +23,7 @@ func _ready():
 		if !SaveData.has_key(save_data_key):
 			SaveData.store(save_data_key,0)
 		var lvl:int=SaveData.read(save_data_key)
+		$ProgressBar.value=lvl
 		var pt:int=SaveData.read(pt_save_data_key)
 		if lvl==0:
 			$MinusButton.disabled=true
@@ -64,48 +65,57 @@ func _update_cost_text():
 	if lvl==max_level:
 		$Cost.text="-"
 	else:
-		$Cost.text=str(costs[SaveData.read(save_data_key)])+" pt"
+		$Cost.text=str(costs[lvl])+" pt"
 
 
 func _update_cost_color():
 	var lvl:int=SaveData.read(save_data_key)
 	var pt:int=SaveData.read(pt_save_data_key)
 	if pt<costs[lvl]:
-		$Cost.self_modulate=Color("ff6060")
+		$Cost.add_color_override("font_color",Color("ff6060"))
 	else:
-		$Cost.self_modulate=Color("#ffff9b")
+		$Cost.add_color_override("font_color",Color("#ffff9b"))
+
+
+func _update_button_state():
+	var lvl:int=SaveData.read(save_data_key)
+	var pt:int=SaveData.read(pt_save_data_key)
+	
+	if lvl==0:
+		$MinusButton.disabled=true
+	else:
+		$MinusButton.disabled=false
+	
+	if pt<costs[lvl] or lvl==max_level:
+		$PlusButton.disabled=true
+	else:
+		$PlusButton.disabled=false
 
 
 func _on_MinusButton_pressed():
 	var lvl:int=SaveData.read(save_data_key)
 	lvl=max(0,lvl-1)
+	SaveData.store(save_data_key,lvl)
 	_update_cost_text()
 	_update_cost_color()
 	_change_upgrade_point(costs[lvl]/2)
 	$ProgressBar.value=lvl
-	SaveData.store(save_data_key,lvl)
 	
-	if lvl==0:
-		$MinusButton.disabled=true
+	_update_button_state()
 
 
 func _on_PlusButton_pressed():
 	var lvl:int=SaveData.read(save_data_key)
 	_change_upgrade_point(-costs[lvl])
 	lvl=min(lvl+1,max_level)
+	SaveData.store(save_data_key,lvl)
 	_update_cost_text()
 	_update_cost_color()
 	$ProgressBar.value=lvl
-	SaveData.store(save_data_key,lvl)
 	
-	if lvl<max_level:
-		$PlusButton.disabled=true
+	_update_button_state()
 
 
 func _on_upgrade_point_changed(pt:int):
-	var lvl:int=SaveData.read(save_data_key)
 	_update_cost_color()
-	if pt<costs[lvl]:
-		$PlusButton.disabled=true
-	else:
-		$PlusButton.disabled=false
+	_update_button_state()
