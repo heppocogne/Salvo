@@ -163,7 +163,8 @@ margin_right = 932.0
 margin_bottom = 448.0
 status_name = "門数"
 save_data_key = "upgrade_main_weapon_barrels"
-costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
+max_level = 5
+costs = PoolIntArray( 200, 400, 600, 800, 1000, 1200 )
 
 [node name="Shell" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 464.0
@@ -171,7 +172,8 @@ margin_right = 932.0
 margin_bottom = 496.0
 status_name = "砲弾"
 save_data_key = "upgrade_main_weapon_caliber"
-costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
+max_level = 8
+costs = PoolIntArray( 100, 200, 300, 400, 500, 600, 700, 800, 900 )
 
 [node name="Accuracy" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 512.0
@@ -181,12 +183,12 @@ status_name = "精度"
 save_data_key = "upgrade_main_weapon_accuracy"
 costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
 
-[node name="Range" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
+[node name="Reload" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 560.0
 margin_right = 932.0
 margin_bottom = 592.0
-status_name = "射程"
-save_data_key = "upgrade_main_weapon_range"
+status_name = "装填"
+save_data_key = "upgrade_main_weapon_reload"
 costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
 
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/Speed" method="_on_upgrade_point_changed"]
@@ -196,7 +198,7 @@ costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/Barrels" method="_on_upgrade_point_changed"]
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/Shell" method="_on_upgrade_point_changed"]
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/Accuracy" method="_on_upgrade_point_changed"]
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/Range" method="_on_upgrade_point_changed"]
+[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/Reload" method="_on_upgrade_point_changed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Return" to="." method="_on_Return_pressed"]
 [connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/Speed" to="." method="_on_upgraded_or_donwgraded"]
 [connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/HP" to="." method="_on_upgraded_or_donwgraded"]
@@ -205,4 +207,4 @@ costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
 [connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/Barrels" to="." method="_on_upgraded_or_donwgraded"]
 [connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/Shell" to="." method="_on_upgraded_or_donwgraded"]
 [connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/Accuracy" to="." method="_on_upgraded_or_donwgraded"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/Range" to="." method="_on_upgraded_or_donwgraded"]
+[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/Reload" to="." method="_on_upgraded_or_donwgraded"]

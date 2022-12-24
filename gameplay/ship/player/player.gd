@@ -13,9 +13,51 @@ var lock_weapon:=false
 var mouse_pos:Vector2
 var _class_Ship=load("res://gameplay/ship/ship.gd")
 
+var _speed_upgrade:int
+var _hp_upgrade:int
+var _protection_upgrade:Vector2
+var _shell_damage_upgrade:int
+var _accuracy_upgrade:float
+var _reload_upgrade:float
+
+# speed: +1.5
+
+# hp: +100
+# h_protection: +25.4
+# v_protection: +12.7
+
+# barrels: +2 (4,6,8,10,12,14,16), reload: +0.3
+# shell: +25.4 (305,330,356,381,406,431,457,483,508), reload: +0.3
+# accuracy: +0.5
+# reload: -0.5
 
 func _ready():
-	pass
+	# load from savedata
+	_speed_upgrade=SaveData.read("upgrade_speed")*1.5
+	
+	_hp_upgrade=SaveData.read("upgrade_HP")*100
+	
+	_protection_upgrade=Vector2(
+			SaveData.read("upgrade_h_protection")*25.4,
+			SaveData.read("upgrade_v_protection")*12.7
+		)
+	
+	var barrels_upgrade:int=SaveData.read("upgrade_main_weapon_barrels")
+	var num_barrels:=4+barrels_upgrade*2
+	for w in main_weapons:
+		w.num_barrels=num_barrels/4
+	if num_barrels%4==2:
+		main_weapons[1].num_barrels+=1
+		main_weapons[2].num_barrels+=1
+	_reload_upgrade+=barrels_upgrade*0.3
+	
+	var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
+	_shell_damage_upgrade=shell_upgrade*25.4
+	_reload_upgrade+=shell_upgrade*0.3
+	
+	_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.5
+	
+	_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
 
 
 func _draw():
@@ -80,10 +122,31 @@ func _physics_process(delta:float):
 	emit_signal("player_moved",position-prev)
 
 
+func get_max_hp()->int:
+	return base_hp+_hp_upgrade
+
+
+func get_speed()->float:
+	return base_speed+_speed_upgrade
+
+
+func get_main_weapon_reload()->float:
+	return base_main_weapon_reload+_reload_upgrade
+
+
+func get_main_weapon_accuracy()->float:
+	return base_main_weapon_accuracy+_accuracy_upgrade
+
+
+func get_protection()->Vector2:
+	return protection+_protection_upgrade
+
+
 func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	var i:Projectile=projectile_scene.instance()
 	i.set_collision_layer_bit(4,true)
 	i.set_collision_mask_bit(3,true)
+	i.damage_upgrade=_shell_damage_upgrade
 	return i
 
 

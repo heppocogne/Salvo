@@ -6,6 +6,7 @@ export var sync_rotation:bool=true
 
 var invalid:=false
 var velocity:Vector2
+var damage_upgrade:int
 var _class_Ship=load("res://gameplay/ship/ship.gd")
 
 
@@ -22,7 +23,7 @@ func _physics_process(delta:float):
 
 
 func get_damage()->int:
-	return base_damage
+	return base_damage+damage_upgrade
 
 
 func _on_Projectile_area_entered(area:Area2D):

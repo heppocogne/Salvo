@@ -61,6 +61,10 @@ func get_main_weapon_dispersion()->float:
 	return base_main_weapon_dispersion
 
 
+func get_protection()->Vector2:
+	return protection
+
+
 # enemy by default
 func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 	var i:Projectile=projectile_scene.instance()
