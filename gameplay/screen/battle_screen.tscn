@@ -11,7 +11,7 @@
 [ext_resource path="res://gameplay/screen/messages.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 512, 64 )
+extents = Vector2( 1536, 64 )
 
 [node name="BattleScreen" type="Control"]
 anchor_right = 1.0
@@ -45,15 +45,15 @@ centered = false
 
 [node name="WaterArea" type="Area2D" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot"]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea"]
+position = Vector2( 512, 564 )
+shape = SubResource( 1 )
+
 [node name="Sprite" type="Sprite" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea"]
 self_modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
 position = Vector2( 0, 500 )
 texture = ExtResource( 3 )
 centered = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea"]
-position = Vector2( 512, 564 )
-shape = SubResource( 1 )
 
 [node name="Player" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" instance=ExtResource( 1 )]
 position = Vector2( 100, 500 )
