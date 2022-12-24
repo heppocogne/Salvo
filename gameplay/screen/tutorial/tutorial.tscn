@@ -5,6 +5,10 @@
 
 [node name="Tutorial" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+clear_count_key = "tutorial_completed"
+pt_per_damage = 0.1
+pt_aiming = 10.0
+first_reward = 100
 
 [node name="Player" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" index="3"]
 base_main_weapon_reload = 1.0

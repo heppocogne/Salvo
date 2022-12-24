@@ -39,13 +39,14 @@ func _on_Projectile_area_entered(area:Area2D):
 		explosion.speed_scale=2.0
 		
 		GlobalScript.play_sound("res://gameplay/effect/tm2_bom001.wav")
-		
-		if area is _class_Ship and !area.is_enemy:
-			GlobalScript.enemy_hit+=1
 	elif area==GlobalScript.water_area:
 		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
 		GlobalScript.node2d_root.add_child(splash)
 		splash.global_position=global_position
+		
+		# enemy projectile
+		if get_collision_layer_bit(4):
+			GlobalScript.battele_screen.on_EnemyShell_off(position)
 		
 		GlobalScript.play_sound("res://gameplay/effect/bom00.wav")
 	queue_free()

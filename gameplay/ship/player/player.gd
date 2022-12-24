@@ -3,11 +3,13 @@ class_name Player
 extends Ship
 
 signal player_fired(diff)
+signal player_moved(diff)
 signal main_weapon_relaod_time_left_changed(t)
 
 const line_color:=Color.darkgray
 const line_length:=64.0
 
+var lock_weapon:=false
 var mouse_pos:Vector2
 var _class_Ship=load("res://gameplay/ship/ship.gd")
 
@@ -36,7 +38,7 @@ func _input(event:InputEvent):
 	elif event is InputEventMouseButton:
 		var mb:=event as InputEventMouseButton
 		if mb.pressed:
-			if mb.button_index==BUTTON_LEFT and main_weapon_ready:
+			if mb.button_index==BUTTON_LEFT and main_weapon_ready and !lock_weapon:
 				var rot:=mouse_pos.angle()
 				var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
 				var a:=0.5*i.gravity
@@ -73,7 +75,9 @@ func _physics_process(delta:float):
 	else:
 		v=0.0
 	
+	var prev:=position
 	position.x=clamp(position.x+v*delta,0,OS.window_size.x)
+	emit_signal("player_moved",position-prev)
 
 
 func get_projectile_instance(projectile_scene:PackedScene)->Projectile:

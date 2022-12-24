@@ -28,15 +28,23 @@ func _on_Enemy_killed():
 			"self_modulate",
 			Color.white,
 			Color(1,1,1,0),
-			3.0,	# duration
+			1.0,	# duration
 			Tween.TRANS_LINEAR,
 			Tween.EASE_IN_OUT
 		)
 		t.start()
+		var tm:=Timer.new()
+		add_child(tm)
+		tm.start(1.0)
+		yield(tm,"timeout")
+		tm.queue_free()
+		set_label_text("")
+		
 	if kill_count==3:
 		timer.start(2.0)
 	elif kill_count==6:
-		set_label_text("ステージ1 クリア")
+		set_label_text("作戦成功!")
+		stage_complete()
 		$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label.self_modulate=Color(1,1,1,1)
 		$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
 #		SaveData.store("stage_2_unlocked",true)

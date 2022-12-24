@@ -3,6 +3,7 @@ class_name Ship
 extends Area2D
 
 signal main_weapon_reloaded()
+signal main_weapon_fired(n)
 signal damaged(d)
 signal killed()
 
@@ -69,6 +70,7 @@ func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
 
 
 func fire_main_weapon(pos:Vector2):
+	var n:=0
 	for w in main_weapons:
 		var v_diff:Vector2=pos-w.global_position
 		var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
@@ -99,8 +101,11 @@ func fire_main_weapon(pos:Vector2):
 			else:
 				rot=PI/2
 		w.put_projectile(rot,get_main_weapon_dispersion(),get_main_weapon_accuracy())
+		n+=w.num_barrels
 	main_weapon_ready=false
 	main_weapon_reload_timer.start(get_main_weapon_reload())
+	
+	emit_signal("main_weapon_fired",n)
 
 
 func damage(p:Projectile):

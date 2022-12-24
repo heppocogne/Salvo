@@ -30,9 +30,6 @@ func get_range()->float:
 
 
 func put_projectile(rot:float,dispersion:float,accuracy:float):
-	if get_parent().is_enemy:
-		GlobalScript.enemy_shoot+=num_barrels
-	
 	for _i in num_barrels:
 		var instance:Projectile=get_parent().get_projectile_instance(projectile_scene)
 		if instance:
