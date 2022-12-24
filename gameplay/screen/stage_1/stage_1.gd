@@ -23,8 +23,9 @@ func _on_Enemy_killed():
 	
 	if kill_count==1:
 		var t:Tween=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label/Tween
+		var l:Label=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label
 		t.interpolate_property(
-			$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label,
+			l,
 			"self_modulate",
 			Color.white,
 			Color(1,1,1,0),
@@ -39,6 +40,7 @@ func _on_Enemy_killed():
 		yield(tm,"timeout")
 		tm.queue_free()
 		set_label_text("")
+		l.self_modulate=Color(1,1,1,1)
 		
 	if kill_count==3:
 		timer.start(2.0)

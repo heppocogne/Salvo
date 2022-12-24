@@ -56,7 +56,6 @@ func _physics_process(_delta:float):
 		if enemy_killed:
 			set_label_text("チュートリアル完了")
 			stage_complete()
-			$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
 			step=TUTORIAL_END
 			SaveData.store("stage_1_unlocked",true)
 

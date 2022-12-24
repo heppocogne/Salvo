@@ -88,6 +88,7 @@ func _on_Button_pressed():
 
 
 func stage_complete():
+	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
 	$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player.lock_weapon=true
 	var c:int
 
@@ -183,6 +184,7 @@ func _on_Player_killed():
 
 
 func stage_fail():
+	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
 	set_label_text("作戦失敗!")
 	
 	if !SaveData.has_key(clear_count_key):
