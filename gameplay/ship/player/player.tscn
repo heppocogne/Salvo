@@ -13,22 +13,26 @@ script = ExtResource( 2 )
 is_enemy = false
 base_speed = 17.0
 base_hp = 500
-protection = Vector2( 254, 50 )
+protection = Vector2( 254, 51 )
 main_weapon_nodepaths = [ NodePath("MainGun1"), NodePath("MainGun2"), NodePath("MainGun3"), NodePath("MainGun4") ]
 base_main_weapon_reload = 10.0
-base_main_weapon_dispersion = 0.2
+base_main_weapon_dispersion = 0.1
 
 [node name="MainGun1" parent="." index="0" instance=ExtResource( 4 )]
 position = Vector2( 33.5, -6 )
+base_muzzle_velocity = 300.0
 
 [node name="MainGun2" parent="." index="1" instance=ExtResource( 4 )]
 position = Vector2( 24, -8 )
+base_muzzle_velocity = 300.0
 
 [node name="MainGun3" parent="." index="2" instance=ExtResource( 4 )]
 position = Vector2( -29, -8 )
+base_muzzle_velocity = 300.0
 
 [node name="MainGun4" parent="." index="3" instance=ExtResource( 4 )]
 position = Vector2( -38, -6 )
+base_muzzle_velocity = 300.0
 
 [node name="CollisionPolygon2D" parent="." index="4"]
 polygon = PoolVector2Array( -62, 0, 58, 0, 62, -6, 37.0224, -5, 17, -5, 17, -9, -23, -9, -23, -5, -63, -5 )
