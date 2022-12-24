@@ -96,8 +96,6 @@ func fire_main_weapon2(pos:Vector2,approx_rot:float):
 			var d:=b*b-4*a*c
 			if 0<=d:
 				var sqrt_d:=sqrt(d)
-				var tan_theta:float
-				tan_theta=(-b-sqrt_d)/(2*a)
 				var rot_candidates:=[
 						atan((-b-sqrt_d)/(2*a)),
 						atan((-b+sqrt_d)/(2*a)),

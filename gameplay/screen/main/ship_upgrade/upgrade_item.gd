@@ -4,7 +4,6 @@ extends HBoxContainer
 
 const pt_save_data_key:String="upgrade_point"
 
-signal level_change(status_name,value)
 signal upgraded_or_donwgraded(cost)
 
 export var status_name:String setget set_status_name
