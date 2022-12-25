@@ -6,7 +6,7 @@ var water_area:Area2D
 
 
 func play_sound(path:String):
-	var a:=AudioStreamPlayer2D.new()
+	var a:=AudioStreamPlayer.new()
 	node2d_root.add_child(a)
 	a.stream=load(path)
 	a.play()
