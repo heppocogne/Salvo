@@ -63,6 +63,7 @@ func set_label_text(text:String):
 	var l:Label=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label
 	l.text=text
 	if l.text=="":
+		$VBoxContainer/ViewportContainer/CenterContainer/PanelContainer.hide()
 		l.hide()
 	else:
 		l.visible=true
@@ -86,6 +87,45 @@ func _on_Timer_timeout():
 
 func _on_Button_pressed():
 	get_tree().change_scene_to(load("res://gameplay/screen/main/main.tscn"))
+
+
+func _fadeout_mission_text(mission_message:String,duration:float):
+	set_label_text(mission_message)
+	
+	var tm:=Timer.new()
+	add_child(tm)
+	tm.start(duration)
+	yield(tm,"timeout")
+	
+	var l:Label=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label
+	var t:Tween=l.get_node("Tween")
+	t.interpolate_property(
+		l,
+		"self_modulate:a",
+		1.0,
+		0.0,
+		1.0,	# duration
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
+	)
+	t.start()
+	var p:PanelContainer=$VBoxContainer/ViewportContainer/CenterContainer/PanelContainer
+	t.interpolate_property(
+		p,
+		"self_modulate:a",
+		1.0,
+		0.0,
+		1.0,	# duration
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
+	)
+	t.start()
+	tm.start(1.1)
+	yield(tm,"timeout")
+	tm.queue_free()
+	set_label_text("")
+	l.self_modulate.a=1.0
+	p.self_modulate.a=1.0
 
 
 func stage_complete():

@@ -13,36 +13,13 @@ func _ready():
 
 
 func _on_Timer_timeout():
-	set_label_text("敵艦隊を撃沈せよ")
+	_fadeout_mission_text("敵艦隊を撃沈せよ",4.0)
 	var s:=spawn_enemy_ship(_old_dd_scene,600)
 	s.connect("killed",self,"_on_Enemy_killed")
 	s=spawn_enemy_ship(_old_dd_scene,700)
 	s.connect("killed",self,"_on_Enemy_killed")
 	s=spawn_enemy_ship(_old_dd_scene,800)
 	s.connect("killed",self,"_on_Enemy_killed")
-	
-	var tm:=Timer.new()
-	add_child(tm)
-	tm.start(4.0)
-	yield(tm,"timeout")
-	
-	var t:Tween=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label/Tween
-	var l:Label=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label
-	t.interpolate_property(
-		l,
-		"self_modulate",
-		Color.white,
-		Color(1,1,1,0),
-		1.0,	# duration
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT
-	)
-	t.start()
-	tm.start(1.0)
-	yield(tm,"timeout")
-	tm.queue_free()
-	set_label_text("")
-	l.self_modulate=Color(1,1,1,1)
 
 
 func _on_Enemy_killed():
@@ -53,8 +30,6 @@ func _on_Enemy_killed():
 	elif kill_count==6:
 		set_label_text("作戦成功!")
 		stage_complete()
-		$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label.self_modulate=Color(1,1,1,1)
-		$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
 		SaveData.store("stage_2_unlocked",true)
 
 
