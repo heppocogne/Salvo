@@ -1,6 +1,6 @@
 extends ProgressBar
 
-var player_node:Ship
+var player_node:Player
 
 
 func _ready():

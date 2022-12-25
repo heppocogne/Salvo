@@ -36,6 +36,7 @@ func _ready():
 	_speed_upgrade=SaveData.read("upgrade_speed")*1.5
 	
 	_hp_upgrade=SaveData.read("upgrade_HP")*100
+	hp=get_max_hp()
 	
 	_protection_upgrade=Vector2(
 			SaveData.read("upgrade_h_protection")*25.4,
@@ -123,7 +124,7 @@ func _physics_process(delta:float):
 
 
 func get_max_hp()->int:
-	return base_hp+_hp_upgrade
+	return .get_max_hp()+_hp_upgrade
 
 
 func get_speed()->float:
