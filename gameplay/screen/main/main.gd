@@ -15,6 +15,8 @@ func _on_Stage_button_pressed(n:String):
 		get_tree().change_scene_to(preload("res://gameplay/screen/tutorial/tutorial.tscn"))
 	elif n=="Stage 1":
 		get_tree().change_scene_to(preload("res://gameplay/screen/stage_1/stage_1.tscn"))
+	elif n=="Stage 2":
+		get_tree().change_scene_to(preload("res://gameplay/screen/stage_2/stage_2.tscn"))
 
 
 func _on_Exit_pressed():

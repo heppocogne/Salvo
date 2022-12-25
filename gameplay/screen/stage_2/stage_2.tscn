@@ -5,3 +5,8 @@
 
 [node name="Stage2" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+clear_count_key = "stage_2_completed"
+pt_per_damage = 0.1
+pt_aiming = 10.0
+pt_maneuver = 10.0
+first_reward = 150
