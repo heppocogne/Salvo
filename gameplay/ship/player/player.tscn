@@ -27,15 +27,15 @@ position = Vector2( 24, -8 )
 base_muzzle_velocity = 300.0
 
 [node name="MainGun3" parent="." index="2" instance=ExtResource( 4 )]
-position = Vector2( -29, -8 )
+position = Vector2( -25, -8 )
 base_muzzle_velocity = 300.0
 
 [node name="MainGun4" parent="." index="3" instance=ExtResource( 4 )]
-position = Vector2( -38, -6 )
+position = Vector2( -42, -6 )
 base_muzzle_velocity = 300.0
 
 [node name="CollisionPolygon2D" parent="." index="4"]
-polygon = PoolVector2Array( -62, 0, 58, 0, 62, -6, 37.0224, -5, 17, -5, 17, -9, -23, -9, -23, -5, -63, -5 )
+polygon = PoolVector2Array( -62, 0, 58, 0, 62, -6, 42, -5, 17, -5, 17, -9, -18, -9, -18, -5, -63, -5 )
 
 [node name="Sprite" parent="." index="5"]
 position = Vector2( 0, -10.5 )
