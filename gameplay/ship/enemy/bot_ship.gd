@@ -11,5 +11,7 @@ func _ready():
 func _physics_process(_delta:float):
 	if !weakref(player_node).get_ref():
 		return
+	elif main_weapons.size()==0:
+		return
 	elif main_weapon_ready and position.distance_to(player_node.position)<=main_weapons[0].get_range():
 		fire_main_weapon(player_node.position)
