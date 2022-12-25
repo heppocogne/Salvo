@@ -117,10 +117,11 @@ func _calculate_reward(bonus:int=0):
 	var aiming_sum:=0.0
 	for a in _player_salvo_diff:
 		aiming_sum+=a
-	var eval_aiming:=100*_player_salvo_diff.size()/aiming_sum
-	if 7.0<eval_aiming:
+	var eval_aiming:=10+log(_player_salvo_diff.size()/aiming_sum)/log(2)
+	
+	if 5.0<eval_aiming:
 		aiming.set_evaluation("S")
-	elif 5.0<eval_aiming:
+	elif 4.0<eval_aiming:
 		aiming.set_evaluation("A")
 	elif 3.0<eval_aiming:
 		aiming.set_evaluation("B")
@@ -141,16 +142,16 @@ func _calculate_reward(bonus:int=0):
 	if _enemy_shell_diff.size()==0:
 		eval_maneuver=0.0
 	else:
-		eval_maneuver=0.01*diff_sum/_enemy_shell_diff.size()
+		eval_maneuver=0.05*diff_sum/_enemy_shell_diff.size()
 	
 	if _enemy_shoot==0:
 		eval_maneuver+=1.0
 	else:
 		eval_maneuver+=1.0-float(_enemy_hit)/_enemy_shoot
 	
-	if 7.0<eval_maneuver:
+	if 5.0<eval_maneuver:
 		maneuver.set_evaluation("S")
-	elif 5.0<eval_maneuver:
+	elif 4.0<eval_maneuver:
 		maneuver.set_evaluation("A")
 	elif 3.0<eval_maneuver:
 		maneuver.set_evaluation("B")
