@@ -143,10 +143,10 @@ func stage_complete():
 	if c==1:
 		reward+=first_reward
 	
-	_calculate_reward(reward)
+	_calculate_reward(true,reward)
 
 
-func _calculate_reward(bonus:int=0):
+func _calculate_reward(success:bool,bonus:int=0):
 	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations.visible=true
 	var tm:Timer=Timer.new()
 	add_child(tm)
@@ -210,7 +210,9 @@ func _calculate_reward(bonus:int=0):
 		reward+=int(pt_aiming*100*_player_salvo_diff.size()/aiming_sum)
 	if _enemy_shell_diff.size()!=0:
 		reward+=pt_maneuver*0.01*diff_sum/_enemy_shell_diff.size()
-	reward+bonus
+	reward+=bonus
+	if !success:
+		reward/=2
 	reward_node.get_node("Point").text=str(reward)+" pt"
 	print_debug("eval_aiming=",eval_aiming,
 				"\neval_maneuver=",eval_maneuver,
@@ -234,7 +236,7 @@ func stage_fail():
 	if !SaveData.has_key(clear_count_key):
 		SaveData.store(clear_count_key,0)
 	
-	_calculate_reward()
+	_calculate_reward(false)
 
 
 func _on_Player_player_fired(diff:float):
