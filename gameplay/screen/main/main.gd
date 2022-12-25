@@ -10,7 +10,7 @@ func _ready():
 			b.set_unlocked(false)
 
 
-func _on_Stage_button_pressed(n:String):
+func _on_Stage_selected(n:String):
 	if n=="Tutorial":
 		get_tree().change_scene_to(preload("res://gameplay/screen/tutorial/tutorial.tscn"))
 	elif n=="Stage 1":
