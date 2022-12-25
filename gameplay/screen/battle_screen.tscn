@@ -216,6 +216,7 @@ script = ExtResource( 7 )
 [connection signal="main_weapon_reloaded" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_main_weapon_reloaded"]
 [connection signal="player_fired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_player_fired"]
 [connection signal="player_moved" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_player_moved"]
+[connection signal="timeout" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player/Timer" to="." method="_on_PlayerMoveTimer_timeout"]
 [connection signal="minimum_size_changed" from="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer" to="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer" method="_on_VBoxContainer_minimum_size_changed"]
 [connection signal="visibility_changed" from="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label" to="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer" method="_on_Label_visibility_changed"]
 [connection signal="timeout" from="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label/Timer" to="." method="_on_Timer_timeout"]

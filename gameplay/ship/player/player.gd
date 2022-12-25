@@ -120,7 +120,8 @@ func _physics_process(delta:float):
 	
 	var prev:=position
 	position.x=clamp(position.x+v*delta,0,OS.window_size.x)
-	emit_signal("player_moved",position-prev)
+	if v!=0.0:
+		emit_signal("player_moved",position-prev)
 
 
 func get_max_hp()->int:

@@ -9,6 +9,7 @@ export var first_reward:=0
 
 var _player_salvo_diff:Array
 var _enemy_shell_diff:Array
+var _player_move_timer_active:=false
 var _player_moving_distance:float
 var _damage_sum:=0.0
 var _enemy_shoot:=0
@@ -163,11 +164,12 @@ func _calculate_reward(bonus:int=0):
 	var reward_node:=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Reward
 	reward_node.visible=true
 	
-	var reward:=int(pt_per_damage*_damage_sum
-			+pt_aiming*100*_player_salvo_diff.size()/aiming_sum
-			+pt_maneuver*0.01*diff_sum/_enemy_shell_diff.size()
-			+bonus
-			)
+	var reward:=int(pt_per_damage*_damage_sum)
+	if aiming_sum!=0.0:
+		reward+=int(pt_aiming*100*_player_salvo_diff.size()/aiming_sum)
+	if _enemy_shell_diff.size()!=0:
+		reward+=pt_maneuver*0.01*diff_sum/_enemy_shell_diff.size()
+	reward+bonus
 	reward_node.get_node("Point").text=str(reward)+" pt"
 	print_debug("eval_aiming=",eval_aiming,
 				"\neval_maneuver=",eval_maneuver,
@@ -206,7 +208,7 @@ func _on_Enemy_fired(n:int):
 
 
 func on_EnemyShell_off(pos:Vector2):
-	if weakref(player_move_timer).get_ref() and player_move_timer.time_left!=0.0:
+	if _player_move_timer_active:
 		_enemy_shell_diff.push_back((pos-player.position).length())
 
 
@@ -215,4 +217,9 @@ func _on_Player_damaged(_d:int):
 
 
 func _on_Player_player_moved(_diff:Vector2):
-	$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player/Timer.start()
+	_player_move_timer_active=true
+	player_move_timer.start()
+
+
+func _on_PlayerMoveTimer_timeout():
+	_player_move_timer_active=false

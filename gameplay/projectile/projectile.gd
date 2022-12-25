@@ -46,7 +46,7 @@ func _on_Projectile_area_entered(area:Area2D):
 		splash.global_position=global_position
 		
 		# enemy projectile
-		if get_collision_layer_bit(4):
+		if get_collision_layer_bit(5):
 			GlobalScript.battele_screen.on_EnemyShell_off(position)
 		
 		GlobalScript.play_sound("res://gameplay/effect/bom00.wav")
