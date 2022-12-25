@@ -43,15 +43,15 @@ func put_projectile(rot:float,dispersion:float,accuracy:float):
 				var a_eval:=accuracy
 				var sum:=0.0
 				while 0<a_eval:
-					var temp:=rand_range(1-dispersion,1+dispersion)
+					var temp:=rand_range(-dispersion,dispersion)
 					if a_eval<1:
 						temp*=a_eval
 					sum+=temp
 					a_eval-=1.0
 				
 				mod=sum/accuracy
-			print_debug("mod=",mod)
-			rot+=PI/2*mod
+				
+			rot+=PI/4*mod
 			if instance.sync_rotation:
 				instance.rotation=rot
 			instance.velocity=Vector2(cos(rot),sin(rot))*get_muzzle_velocity()
