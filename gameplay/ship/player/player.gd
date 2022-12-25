@@ -33,32 +33,33 @@ var _reload_upgrade:float
 
 func _ready():
 	# load from savedata
-	_speed_upgrade=SaveData.read("upgrade_speed")*1.5
-	
-	_hp_upgrade=SaveData.read("upgrade_HP")*100
-	hp=get_max_hp()
-	
-	_protection_upgrade=Vector2(
-			SaveData.read("upgrade_h_protection")*25.4,
-			SaveData.read("upgrade_v_protection")*12.7
-		)
-	
-	var barrels_upgrade:int=SaveData.read("upgrade_main_weapon_barrels")
-	var num_barrels:=4+barrels_upgrade*2
-	for w in main_weapons:
-		w.num_barrels=num_barrels/4
-	if num_barrels%4==2:
-		main_weapons[1].num_barrels+=1
-		main_weapons[2].num_barrels+=1
-	_reload_upgrade+=barrels_upgrade*0.3
-	
-	var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
-	_shell_damage_upgrade=shell_upgrade*25.4
-	_reload_upgrade+=shell_upgrade*0.3
-	
-	_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.5
-	
-	_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
+	if !Engine.editor_hint:
+		_speed_upgrade=SaveData.read("upgrade_speed")*1.5
+		
+		_hp_upgrade=SaveData.read("upgrade_HP")*100
+		hp=get_max_hp()
+		
+		_protection_upgrade=Vector2(
+				SaveData.read("upgrade_h_protection")*25.4,
+				SaveData.read("upgrade_v_protection")*12.7
+			)
+		
+		var barrels_upgrade:int=SaveData.read("upgrade_main_weapon_barrels")
+		var num_barrels:=4+barrels_upgrade*2
+		for w in main_weapons:
+			w.num_barrels=num_barrels/4
+		if num_barrels%4==2:
+			main_weapons[1].num_barrels+=1
+			main_weapons[2].num_barrels+=1
+		_reload_upgrade+=barrels_upgrade*0.3
+		
+		var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
+		_shell_damage_upgrade=shell_upgrade*25.4
+		_reload_upgrade+=shell_upgrade*0.3
+		
+		_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.5
+		
+		_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
 
 
 func _draw():
