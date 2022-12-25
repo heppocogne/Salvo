@@ -8,8 +8,11 @@
 
 [node name="OldCL" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
-base_hp = 750
+base_hp = 650
 protection = Vector2( 75, 25 )
+main_weapon_nodepaths = [ NodePath("MeduimGun"), NodePath("MeduimGun2"), NodePath("MedimuGun3") ]
+base_main_weapon_reload = 6.5
+base_main_weapon_dispersion = 0.2
 
 [node name="CollisionPolygon2D" parent="." index="0"]
 polygon = PoolVector2Array( -43, -6, 12, -5, 27, -5, 27, -3, 42, -3, 43, 0, -41, 0 )
