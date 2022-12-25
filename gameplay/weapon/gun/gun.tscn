@@ -5,10 +5,10 @@
 [ext_resource path="res://gameplay/projectile/base_shell.tscn" type="PackedScene" id=3]
 [ext_resource path="res://gameplay/effect/bom04.wav" type="AudioStream" id=4]
 
-[node name="LargeGun" instance=ExtResource( 1 )]
+[node name="Gun" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 projectile_scene = ExtResource( 3 )
 base_muzzle_velocity = 200.0
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="0"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="0"]
 stream = ExtResource( 4 )
