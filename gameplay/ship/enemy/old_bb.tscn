@@ -4,7 +4,7 @@
 [ext_resource path="res://gameplay/ship/enemy/old_bb.svg" type="Texture" id=2]
 [ext_resource path="res://gameplay/weapon/gun/gun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://gameplay/ship/enemy/bot_ship.gd" type="Script" id=4]
-[ext_resource path="res://gameplay/projectile/283mm_shell.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gameplay/projectile/283mm_light_shell.tscn" type="PackedScene" id=5]
 
 [node name="OlbBattleship" instance=ExtResource( 1 )]
 scale = Vector2( 0.5, 0.5 )
@@ -26,10 +26,10 @@ texture = ExtResource( 2 )
 position = Vector2( 62, -14 )
 projectile_scene = ExtResource( 5 )
 base_muzzle_velocity = 240.0
-_range = 587.755
+_range = 720.0
 
 [node name="LargeGun2" parent="." index="4" instance=ExtResource( 3 )]
 position = Vector2( -52, -14 )
 projectile_scene = ExtResource( 5 )
 base_muzzle_velocity = 240.0
-_range = 587.755
+_range = 720.0
