@@ -164,7 +164,7 @@ margin_bottom = 448.0
 status_name = "門数"
 save_data_key = "upgrade_main_weapon_barrels"
 max_level = 5
-costs = PoolIntArray( 200, 400, 600, 800, 1000, 1200 )
+costs = PoolIntArray( 200, 400, 800, 1600, 3200, 6400 )
 
 [node name="Shell" parent="Panel/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_top = 464.0
