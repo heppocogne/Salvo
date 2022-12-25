@@ -8,9 +8,12 @@ var invalid:=false
 var velocity:Vector2
 var damage_upgrade:int
 var _class_Ship=load("res://gameplay/ship/ship.gd")
+var _scale_modifier:Vector2
 
 
 func _ready():
+	_scale_modifier=pow(get_damage()/100,1.0/3.0)*Vector2(1,1)
+	scale*=_scale_modifier
 	pass
 
 
@@ -36,13 +39,14 @@ func _on_Projectile_area_entered(area:Area2D):
 		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
 		GlobalScript.node2d_root.add_child(explosion)
 		explosion.global_position=global_position
-		explosion.scale=0.05*Vector2(1,1)
+		explosion.scale=0.05*_scale_modifier
 		explosion.speed_scale=2.0
 		
 		GlobalScript.play_sound("res://gameplay/effect/tm2_bom001.wav")
 	elif area==GlobalScript.water_area:
 		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
 		GlobalScript.node2d_root.add_child(splash)
+		splash.scale=_scale_modifier
 		splash.global_position=global_position
 		
 		# enemy projectile
