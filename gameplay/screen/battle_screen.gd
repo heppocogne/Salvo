@@ -180,6 +180,7 @@ func _calculate_reward(bonus:int=0):
 	
 	var pt:int=SaveData.read("upgrade_point")
 	SaveData.store("upgrade_point",pt+reward)
+	tm.queue_free()
 
 
 func _on_Player_killed():
