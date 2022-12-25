@@ -24,6 +24,14 @@ func _ready():
 			_data={
 				"upgrade_point":0,
 				"tutorial_unlocked":true,
+				"upgrade_speed":0,
+				"upgrade_HP":0,
+				"upgrade_h_protection":0,
+				"upgrade_v_protection":0,
+				"upgrade_main_weapon_barrels":0,
+				"upgrade_main_weapon_caliber":0,
+				"upgrade_main_weapon_accuracy":0,
+				"upgrade_main_weapon_reload":0,
 			}
 	
 	print_debug("save_data=",_data)
