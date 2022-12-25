@@ -99,7 +99,8 @@ config/icon="res://icon.png"
 [autoload]
 
 GlobalScript="*res://global_script.gd"
-SaveData="*res://save_data.gd"
+SaveData="*res://gameplay/save_data.gd"
+SoundPlayer="*res://gameplay/sound_player.gd"
 
 [display]
 
