@@ -29,3 +29,4 @@ wait_time = 5.0
 [node name="SmallGun" parent="." index="3" instance=ExtResource( 3 )]
 position = Vector2( -16, -4 )
 projectile_scene = ExtResource( 4 )
+_range = 408.163

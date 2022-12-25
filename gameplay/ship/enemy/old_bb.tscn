@@ -26,8 +26,10 @@ texture = ExtResource( 2 )
 position = Vector2( 62, -14 )
 projectile_scene = ExtResource( 5 )
 base_muzzle_velocity = 240.0
+_range = 587.755
 
 [node name="LargeGun2" parent="." index="4" instance=ExtResource( 3 )]
 position = Vector2( -52, -14 )
 projectile_scene = ExtResource( 5 )
 base_muzzle_velocity = 240.0
+_range = 587.755

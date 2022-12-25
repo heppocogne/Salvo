@@ -1,31 +1,56 @@
+tool
 class_name Weapon
 extends Node2D
 
-export var projectile_scene:PackedScene
-export var base_muzzle_velocity:float
+export var projectile_scene:PackedScene setget set_projectile_scene
+export var base_muzzle_velocity:float setget set_base_muzzle_velocity
 export var muzzle_position:Vector2
 export var num_barrels:int=1
 
-var _range:float=-1
+export var _range:float=-1  setget _set_range,get_range
 
 
 func _ready():
-	assert(get_parent().has_method("get_projectile_instance"))
+	if Engine.editor_hint:
+		assert(get_parent().has_method("get_projectile_instance"))
+
+
+func set_projectile_scene(scene:PackedScene):
+	projectile_scene=scene
+	_range=-1
+	get_range()
+
+
+func set_base_muzzle_velocity(v:float):
+	base_muzzle_velocity=v
+	_range=-1
+	get_range()
 
 
 func get_muzzle_velocity()->float:
 	return base_muzzle_velocity
 
 
+func _set_range(r:float):
+	push_warning("'_range' is read only")
+
+
 func get_range()->float:
-	if _range<0.0:
-		var instance:Projectile=get_parent().get_projectile_instance(projectile_scene)
-		if instance:
-			var v:=get_muzzle_velocity()
-			_range=v*v/instance.gravity
-			instance.queue_free()
-		else:
-			_range=0.0
+	if projectile_scene:
+		if _range<0.0:
+			var instance:Projectile
+			if Engine.editor_hint:
+				instance=projectile_scene.instance()
+			elif get_parent():
+				instance=get_parent().get_projectile_instance(projectile_scene)
+			if instance:
+				var v:=get_muzzle_velocity()
+				_range=v*v/instance.gravity
+				instance.queue_free()
+			else:
+				_range=-1.0
+	else:
+		_range=-1.0
 	return _range
 
 
