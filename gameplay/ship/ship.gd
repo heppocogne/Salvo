@@ -75,7 +75,7 @@ func _ready():
 		weapon_states[key]=ws
 		for np in wg["node_paths"]:
 			var w:Weapon=get_node(np)
-			assert(w)
+			assert(w,str(np)+" is not a Weapon")
 			ws.nodes.push_back(w)
 		ws.timer.wait_time=get_weapon_reload(key)
 		ws.timer.one_shot=true

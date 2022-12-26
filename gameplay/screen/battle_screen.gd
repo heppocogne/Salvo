@@ -42,7 +42,7 @@ func _process(_delta:float):
 
 func spawn_enemy_ship(scene:PackedScene, x:float)->Ship:
 	var ship:Ship=scene.instance()
-	GlobalScript.node2d_root.add_child(ship)
+	GlobalScript.node2d_root.call_deferred("add_child",ship)
 	ship.position.y=500
 	ship.connect("damaged",self,"_on_Enemy_damaged")
 	ship.connect("weapon_fired",self,"_on_Enemy_fired")

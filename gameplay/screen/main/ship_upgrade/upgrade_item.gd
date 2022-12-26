@@ -116,6 +116,6 @@ func _on_PlusButton_pressed():
 	_update_button_state()
 
 
-func _on_upgrade_point_changed(pt:int):
+func _on_upgrade_point_changed(_pt:int):
 	_update_cost_color()
 	_update_button_state()
