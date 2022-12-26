@@ -31,7 +31,7 @@ func get_muzzle_velocity()->float:
 	return base_muzzle_velocity
 
 
-func _set_range(r:float):
+func _set_range(_r:float):
 	push_warning("'_range' is read only")
 
 
