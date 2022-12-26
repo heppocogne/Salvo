@@ -1,3 +1,4 @@
+tool
 extends Ship
 
 var player_node:Area2D
@@ -11,7 +12,9 @@ func _ready():
 func _physics_process(_delta:float):
 	if !weakref(player_node).get_ref():
 		return
-	elif main_weapons.size()==0:
-		return
-	elif main_weapon_ready and position.distance_to(player_node.position)<=main_weapons[0].get_range():
-		fire_main_weapon(player_node.position)
+	for key in weapon_groups:
+		var ws:WeaponState=weapon_states[key]
+		if ws.nodes.size()==0:
+			return
+		elif ws.ready and position.distance_to(player_node.position)<=ws.nodes[0].get_range():
+			fire_weapon(key,player_node.position)

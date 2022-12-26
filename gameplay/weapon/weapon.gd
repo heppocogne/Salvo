@@ -38,11 +38,7 @@ func _set_range(r:float):
 func get_range()->float:
 	if projectile_scene:
 		if _range<0.0:
-			var instance:Projectile
-			if Engine.editor_hint:
-				instance=projectile_scene.instance()
-			elif get_parent():
-				instance=get_parent().get_projectile_instance(projectile_scene)
+			var instance:Projectile=projectile_scene.instance()
 			if instance:
 				var v:=get_muzzle_velocity()
 				_range=v*v/instance.gravity
@@ -54,9 +50,9 @@ func get_range()->float:
 	return _range
 
 
-func put_projectile(rot:float,dispersion:float,accuracy:float):
+func put_projectile(projectile_prototype:Projectile,rot:float,dispersion:float,accuracy:float):
 	for _i in num_barrels:
-		var instance:Projectile=get_parent().get_projectile_instance(projectile_scene)
+		var instance:Projectile=projectile_prototype.duplicate()
 		if instance:
 			GlobalScript.node2d_root.add_child(instance)
 			instance.global_position=to_global(muzzle_position)

@@ -45,7 +45,7 @@ func spawn_enemy_ship(scene:PackedScene, x:float)->Ship:
 	GlobalScript.node2d_root.add_child(ship)
 	ship.position.y=500
 	ship.connect("damaged",self,"_on_Enemy_damaged")
-	ship.connect("main_weapon_fired",self,"_on_Enemy_fired")
+	ship.connect("weapon_fired",self,"_on_Enemy_fired")
 	tween.interpolate_property(
 		ship,
 		"position:x",
@@ -247,12 +247,12 @@ func _on_Enemy_damaged(d:int):
 	_damage_sum+=d
 
 
-func _on_Enemy_fired(n:int):
+func _on_Enemy_fired(_key:String,n:int):
 	_enemy_shoot+=n
 
 
 func on_EnemyShell_off(pos:Vector2):
-	if _player_move_timer_active:
+	if _player_move_timer_active and weakref(player).get_ref():
 		_enemy_shell_diff.push_back((pos-player.position).length())
 
 

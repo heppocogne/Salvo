@@ -4,7 +4,7 @@ extends Ship
 
 signal player_fired(diff)
 signal player_moved(diff)
-signal main_weapon_relaod_time_left_changed(t)
+signal weapon_relaod_time_left_changed(key,t)
 
 const line_color:=Color.darkgray
 const line_length:=64.0
@@ -16,9 +16,9 @@ var _class_Ship=load("res://gameplay/ship/ship.gd")
 var _speed_upgrade:int
 var _hp_upgrade:int
 var _protection_upgrade:Vector2
-var _shell_damage_upgrade:int
-var _accuracy_upgrade:float
-var _reload_upgrade:float
+var _main_weapon_shell_damage_upgrade:int
+var _main_weapon_accuracy_upgrade:float
+var _main_weapon_reload_upgrade:float
 
 # speed: +1.5
 
@@ -33,33 +33,36 @@ var _reload_upgrade:float
 
 func _ready():
 	# load from savedata
-	if !Engine.editor_hint:
-		_speed_upgrade=SaveData.read("upgrade_speed")*1.5
-		
-		_hp_upgrade=SaveData.read("upgrade_HP")*100
-		hp=get_max_hp()
-		
-		_protection_upgrade=Vector2(
-				SaveData.read("upgrade_h_protection")*25.4,
-				SaveData.read("upgrade_v_protection")*12.7
-			)
-		
-		var barrels_upgrade:int=SaveData.read("upgrade_main_weapon_barrels")
-		var num_barrels:=4+barrels_upgrade*2
-		for w in main_weapons:
+	if Engine.editor_hint:
+		return
+	
+	_speed_upgrade=SaveData.read("upgrade_speed")*1.5
+	
+	_hp_upgrade=SaveData.read("upgrade_HP")*100
+	hp=get_max_hp()
+	
+	_protection_upgrade=Vector2(
+			SaveData.read("upgrade_h_protection")*25.4,
+			SaveData.read("upgrade_v_protection")*12.7
+		)
+	
+	var barrels_upgrade:int=SaveData.read("upgrade_main_weapon_barrels")
+	var num_barrels:=4+barrels_upgrade*2
+	if weapon_groups.has("main"):
+		for w in weapon_states["main"].nodes:
 			w.num_barrels=num_barrels/4
-		if num_barrels%4==2:
-			main_weapons[1].num_barrels+=1
-			main_weapons[2].num_barrels+=1
-		_reload_upgrade+=barrels_upgrade*0.3
-		
-		var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
-		_shell_damage_upgrade=shell_upgrade*25.4
-		_reload_upgrade+=shell_upgrade*0.3
-		
-		_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.5
-		
-		_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
+	if num_barrels%4==2:
+		weapon_states["main"].nodes[0].num_barrels+=1
+		weapon_states["main"].nodes[3].num_barrels+=1
+	_main_weapon_reload_upgrade+=barrels_upgrade*0.3
+	
+	var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
+	_main_weapon_shell_damage_upgrade=shell_upgrade*25.4
+	_main_weapon_reload_upgrade+=shell_upgrade*0.3
+	
+	_main_weapon_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.5
+	
+	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
 
 
 func _draw():
@@ -71,8 +74,12 @@ func _draw():
 func _process(_delta:float):
 	if Engine.editor_hint:
 		return
-	if !main_weapon_reload_timer.is_stopped():
-		emit_signal("main_weapon_relaod_time_left_changed",main_weapon_reload_timer.time_left)
+	
+	for key in weapon_groups:
+		var wg:Dictionary=weapon_groups[key]
+		var tm:Timer=weapon_states[key].timer
+		if !tm.is_stopped():
+			emit_signal("weapon_relaod_time_left_changed",key,tm.time_left)
 
 
 func _input(event:InputEvent):
@@ -82,18 +89,19 @@ func _input(event:InputEvent):
 	elif event is InputEventMouseButton:
 		var mb:=event as InputEventMouseButton
 		if mb.pressed:
-			if mb.button_index==BUTTON_LEFT and main_weapon_ready and !lock_weapon:
+			if mb.button_index==BUTTON_LEFT and weapon_states["main"].ready and !lock_weapon:
 				var rot:=mouse_pos.angle()
-				var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
+				var mw:Weapon=weapon_states["main"].nodes[0]
+				var i:Projectile=get_projectile_instance("main")
 				var a:=0.5*i.gravity
-				var b:float=main_weapons[0].get_muzzle_velocity()*sin(rot)
+				var b:float=mw.get_muzzle_velocity()*sin(rot)
 				var c:=global_position.y-500
 				var sqrt_d:=sqrt(b*b-4*a*c)
 				var t:=(-b+sqrt_d)/(2*a)
-				var pos:=Vector2(main_weapons[0].get_muzzle_velocity()*cos(rot)*t+global_position.x,500)
+				var pos:=Vector2(mw.get_muzzle_velocity()*cos(rot)*t+global_position.x,500)
 				
 				i.queue_free()
-				fire_main_weapon2(pos,rot)
+				fire_weapon2("main",pos,rot)
 				
 				var dist_min:float=INF
 				for n in GlobalScript.node2d_root.get_children():
@@ -133,30 +141,41 @@ func get_speed()->float:
 	return base_speed+_speed_upgrade
 
 
-func get_main_weapon_reload()->float:
-	return base_main_weapon_reload+_reload_upgrade
+func get_base_reload(key:String="main")->float:
+	if key=="main":
+		return .get_base_reload(key)+_main_weapon_reload_upgrade
+	else:
+		return .get_base_reload(key)
 
 
-func get_main_weapon_accuracy()->float:
-	return base_main_weapon_accuracy+_accuracy_upgrade
+func get_base_accuracy(key:String="main")->float:
+	if key=="main":
+		return .get_base_accuracy(key)+_main_weapon_accuracy_upgrade
+	else:
+		return .get_base_accuracy(key)
 
 
 func get_protection()->Vector2:
 	return protection+_protection_upgrade
 
 
-func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
-	var i:Projectile=projectile_scene.instance()
-	i.set_collision_layer_bit(4,true)
-	i.set_collision_mask_bit(3,true)
-	i.damage_upgrade=_shell_damage_upgrade
-	return i
+func get_projectile_instance(key:String="main")->Projectile:
+	if weapon_states[key].projectile_prototype==null:
+		var projectile_scene:PackedScene=weapon_states[key].nodes[0].projectile_scene
+		var i:Projectile=projectile_scene.instance()
+		i.set_collision_layer_bit(4,true)
+		i.set_collision_mask_bit(3,true)
+		if key=="main":
+			i.damage_upgrade=_main_weapon_shell_damage_upgrade
+		weapon_states[key].projectile_prototype=i
+	return weapon_states[key].projectile_prototype.duplicate()
 
 
-func fire_main_weapon2(pos:Vector2,approx_rot:float):
-	for w in main_weapons:
+func fire_weapon2(key:String,pos:Vector2,approx_rot:float):
+	var ws:WeaponState=weapon_states[key]
+	for w in ws.nodes:
 		var v_diff:Vector2=pos-w.global_position
-		var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
+		var i:Projectile=get_projectile_instance()
 		var rot:float
 		var v:float=w.get_muzzle_velocity()
 		var a:=0.5*i.gravity*v_diff.x*v_diff.x/(v*v)
@@ -190,9 +209,9 @@ func fire_main_weapon2(pos:Vector2,approx_rot:float):
 				rot=-PI/2
 			else:
 				rot=PI/2
-		w.put_projectile(rot,get_main_weapon_dispersion(),get_main_weapon_accuracy())
-	main_weapon_ready=false
-	main_weapon_reload_timer.start(get_main_weapon_reload())
+		w.put_projectile(get_projectile_instance(key),rot,get_weapon_dispersion(key),get_weapon_accuracy(key))
+	ws.ready=false
+	ws.timer.start(get_weapon_reload())
 
 
 func _damage_popup(d:int,pos:Vector2):

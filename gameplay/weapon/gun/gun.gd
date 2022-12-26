@@ -7,7 +7,7 @@ func _ready():
 	pass
 
 
-func put_projectile(rot:float,dispersion:float,accuracy:float):
+func put_projectile(projectile_prototype:Projectile,rot:float,dispersion:float,accuracy:float):
 	if !$AudioStreamPlayer.playing:
 		$AudioStreamPlayer.play()
-	.put_projectile(rot,dispersion,accuracy)
+	.put_projectile(projectile_prototype,rot,dispersion,accuracy)

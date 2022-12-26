@@ -10,9 +10,14 @@
 script = ExtResource( 5 )
 base_hp = 650
 protection = Vector2( 75, 25 )
-main_weapon_nodepaths = [ NodePath("MeduimGun"), NodePath("MeduimGun2"), NodePath("MedimuGun3") ]
-base_main_weapon_reload = 6.5
-base_main_weapon_dispersion = 0.2
+weapon_groups = {
+"main": {
+"base_accuracy": 0.0,
+"base_dispersion": 0.2,
+"base_reload": 6.5,
+"node_paths": [ NodePath("MediumGun"), NodePath("MediumGun2"), NodePath("MediumGun3") ]
+}
+}
 
 [node name="CollisionPolygon2D" parent="." index="0"]
 polygon = PoolVector2Array( -43, -6, 12, -5, 27, -5, 27, -3, 42, -3, 43, 0, -41, 0 )
@@ -21,19 +26,19 @@ polygon = PoolVector2Array( -43, -6, 12, -5, 27, -5, 27, -3, 42, -3, 43, 0, -41,
 position = Vector2( 0, -14.5 )
 texture = ExtResource( 2 )
 
-[node name="MeduimGun" parent="." index="3" instance=ExtResource( 3 )]
+[node name="MeduimGun" parent="." index="2" instance=ExtResource( 3 )]
 position = Vector2( -30, -8 )
 projectile_scene = ExtResource( 4 )
 base_muzzle_velocity = 220.0
 _range = 605.0
 
-[node name="MeduimGun2" parent="." index="4" instance=ExtResource( 3 )]
+[node name="MeduimGun2" parent="." index="3" instance=ExtResource( 3 )]
 position = Vector2( 19, -7 )
 projectile_scene = ExtResource( 4 )
 base_muzzle_velocity = 220.0
 _range = 605.0
 
-[node name="MedimuGun3" parent="." index="5" instance=ExtResource( 3 )]
+[node name="MedimuGun3" parent="." index="4" instance=ExtResource( 3 )]
 position = Vector2( 31, -5 )
 projectile_scene = ExtResource( 4 )
 base_muzzle_velocity = 220.0

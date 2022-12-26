@@ -2,8 +2,8 @@ tool
 class_name Ship
 extends Area2D
 
-signal main_weapon_reloaded()
-signal main_weapon_fired(n)
+signal weapon_reloaded(key)
+signal weapon_fired(key,n)
 signal damaged(d)
 signal killed()
 
@@ -13,23 +13,75 @@ export var is_enemy:=true
 export var base_speed:=0.0
 export var base_hp:=100
 export var protection:Vector2
-export(Array,NodePath) var main_weapon_nodepaths:Array
-export var base_main_weapon_reload:=1.0 setget set_base_main_weapon_reload
-export var base_main_weapon_accuracy:=0.0
-export var base_main_weapon_dispersion:=0.0
+export var weapon_groups:Dictionary setget _set_weapon_groups
+# key:groupname:String
+#{
+#	"node_paths":Array,
+#	"base_reload":float,
+#	"base_accuracy":float,
+#	"base_dispersion":float,
+#}
 
-onready var main_weapon_reload_timer:Timer=$MainWeaponReloadTimer
 onready var hp:=get_max_hp()
-var main_weapons:Array
-var main_weapon_ready:=false
+var weapon_states:Dictionary
+
+
+class WeaponState:
+	extends Node
+	func _init():
+		nodes=[]
+		timer=Timer.new()
+		add_child(timer)
+	
+	var nodes:Array
+	var ready:bool=false
+	var timer:Timer
+	var projectile_prototype:Projectile=null
+
+
+func _init():
+	weapon_groups={}
+	weapon_states={}
 
 
 func _ready():
-	main_weapons=[]
-	for np in main_weapon_nodepaths:
-		var w:Weapon=get_node(np)
-		assert(w)
-		main_weapons.push_back(w)
+	if Engine.editor_hint:
+		return
+	
+	for key in weapon_groups:
+		var wg:Dictionary=weapon_groups[key]
+		# validiation
+		if !wg.has("node_paths"):
+			wg["node_paths"]=[]
+		else:
+			assert(wg["node_paths"] is Array)
+		
+		if !wg.has("base_reload"):
+			wg["base_reload"]=1.0
+		else:
+			assert(wg["base_reload"] is float or wg["base_reload"] is int)
+		
+		if !wg.has("base_accuracy"):
+			wg["base_accuracy"]=0.0
+		else:
+			assert(wg["base_accuracy"] is float or wg["base_accuracy"] is int)
+		
+		if !wg.has("base_dispersion"):
+			wg["base_dispersion"]=0.0
+		else:
+			assert(wg["base_dispersion"] is float)
+		
+		var ws:WeaponState=WeaponState.new()
+		weapon_states[key]=ws
+		for np in wg["node_paths"]:
+			var w:Weapon=get_node(np)
+			assert(w)
+			ws.nodes.push_back(w)
+		ws.timer.wait_time=get_weapon_reload(key)
+		ws.timer.one_shot=true
+		ws.timer.autostart=true
+		ws.timer.connect("timeout",self,"_on_ReloadTimer_timeout",[key])
+		add_child(ws)
 
 
 func _physics_process(_delta:float):
@@ -44,40 +96,56 @@ func get_speed()->float:
 	return base_speed
 
 
-func get_main_weapon_reload()->float:
-	return base_main_weapon_reload
+func get_weapon_reload(key:String="main")->float:
+	return weapon_groups[key]["base_reload"]
 
 
-func set_base_main_weapon_reload(t:float):
-	base_main_weapon_reload=t
-	$MainWeaponReloadTimer.wait_time=t
+func set_weapon_reload(key:String,t:float):
+	weapon_groups[key]["base_reload"]=t
+	weapon_states[key].timer.wait_time=t
 
 
-func get_main_weapon_accuracy()->float:
-	return base_main_weapon_accuracy
+func get_weapon_accuracy(key:String="main")->float:
+	return weapon_groups[key]["base_accuracy"]
 
 
-func get_main_weapon_dispersion()->float:
-	return base_main_weapon_dispersion
+func get_weapon_dispersion(key:String="main")->float:
+	return weapon_groups[key]["base_dispersion"]
 
 
 func get_protection()->Vector2:
 	return protection
 
 
+func _set_weapon_groups(wg:Dictionary):
+	weapon_groups=wg
+	for key in weapon_groups:
+		if weapon_groups[key]==null or weapon_groups[key].empty():
+			weapon_groups[key]={
+					"node_paths":[],
+					"base_reload":1.0,
+					"base_accuracy":0.0,
+					"base_dispersion":0.0,
+				}
+
+
 # enemy by default
-func get_projectile_instance(projectile_scene:PackedScene)->Projectile:
-	var i:Projectile=projectile_scene.instance()
-	i.set_collision_layer_bit(5,true)
-	i.set_collision_mask_bit(2,true)
-	return i
+func get_projectile_instance(key:String="main")->Projectile:
+	if weapon_states[key].projectile_prototype==null:
+		var projectile_scene:PackedScene=weapon_states[key].nodes[0].projectile_scene
+		var i:Projectile=projectile_scene.instance()
+		i.set_collision_layer_bit(5,true)
+		i.set_collision_mask_bit(2,true)
+		weapon_states[key].projectile_prototype=i
+	return weapon_states[key].projectile_prototype.duplicate()
 
 
-func fire_main_weapon(pos:Vector2):
+func fire_weapon(key:String,pos:Vector2):
 	var n:=0
-	for w in main_weapons:
+	var ws:WeaponState=weapon_states[key]
+	for w in ws.nodes:
 		var v_diff:Vector2=pos-w.global_position
-		var i:Projectile=get_projectile_instance(main_weapons[0].projectile_scene)
+		var i:Projectile=get_projectile_instance(key)
 		var v:float=w.get_muzzle_velocity()
 		var a:=0.5*i.gravity*v_diff.x*v_diff.x/(v*v)
 		var rot:float
@@ -104,12 +172,12 @@ func fire_main_weapon(pos:Vector2):
 				rot=-PI/2
 			else:
 				rot=PI/2
-		w.put_projectile(rot,get_main_weapon_dispersion(),get_main_weapon_accuracy())
+		w.put_projectile(get_projectile_instance(key),rot,get_weapon_dispersion(key),get_weapon_accuracy(key))
 		n+=w.num_barrels
-	main_weapon_ready=false
-	main_weapon_reload_timer.start(get_main_weapon_reload())
+	ws.ready=false
+	ws.timer.start(get_weapon_reload(key))
 	
-	emit_signal("main_weapon_fired",n)
+	emit_signal("weapon_fired",key,n)
 
 
 func damage(p:Projectile):
@@ -153,6 +221,13 @@ func _add_sinking_ship():
 	sinking.global_position=global_position
 
 
-func _on_MainWeaponReloadTimer_timeout():
-	main_weapon_ready=true
-	emit_signal("main_weapon_reloaded")
+func _on_ReloadTimer_timeout(key:String):
+	weapon_states[key].ready=true
+	emit_signal("weapon_reloaded",key)
+
+
+func _on_Ship_tree_exiting():
+	for key in weapon_groups:
+		var ws:WeaponState=weapon_states[key]
+		if ws.projectile_prototype:
+			ws.projectile_prototype.queue_free()
