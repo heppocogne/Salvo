@@ -210,6 +210,7 @@ costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HP" method="_on_upgrade_point_changed"]
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HorizontalProtection" method="_on_upgrade_point_changed"]
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/VerticalProtection" method="_on_upgrade_point_changed"]
+[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/EmergencyRepair" method="_on_upgrade_point_changed"]
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Barrels" method="_on_upgrade_point_changed"]
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Shell" method="_on_upgrade_point_changed"]
 [connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Accuracy" method="_on_upgrade_point_changed"]
