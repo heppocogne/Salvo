@@ -2,7 +2,20 @@ extends Node
 
 # for debug
 const json_path:String="user://save.json"
-const path:String="user://save.var"
+const path:String="user://save.dat"
+const _default_savedata:={
+		"upgrade_point":0,
+		"tutorial_1_unlocked":true,
+		"upgrade_speed":0,
+		"upgrade_HP":0,
+		"upgrade_h_protection":0,
+		"upgrade_v_protection":0,
+		"upgrade_emergency_repair":0,
+		"upgrade_main_weapon_barrels":0,
+		"upgrade_main_weapon_caliber":0,
+		"upgrade_main_weapon_accuracy":0,
+		"upgrade_main_weapon_reload":0,
+	}
 
 var _data:Dictionary
 
@@ -18,22 +31,13 @@ func _ready():
 			if parse_result.error==OK:
 				_data=parse_result.result
 			else:
-				print_debug("Save data corrupted!\nline:%d\nerror:%s"%[parse_result.error_line,parse_result.error_string])
-				_data={}
+				push_error("Save data corrupted!\nat line:%d\nerror:%s"%[parse_result.error_line,parse_result.error_string])
+				get_tree().quit(1)
 		else:
-			_data={
-				"upgrade_point":0,
-				"tutorial_1_unlocked":true,
-				"upgrade_speed":0,
-				"upgrade_HP":0,
-				"upgrade_h_protection":0,
-				"upgrade_v_protection":0,
-				"upgrade_emergency_repair":0,
-				"upgrade_main_weapon_barrels":0,
-				"upgrade_main_weapon_caliber":0,
-				"upgrade_main_weapon_accuracy":0,
-				"upgrade_main_weapon_reload":0,
-			}
+			_data=_default_savedata
+	else:
+		# use crypto data
+		pass
 	
 	print_debug("save_data=",_data)
 
@@ -44,6 +48,9 @@ func save_to_file():
 		if f.open(json_path,File.WRITE)==OK:
 			var json:=to_json(_data)
 			f.store_string(json)
+	else:
+		# use crypto data
+		pass
 
 
 func _on_SaveData_tree_exiting():
@@ -58,5 +65,7 @@ func has_key(key:String)->bool:
 	return _data.has(key)
 
 
-func read(key:String):
+func read(key:String,use_default_unlesss_exists:=true):
+	if use_default_unlesss_exists and !has_key(key):
+		_data[key]=_default_savedata[key]
 	return _data[key]
