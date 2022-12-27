@@ -65,9 +65,9 @@ _global_script_classes=[ {
 "path": "res://gameplay/screen/subject_evaluation.gd"
 }, {
 "base": "HBoxContainer",
-"class": "UpgradeItem",
+"class": "UpgradeFeature",
 "language": "GDScript",
-"path": "res://gameplay/screen/main/ship_upgrade/upgrade_item.gd"
+"path": "res://gameplay/screen/main/ship_upgrade/upgrade_feature.gd"
 }, {
 "base": "Node2D",
 "class": "Weapon",
@@ -86,7 +86,7 @@ _global_script_class_icons={
 "SinkingShip": "",
 "StageDescription": "",
 "SubjectEvaluation": "",
-"UpgradeItem": "",
+"UpgradeFeature": "",
 "Weapon": ""
 }
 

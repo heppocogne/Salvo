@@ -1,5 +1,5 @@
 tool
-class_name UpgradeItem
+class_name UpgradeFeature
 extends HBoxContainer
 
 const pt_save_data_key:String="upgrade_point"
