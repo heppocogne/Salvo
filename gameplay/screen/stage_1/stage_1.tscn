@@ -10,8 +10,3 @@ pt_per_damage = 0.1
 pt_aiming = 10.0
 pt_maneuver = 10.0
 first_reward = 100
-
-[node name="Timer" type="Timer" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" index="4"]
-one_shot = true
-
-[connection signal="timeout" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Timer" to="." method="_on_Timer_timeout2"]
