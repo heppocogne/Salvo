@@ -206,22 +206,4 @@ status_name = "装填"
 save_data_key = "upgrade_main_weapon_reload"
 costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
 
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Speed" method="_on_upgrade_point_changed"]
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HP" method="_on_upgrade_point_changed"]
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HorizontalProtection" method="_on_upgrade_point_changed"]
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/VerticalProtection" method="_on_upgrade_point_changed"]
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/EmergencyRepair" method="_on_upgrade_point_changed"]
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Barrels" method="_on_upgrade_point_changed"]
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Shell" method="_on_upgrade_point_changed"]
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Accuracy" method="_on_upgrade_point_changed"]
-[connection signal="upgrade_point_changed" from="." to="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reload" method="_on_upgrade_point_changed"]
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/Return" to="." method="_on_Return_pressed"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Speed" to="." method="_on_upgraded_or_donwgraded"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HP" to="." method="_on_upgraded_or_donwgraded"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HorizontalProtection" to="." method="_on_upgraded_or_donwgraded"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/VerticalProtection" to="." method="_on_upgraded_or_donwgraded"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/EmergencyRepair" to="." method="_on_upgraded_or_donwgraded"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Barrels" to="." method="_on_upgraded_or_donwgraded"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Shell" to="." method="_on_upgraded_or_donwgraded"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Accuracy" to="." method="_on_upgraded_or_donwgraded"]
-[connection signal="upgraded_or_donwgraded" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Reload" to="." method="_on_upgraded_or_donwgraded"]

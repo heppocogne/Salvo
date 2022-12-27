@@ -11,6 +11,11 @@ func _ready():
 	else:
 		$Panel/MarginContainer/VBoxContainer/HBoxContainer2/Label3.text="0 pt"
 		SaveData.store(pt_save_data_key,0)
+	
+	for u in $Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer.get_children():
+		if u is UpgradeFeature:
+			connect("upgrade_point_changed",u,"_on_upgrade_point_changed")
+			u.connect("upgraded_or_donwgraded",self,"_on_upgraded_or_donwgraded")
 
 
 func _on_upgraded_or_donwgraded():
