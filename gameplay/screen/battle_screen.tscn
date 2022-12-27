@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://gameplay/ship/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/screen/battle_screen.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://gameplay/screen/main_weapon_reload_bar.gd" type="Script" id=7]
 [ext_resource path="res://gameplay/screen/subject_evaluation.tscn" type="PackedScene" id=8]
 [ext_resource path="res://gameplay/screen/messages.gd" type="Script" id=9]
+[ext_resource path="res://gameplay/screen/repair_time_bar.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1536, 64 )
@@ -186,19 +187,43 @@ custom_constants/separation = 10
 margin_right = 1010.0
 margin_bottom = 24.0
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+[node name="HP" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
 margin_right = 48.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = "耐久: "
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+[node name="HPBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
 margin_left = 52.0
 margin_right = 502.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 450, 24 )
+rect_min_size = Vector2( 450, 0 )
+size_flags_vertical = 3
 percent_visible = false
 script = ExtResource( 6 )
+
+[node name="Control" type="Control" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+margin_left = 506.0
+margin_right = 530.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+
+[node name="RepairTime" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+margin_left = 534.0
+margin_right = 574.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 5 )
+text = "修理:"
+
+[node name="RepairTimeBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+margin_left = 578.0
+margin_right = 878.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_vertical = 3
+value = 100.0
+percent_visible = false
+script = ExtResource( 10 )
 
 [node name="MainWeapon" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 margin_top = 34.0
@@ -216,16 +241,19 @@ margin_left = 52.0
 margin_right = 352.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 300, 24 )
+size_flags_vertical = 3
 percent_visible = false
 script = ExtResource( 7 )
 
 [connection signal="tree_exiting" from="." to="." method="_on_BattleScreen_tree_exiting"]
 [connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_damaged"]
-[connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/ProgressBar" method="_on_Player_hp_changed"]
+[connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/HPBar" method="_on_Player_hp_changed"]
 [connection signal="killed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_killed"]
 [connection signal="player_fired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_player_fired"]
 [connection signal="player_moved" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_player_moved"]
-[connection signal="player_repaired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/ProgressBar" method="_on_Player_hp_changed"]
+[connection signal="player_repaired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/HPBar" method="_on_Player_hp_changed"]
+[connection signal="repair_cooldown_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/RepairTimeBar" method="_on_Player_repair_cooldown_left_changed"]
+[connection signal="repair_cooldown_started" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/RepairTimeBar" method="_on_Player_repair_cooldown_started"]
 [connection signal="weapon_relaod_time_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_main_weapon_relaod_time_left_changed"]
 [connection signal="weapon_reloaded" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_main_weapon_reloaded"]
 [connection signal="timeout" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player/Timer" to="." method="_on_PlayerMoveTimer_timeout"]
