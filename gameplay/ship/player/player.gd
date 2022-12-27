@@ -18,17 +18,18 @@ var _hp_upgrade:int
 var _protection_upgrade:Vector2
 var _main_weapon_shell_damage_upgrade:int
 var _main_weapon_accuracy_upgrade:float
+var _main_weapon_dispersion_upgrade:float
 var _main_weapon_reload_upgrade:float
 
 # speed: +1.5
 
-# hp: +100
+# hp: +50
 # h_protection: +25.4
 # v_protection: +12.7
 
-# barrels: +2 (4,6,8,10,12,14,16), reload: +0.3
+# barrels: +2 (4,6,8,10,12,14,16), reload: +0.3 dispersion+0.03
 # shell: +25.4 (305,330,356,381,406,431,457,483,508), reload: +0.3
-# accuracy: +0.5
+# accuracy: +0.4
 # reload: -0.5
 
 func _ready():
@@ -38,7 +39,7 @@ func _ready():
 	
 	_speed_upgrade=SaveData.read("upgrade_speed")*1.5
 	
-	_hp_upgrade=SaveData.read("upgrade_HP")*100
+	_hp_upgrade=SaveData.read("upgrade_HP")*50
 	hp=get_max_hp()
 	
 	_protection_upgrade=Vector2(
@@ -55,12 +56,13 @@ func _ready():
 		weapon_states["main"].nodes[0].num_barrels+=1
 		weapon_states["main"].nodes[3].num_barrels+=1
 	_main_weapon_reload_upgrade+=barrels_upgrade*0.3
+	_main_weapon_dispersion_upgrade+=barrels_upgrade*0.03
 	
 	var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
 	_main_weapon_shell_damage_upgrade=shell_upgrade*25.4
 	_main_weapon_reload_upgrade+=shell_upgrade*0.3
 	
-	_main_weapon_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.5
+	_main_weapon_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.4
 	
 	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
 
@@ -141,18 +143,25 @@ func get_speed()->float:
 	return base_speed+_speed_upgrade
 
 
-func get_base_reload(key:String="main")->float:
+func get_weapon_reload(key:String="main")->float:
 	if key=="main":
-		return .get_base_reload(key)+_main_weapon_reload_upgrade
+		return .get_weapon_reload(key)+_main_weapon_reload_upgrade
 	else:
-		return .get_base_reload(key)
+		return .get_weapon_reload(key)
 
 
-func get_base_accuracy(key:String="main")->float:
+func get_weapon_accuracy(key:String="main")->float:
 	if key=="main":
-		return .get_base_accuracy(key)+_main_weapon_accuracy_upgrade
+		return .get_weapon_accuracy(key)+_main_weapon_accuracy_upgrade
 	else:
-		return .get_base_accuracy(key)
+		return .get_weapon_accuracy(key)
+
+
+func get_weapon_dispersion(key:String="main")->float:
+	if key=="main":
+		return .get_weapon_dispersion(key)+_main_weapon_dispersion_upgrade
+	else:
+		return .get_weapon_dispersion(key)
 
 
 func get_protection()->Vector2:
