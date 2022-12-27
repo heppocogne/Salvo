@@ -23,7 +23,7 @@ func _ready():
 		else:
 			_data={
 				"upgrade_point":0,
-				"tutorial_unlocked":true,
+				"tutorial_1_unlocked":true,
 				"upgrade_speed":0,
 				"upgrade_HP":0,
 				"upgrade_h_protection":0,

@@ -11,8 +11,8 @@ func _ready():
 
 
 func _on_Stage_selected(n:String):
-	if n=="Tutorial":
-		get_tree().change_scene_to(preload("res://gameplay/screen/tutorial/tutorial.tscn"))
+	if n=="Tutorial 1":
+		get_tree().change_scene_to(preload("res://gameplay/screen/tutorial_1/tutorial_1.tscn"))
 	elif n=="Stage 1":
 		get_tree().change_scene_to(preload("res://gameplay/screen/stage_1/stage_1.tscn"))
 	elif n=="Stage 2":
