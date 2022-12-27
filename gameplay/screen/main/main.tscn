@@ -54,6 +54,7 @@ custom_constants/separation = 16
 [node name="Tutorial" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
 margin_right = 482.0
 margin_bottom = 30.0
+unlocked = true
 save_data_key = "tutorial_unlocked"
 stage_name = "Tutorial"
 description = "チュートリアル"
