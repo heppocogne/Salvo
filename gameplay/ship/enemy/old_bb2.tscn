@@ -1,16 +1,31 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://gameplay/ship/ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/ship/enemy/old_bb.svg" type="Texture" id=2]
 [ext_resource path="res://gameplay/weapon/gun/gun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://gameplay/ship/enemy/bot_ship.gd" type="Script" id=4]
 [ext_resource path="res://gameplay/projectile/283mm_light_shell.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gameplay/projectile/152mm_shell.tscn" type="PackedScene" id=6]
 
 [node name="OlbBattleship2" instance=ExtResource( 1 )]
 scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 4 )
-base_hp = 1000
+base_hp = 1200
 protection = Vector2( 280, 60 )
+weapon_groups = {
+"main": {
+"base_accuracy": 0.3,
+"base_dispersion": 0.2,
+"base_reload": 12.0,
+"node_paths": [ NodePath("LargeGun"), NodePath("LargeGun2") ]
+},
+"sub": {
+"base_accuracy": 0.0,
+"base_dispersion": 0.25,
+"base_reload": 6.5,
+"node_paths": [ NodePath("MediumGun"), NodePath("MediumGun2"), NodePath("MediumGun3"), NodePath("MediumGun4"), NodePath("MediumGun5"), NodePath("MediumGun6") ]
+}
+}
 
 [node name="CollisionPolygon2D" parent="." index="0"]
 polygon = PoolVector2Array( -120, 0, 120, 0, 118, -10, 51, -10, 51, -22, -41, -22, -41, -10, -118, -10 )
@@ -32,3 +47,33 @@ projectile_scene = ExtResource( 5 )
 base_muzzle_velocity = 240.0
 num_barrels = 2
 _range = 720.0
+
+[node name="MediumGun" parent="." index="4" instance=ExtResource( 3 )]
+position = Vector2( -32, -12 )
+projectile_scene = ExtResource( 6 )
+_range = 408.163
+
+[node name="MediumGun2" parent="." index="5" instance=ExtResource( 3 )]
+position = Vector2( -14, -12 )
+projectile_scene = ExtResource( 6 )
+_range = 408.163
+
+[node name="MediumGun3" parent="." index="6" instance=ExtResource( 3 )]
+position = Vector2( 0, -12 )
+projectile_scene = ExtResource( 6 )
+_range = 408.163
+
+[node name="MediumGun4" parent="." index="7" instance=ExtResource( 3 )]
+position = Vector2( 14, -12 )
+projectile_scene = ExtResource( 6 )
+_range = 408.163
+
+[node name="MediumGun5" parent="." index="8" instance=ExtResource( 3 )]
+position = Vector2( 28, -12 )
+projectile_scene = ExtResource( 6 )
+_range = 408.163
+
+[node name="MediumGun6" parent="." index="9" instance=ExtResource( 3 )]
+position = Vector2( 42, -12 )
+projectile_scene = ExtResource( 6 )
+_range = 408.163
