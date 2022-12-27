@@ -37,12 +37,16 @@ func _ready():
 	print_debug("save_data=",_data)
 
 
-func _on_SaveData_tree_exiting():
+func save_to_file():
 	var f:=File.new()
 	if OS.has_feature("debug"):
 		if f.open(json_path,File.WRITE)==OK:
 			var json:=to_json(_data)
 			f.store_string(json)
+
+
+func _on_SaveData_tree_exiting():
+	save_to_file()
 
 
 func store(key:String,value):

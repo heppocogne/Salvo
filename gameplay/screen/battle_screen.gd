@@ -202,6 +202,7 @@ func _calculate_reward(success:bool,bonus:int=0):
 	
 	tm.start(0.5)
 	yield(tm,"timeout")
+	tm.queue_free()
 	var reward_node:=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Reward
 	reward_node.visible=true
 	
@@ -222,7 +223,7 @@ func _calculate_reward(success:bool,bonus:int=0):
 	
 	var pt:int=SaveData.read("upgrade_point")
 	SaveData.store("upgrade_point",pt+reward)
-	tm.queue_free()
+	SaveData.save_to_file()
 
 
 func _on_Player_killed():

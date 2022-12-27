@@ -20,4 +20,5 @@ func _on_upgraded_or_donwgraded():
 
 
 func _on_Return_pressed():
+	SaveData.save_to_file()
 	get_tree().change_scene_to(load("res://gameplay/screen/main/main.tscn"))
