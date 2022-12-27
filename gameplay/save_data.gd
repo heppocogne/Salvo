@@ -28,6 +28,7 @@ func _ready():
 				"upgrade_HP":0,
 				"upgrade_h_protection":0,
 				"upgrade_v_protection":0,
+				"upgrade_emergency_repair":0,
 				"upgrade_main_weapon_barrels":0,
 				"upgrade_main_weapon_caliber":0,
 				"upgrade_main_weapon_accuracy":0,

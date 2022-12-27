@@ -51,3 +51,12 @@ position = Vector2( 0, -10.5 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 flip_h = false
+
+[node name="DamageTimer" type="Timer" parent="." index="6"]
+one_shot = true
+
+[node name="RpairTimer" type="Timer" parent="." index="7"]
+
+[connection signal="damaged" from="." to="." method="_on_Player_damaged"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]
+[connection signal="timeout" from="RpairTimer" to="." method="_on_RpairTimer_timeout"]

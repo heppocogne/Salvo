@@ -4,7 +4,10 @@ extends Ship
 
 signal player_fired(diff)
 signal player_moved(diff)
+signal player_repaired(h)
 signal weapon_relaod_time_left_changed(key,t)
+signal repair_cooldown_started(c)
+signal repair_cooldown_left_changed(t)
 
 const line_color:=Color.darkgray
 const line_length:=64.0
@@ -16,16 +19,21 @@ var _class_Ship=load("res://gameplay/ship/ship.gd")
 var _speed_upgrade:int
 var _hp_upgrade:int
 var _protection_upgrade:Vector2
+var _regeneration_per_sec:int
 var _main_weapon_shell_damage_upgrade:int
 var _main_weapon_accuracy_upgrade:float
 var _main_weapon_dispersion_upgrade:float
 var _main_weapon_reload_upgrade:float
+
+onready var damage_timer:Timer=$DamageTimer
+onready var repair_timer:Timer=$RpairTimer
 
 # speed: +1.5
 
 # hp: +50
 # h_protection: +25.4
 # v_protection: +12.7
+# repair: +1/s
 
 # barrels: +2 (4,6,8,10,12,14,16), reload: +0.3 dispersion+0.03
 # shell: +25.4 (305,330,356,381,406,431,457,483,508), reload: +0.3
@@ -46,6 +54,8 @@ func _ready():
 			SaveData.read("upgrade_h_protection")*25.4,
 			SaveData.read("upgrade_v_protection")*12.7
 		)
+	
+	_regeneration_per_sec=SaveData.read("upgrade_emergency_repair")+1
 	
 	var barrels_upgrade:int=SaveData.read("upgrade_main_weapon_barrels")
 	var num_barrels:=4+barrels_upgrade*2
@@ -82,6 +92,9 @@ func _process(_delta:float):
 		var tm:Timer=weapon_states[key].timer
 		if !tm.is_stopped():
 			emit_signal("weapon_relaod_time_left_changed",key,tm.time_left)
+	
+	if !damage_timer.is_stopped():
+		emit_signal("repair_cooldown_left_changed",damage_timer.time_left)
 
 
 func _input(event:InputEvent):
@@ -229,3 +242,27 @@ func _damage_popup(d:int,pos:Vector2):
 	popup.font_color=Color.red
 	popup.rect_position=pos+Vector2(0,-64)
 	GlobalScript.node2d_root.add_child(popup)
+
+
+func _on_Player_damaged(d:int):
+	repair_timer.stop()
+	var cooldown:=damage_timer.time_left+sqrt(d)
+	damage_timer.start(cooldown)
+	emit_signal("repair_cooldown_started",cooldown)
+
+
+func _on_DamageTimer_timeout():
+	if _regeneration_per_sec!=0:
+		repair_timer.start()
+
+
+func _on_RpairTimer_timeout():
+	if hp!=get_max_hp():
+		hp=min(get_max_hp(),hp+_regeneration_per_sec)
+		var popup:=preload("res://gameplay/ship/repair_indicator.tscn").instance()
+		popup.text="+"+str(_regeneration_per_sec)
+		popup.rect_position=position+Vector2(0,-64)
+		GlobalScript.node2d_root.add_child(popup)
+		emit_signal("player_repaired",hp)
+	else:
+		repair_timer.stop()

@@ -221,10 +221,11 @@ script = ExtResource( 7 )
 
 [connection signal="tree_exiting" from="." to="." method="_on_BattleScreen_tree_exiting"]
 [connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_damaged"]
-[connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/ProgressBar" method="_on_Player_damaged"]
+[connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/ProgressBar" method="_on_Player_hp_changed"]
 [connection signal="killed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_killed"]
 [connection signal="player_fired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_player_fired"]
 [connection signal="player_moved" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_player_moved"]
+[connection signal="player_repaired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/ProgressBar" method="_on_Player_hp_changed"]
 [connection signal="weapon_relaod_time_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_main_weapon_relaod_time_left_changed"]
 [connection signal="weapon_reloaded" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_main_weapon_reloaded"]
 [connection signal="timeout" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player/Timer" to="." method="_on_PlayerMoveTimer_timeout"]
