@@ -34,6 +34,7 @@ func _physics_process(_delta:float):
 		if move_left and move_right:
 			set_label_text("左クリックで主砲を発射")
 			step=FIRE_TUTORIAL
+			return
 	
 	elif step==FIRE_TUTORIAL:
 		if left_clicked:
@@ -48,9 +49,13 @@ func _physics_process(_delta:float):
 				step=KILL_TUTORIAL
 				var ship:=spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),500)
 				ship.connect("killed",self,"_on_Enemy_Killed")
+				return
 		
 		if Input.is_mouse_button_pressed(BUTTON_LEFT):
-			left_clicked=true
+			for n in GlobalScript.node2d_root.get_children():
+				if n is Projectile:
+					left_clicked=true
+					return
 	
 	if step==KILL_TUTORIAL:
 		if enemy_killed:
