@@ -48,7 +48,11 @@ func _physics_process(_delta:float):
 				set_label_text("敵を撃沈せよ")
 				step=KILL_TUTORIAL
 				var ship:=spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),500)
+				var m:Marker=preload("res://gameplay/misc/marker.tscn").instance()
+				m.target_node=ship
+				GlobalScript.node2d_root.add_child(m)
 				ship.connect("killed",self,"_on_Enemy_Killed")
+				ship.connect("killed",m,"queue_free")
 				return
 		
 		if Input.is_mouse_button_pressed(BUTTON_LEFT):
