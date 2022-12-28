@@ -24,10 +24,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gameplay/weapon/gun/gun.gd"
 }, {
-"base": "Button",
-"class": "LockableButton",
+"base": "Sprite",
+"class": "Marker",
 "language": "GDScript",
-"path": "res://gameplay/screen/main/lockable_button.gd"
+"path": "res://gameplay/misc/marker.gd"
 }, {
 "base": "Particles2D",
 "class": "OneshotParticles2D",
@@ -73,12 +73,17 @@ _global_script_classes=[ {
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://gameplay/weapon/weapon.gd"
+}, {
+"base": "Node",
+"class": "WeaponState",
+"language": "GDScript",
+"path": "res://gameplay/misc/weapon_state.gd"
 } ]
 _global_script_class_icons={
 "BattleScreen": "",
 "DamageIndicator": "",
 "Gun": "",
-"LockableButton": "",
+"Marker": "",
 "OneshotParticles2D": "",
 "Player": "",
 "Projectile": "",
