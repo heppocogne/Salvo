@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://gameplay/weapon/weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gameplay/weapon/bomb_thrower.gd" type="Script" id=2]
+[ext_resource path="res://gameplay/effect/mixkit-cartoon-falling-whistle-395.wav" type="AudioStream" id=3]
+
+[node name="BombThrower" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+base_muzzle_velocity = 0.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="0"]
+stream = ExtResource( 3 )
+pitch_scale = 0.5

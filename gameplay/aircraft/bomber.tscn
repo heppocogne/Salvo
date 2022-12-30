@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://gameplay/aircraft/aircraft.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gameplay/aircraft/bomber.svg" type="Texture" id=2]
+[ext_resource path="res://gameplay/weapon/bomb_thrower.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gameplay/projectile/500kg_bomb.tscn" type="PackedScene" id=4]
+[ext_resource path="res://gameplay/aircraft/bomber.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12, 9 )
+
+[node name="Bomber" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+base_speed = 120.0
+base_hp = 40
+weapon_groups = {
+"main": {
+"base_accuracy": 0.0,
+"base_dispersion": 0.2,
+"base_reload": 10000.0,
+"node_paths": [ NodePath("BombThrower") ]
+}
+}
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="BombThrower" parent="." index="2" instance=ExtResource( 3 )]
+projectile_scene = ExtResource( 4 )
+_range = 0.0102041

@@ -7,6 +7,7 @@ export var pt_aiming:=1.0
 export var pt_maneuver:=1.0
 export var first_reward:=0
 
+var player_killed:=false
 var _player_salvo_diff:Array
 var _enemy_shell_diff:Array
 var _player_move_timer_active:=false
@@ -130,8 +131,12 @@ func _fadeout_mission_text(mission_message:String,duration:float):
 
 
 func stage_complete():
+	if player_killed:
+		return
+	
 	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
-	$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player.lock_weapon=true
+	player.block_user_input=true
+	player.disconnect("killed",self,"_on_Player_killed")
 	var c:int
 
 	if SaveData.has_key(clear_count_key):
@@ -158,7 +163,11 @@ func _calculate_reward(success:bool,bonus:int=0):
 	var aiming_sum:=0.0
 	for a in _player_salvo_diff:
 		aiming_sum+=a
-	var eval_aiming:=10+log(_player_salvo_diff.size()/aiming_sum)/log(2)
+	var eval_aiming:float
+	if aiming_sum==0:
+		eval_aiming=0.0
+	else:
+		eval_aiming=10+log(_player_salvo_diff.size()/aiming_sum)/log(2)
 	
 	if 5.0<eval_aiming:
 		aiming.set_evaluation("S")
@@ -228,6 +237,7 @@ func _calculate_reward(success:bool,bonus:int=0):
 
 
 func _on_Player_killed():
+	player_killed=true
 	stage_fail()
 
 

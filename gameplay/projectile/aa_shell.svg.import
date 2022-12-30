@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/white_pixel.png-a20ee248cdba4cfb983e77f8873c40d0.stex"
+path="res://.import/aa_shell.svg-47cdd533bdd528f935f3638289c2b90a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gameplay/screen/main/white_pixel.png"
-dest_files=[ "res://.import/white_pixel.png-a20ee248cdba4cfb983e77f8873c40d0.stex" ]
+source_file="res://gameplay/projectile/aa_shell.svg"
+dest_files=[ "res://.import/aa_shell.svg-47cdd533bdd528f935f3638289c2b90a.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

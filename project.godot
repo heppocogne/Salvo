@@ -9,30 +9,85 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Aircraft",
+"language": "GDScript",
+"path": "res://gameplay/aircraft/aircraft.gd"
+}, {
+"base": "NavaelBaseObject",
+"class": "Airport",
+"language": "GDScript",
+"path": "res://gameplay/base/airport.gd"
+}, {
+"base": "Gun",
+"class": "AntiAirGun",
+"language": "GDScript",
+"path": "res://gameplay/weapon/gun/anti_air_gun.gd"
+}, {
+"base": "Projectile",
+"class": "AntiAirProjectile",
+"language": "GDScript",
+"path": "res://gameplay/projectile/anti_air_projectile.gd"
+}, {
+"base": "NavaelBaseObject",
+"class": "Artillery",
+"language": "GDScript",
+"path": "res://gameplay/base/artillery.gd"
+}, {
 "base": "Control",
 "class": "BattleScreen",
 "language": "GDScript",
 "path": "res://gameplay/screen/battle_screen.gd"
+}, {
+"base": "Weapon",
+"class": "BombThrower",
+"language": "GDScript",
+"path": "res://gameplay/weapon/bomb_thrower.gd"
+}, {
+"base": "Aircraft",
+"class": "Bomber",
+"language": "GDScript",
+"path": "res://gameplay/aircraft/bomber.gd"
+}, {
+"base": "Projectile",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://gameplay/projectile/bullet.gd"
 }, {
 "base": "Label",
 "class": "DamageIndicator",
 "language": "GDScript",
 "path": "res://gameplay/ship/damage_indicator.gd"
 }, {
+"base": "Aircraft",
+"class": "Fighter",
+"language": "GDScript",
+"path": "res://gameplay/aircraft/fighter.gd"
+}, {
 "base": "Weapon",
 "class": "Gun",
 "language": "GDScript",
 "path": "res://gameplay/weapon/gun/gun.gd"
 }, {
-"base": "Button",
-"class": "LockableButton",
+"base": "Gun",
+"class": "MachineGun",
 "language": "GDScript",
-"path": "res://gameplay/screen/main/lockable_button.gd"
+"path": "res://gameplay/weapon/gun/machine_gun.gd"
 }, {
 "base": "Sprite",
 "class": "Marker",
 "language": "GDScript",
 "path": "res://gameplay/misc/marker.gd"
+}, {
+"base": "Area2D",
+"class": "NavaelBaseObject",
+"language": "GDScript",
+"path": "res://gameplay/base/naval_base_object.gd"
+}, {
+"base": "Area2D",
+"class": "NavalFortress",
+"language": "GDScript",
+"path": "res://gameplay/base/naval_fortress.gd"
 }, {
 "base": "Particles2D",
 "class": "OneshotParticles2D",
@@ -78,13 +133,29 @@ _global_script_classes=[ {
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://gameplay/weapon/weapon.gd"
+}, {
+"base": "Node",
+"class": "WeaponState",
+"language": "GDScript",
+"path": "res://gameplay/misc/weapon_state.gd"
 } ]
 _global_script_class_icons={
+"Aircraft": "",
+"Airport": "",
+"AntiAirGun": "",
+"AntiAirProjectile": "",
+"Artillery": "",
 "BattleScreen": "",
+"BombThrower": "",
+"Bomber": "",
+"Bullet": "",
 "DamageIndicator": "",
+"Fighter": "",
 "Gun": "",
-"LockableButton": "",
+"MachineGun": "",
 "Marker": "",
+"NavaelBaseObject": "",
+"NavalFortress": "",
 "OneshotParticles2D": "",
 "Player": "",
 "Projectile": "",
@@ -93,7 +164,8 @@ _global_script_class_icons={
 "StageDescription": "",
 "SubjectEvaluation": "",
 "UpgradeFeature": "",
-"Weapon": ""
+"Weapon": "",
+"WeaponState": ""
 }
 
 [application]
@@ -139,6 +211,7 @@ game_right={
 2d_physics/layer_6="EnemyProjectile"
 2d_physics/layer_8="EnemyAircraft"
 2d_physics/layer_10="EnemyBuilding"
+2d_physics/layer_11="PlayerAntiAirProjectile"
 
 [mono]
 

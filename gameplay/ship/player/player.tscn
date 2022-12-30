@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://gameplay/ship/ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/ship/player/player.gd" type="Script" id=2]
 [ext_resource path="res://gameplay/ship/bb.svg" type="Texture" id=3]
 [ext_resource path="res://gameplay/weapon/gun/gun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://gameplay/projectile/152mm_shell.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gameplay/weapon/gun/anti_air_gun.tscn" type="PackedScene" id=6]
 
 [node name="Player" instance=ExtResource( 1 )]
 scale = Vector2( 0.75, 0.75 )
@@ -15,47 +17,95 @@ base_speed = 17.0
 base_hp = 500
 protection = Vector2( 254, 51 )
 weapon_groups = {
+"aa": {
+"base_accuracy": 1.0,
+"base_dispersion": 0.1,
+"base_reload": 2.0,
+"node_paths": [ NodePath("AntiAirGun"), NodePath("AntiAirGun2"), NodePath("AntiAirGun3"), NodePath("AntiAirGun4") ]
+},
 "main": {
 "base_accuracy": 0.0,
 "base_dispersion": 0.1,
 "base_reload": 10.0,
 "node_paths": [ NodePath("MainGun1"), NodePath("MainGun2"), NodePath("MainGun3"), NodePath("MainGun4") ]
+},
+"secondary": {
+"base_accuracy": 0.0,
+"base_dispersion": 0.3,
+"base_reload": 5.5,
+"node_paths": [ NodePath("MediumGun"), NodePath("MediumGun2"), NodePath("MediumGun3"), NodePath("MediumGun4") ]
 }
 }
 
-[node name="MainGun1" parent="." index="0" instance=ExtResource( 4 )]
-position = Vector2( 33.5, -6 )
-base_muzzle_velocity = 300.0
-_range = 918.367
-
-[node name="MainGun2" parent="." index="1" instance=ExtResource( 4 )]
-position = Vector2( 24, -8 )
-base_muzzle_velocity = 300.0
-_range = 918.367
-
-[node name="MainGun3" parent="." index="2" instance=ExtResource( 4 )]
-position = Vector2( -25, -8 )
-base_muzzle_velocity = 300.0
-_range = 918.367
-
-[node name="MainGun4" parent="." index="3" instance=ExtResource( 4 )]
-position = Vector2( -42, -6 )
-base_muzzle_velocity = 300.0
-_range = 918.367
-
-[node name="CollisionPolygon2D" parent="." index="4"]
+[node name="CollisionPolygon2D" parent="." index="0"]
 polygon = PoolVector2Array( -62, 0, 58, 0, 62, -6, 42, -5, 17, -5, 17, -9, -18, -9, -18, -5, -63, -5 )
 
-[node name="Sprite" parent="." index="5"]
+[node name="Sprite" parent="." index="1"]
 position = Vector2( 0, -10.5 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 flip_h = false
 
-[node name="DamageTimer" type="Timer" parent="." index="6"]
+[node name="DamageTimer" type="Timer" parent="." index="2"]
 one_shot = true
 
-[node name="RpairTimer" type="Timer" parent="." index="7"]
+[node name="RpairTimer" type="Timer" parent="." index="3"]
+
+[node name="MainGun1" parent="." index="4" instance=ExtResource( 4 )]
+position = Vector2( 33.5, -6 )
+base_muzzle_velocity = 300.0
+_range = 918.367
+
+[node name="MainGun2" parent="." index="5" instance=ExtResource( 4 )]
+position = Vector2( 24, -8 )
+base_muzzle_velocity = 300.0
+_range = 918.367
+
+[node name="MainGun3" parent="." index="6" instance=ExtResource( 4 )]
+position = Vector2( -25, -8 )
+base_muzzle_velocity = 300.0
+_range = 918.367
+
+[node name="MainGun4" parent="." index="7" instance=ExtResource( 4 )]
+position = Vector2( -42, -6 )
+base_muzzle_velocity = 300.0
+_range = 918.367
+
+[node name="MediumGun" parent="." index="8" instance=ExtResource( 4 )]
+position = Vector2( 17, -8 )
+projectile_scene = ExtResource( 5 )
+base_muzzle_velocity = 240.0
+_range = 587.755
+
+[node name="MediumGun2" parent="." index="9" instance=ExtResource( 4 )]
+position = Vector2( 12, -7 )
+projectile_scene = ExtResource( 5 )
+base_muzzle_velocity = 240.0
+_range = 587.755
+
+[node name="MediumGun3" parent="." index="10" instance=ExtResource( 4 )]
+position = Vector2( -17, -8 )
+projectile_scene = ExtResource( 5 )
+base_muzzle_velocity = 240.0
+_range = 587.755
+
+[node name="MediumGun4" parent="." index="11" instance=ExtResource( 4 )]
+position = Vector2( -12, -7 )
+projectile_scene = ExtResource( 5 )
+base_muzzle_velocity = 240.0
+_range = 587.755
+
+[node name="AntiAirGun" parent="." index="12" instance=ExtResource( 6 )]
+position = Vector2( 9, -10 )
+
+[node name="AntiAirGun2" parent="." index="13" instance=ExtResource( 6 )]
+position = Vector2( -5, -9 )
+
+[node name="AntiAirGun3" parent="." index="14" instance=ExtResource( 6 )]
+position = Vector2( -9, -9 )
+
+[node name="AntiAirGun4" parent="." index="15" instance=ExtResource( 6 )]
+position = Vector2( -33, -5 )
 
 [connection signal="damaged" from="." to="." method="_on_Player_damaged"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_DamageTimer_timeout"]

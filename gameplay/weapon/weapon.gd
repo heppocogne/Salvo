@@ -11,8 +11,7 @@ export var _range:float=-1  setget _set_range,get_range
 
 
 func _ready():
-	if Engine.editor_hint:
-		assert(get_parent().has_method("get_projectile_instance"))
+	pass
 
 
 func set_projectile_scene(scene:PackedScene):
@@ -41,7 +40,10 @@ func get_range()->float:
 			var instance:Projectile=projectile_scene.instance()
 			if instance:
 				var v:=get_muzzle_velocity()
-				_range=v*v/instance.gravity
+				if instance.gravity==0.0:
+					_range=INF
+				else:
+					_range=v*v/instance.gravity
 				instance.queue_free()
 			else:
 				_range=-1.0
@@ -50,29 +52,32 @@ func get_range()->float:
 	return _range
 
 
+static func get_random_dispersion(dispersion:float,accuracy:float)->float:
+	var disp:float
+	if accuracy==0.0:
+		disp=rand_range(-dispersion,dispersion)
+	else:
+		var a_eval:=accuracy
+		var sum:=0.0
+		while 0<a_eval:
+			var temp:=rand_range(-dispersion,dispersion)
+			if a_eval<1:
+				temp*=a_eval
+			sum+=temp
+			a_eval-=1.0
+		
+		disp=sum/accuracy
+	return disp
+
+
 func put_projectile(projectile_prototype:Projectile,rot:float,dispersion:float,accuracy:float):
 	for _i in num_barrels:
 		var instance:Projectile=projectile_prototype.duplicate()
 		if instance:
 			GlobalScript.node2d_root.add_child(instance)
 			instance.global_position=to_global(muzzle_position)
-			# TODO: consider dispersion & accuracy
-			var mod:float
-			if accuracy==0.0:
-				mod=rand_range(-dispersion,dispersion)
-			else:
-				var a_eval:=accuracy
-				var sum:=0.0
-				while 0<a_eval:
-					var temp:=rand_range(-dispersion,dispersion)
-					if a_eval<1:
-						temp*=a_eval
-					sum+=temp
-					a_eval-=1.0
-				
-				mod=sum/accuracy
-				
-			rot+=PI/4*mod
+			
+			rot+=PI/4*get_random_dispersion(dispersion,accuracy)
 			if instance.sync_rotation:
 				instance.rotation=rot
 			instance.velocity=Vector2(cos(rot),sin(rot))*get_muzzle_velocity()

@@ -14,7 +14,6 @@ var _scale_modifier:Vector2
 func _ready():
 	_scale_modifier=pow(get_damage()/100,1.0/3.0)*Vector2(1,1)
 	scale*=_scale_modifier
-	pass
 
 
 func _physics_process(delta:float):
@@ -30,20 +29,10 @@ func get_damage()->int:
 
 
 func _on_Projectile_area_entered(area:Area2D):
-	if area.has_method("damage"):
-		if invalid:
-			return
-		invalid=true
-		
-		area.damage(self)
-		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
-		GlobalScript.node2d_root.add_child(explosion)
-		explosion.global_position=global_position
-		explosion.scale=0.05*_scale_modifier
-		explosion.speed_scale=2.0
-		
-		GlobalScript.play_sound("res://gameplay/effect/tm2_bom001.wav")
-	elif area==GlobalScript.water_area:
+	if invalid:
+		return
+	invalid=true
+	if area==GlobalScript.water_area:
 		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
 		GlobalScript.node2d_root.add_child(splash)
 		splash.scale=_scale_modifier
@@ -54,4 +43,14 @@ func _on_Projectile_area_entered(area:Area2D):
 			GlobalScript.battele_screen.on_EnemyShell_off(position)
 		
 		GlobalScript.play_sound("res://gameplay/effect/bom00.wav")
+	else:
+		if area.has_method("damage"):
+			area.damage(self)
+		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
+		GlobalScript.node2d_root.add_child(explosion)
+		explosion.global_position=global_position
+		explosion.scale=0.05*_scale_modifier
+		explosion.speed_scale=2.0
+		
+		GlobalScript.play_sound("res://gameplay/effect/tm2_bom001.wav")
 	queue_free()

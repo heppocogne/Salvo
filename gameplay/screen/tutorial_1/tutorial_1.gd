@@ -63,7 +63,7 @@ func _physics_process(_delta:float):
 	
 	if step==KILL_TUTORIAL:
 		if enemy_killed:
-			set_label_text("チュートリアル完了")
+			set_label_text("チュートリアル 1 完了")
 			stage_complete()
 			step=TUTORIAL_END
 			SaveData.store("stage_1_unlocked",true)

@@ -9,13 +9,3 @@ clear_count_key = "tutorial_completed"
 pt_per_damage = 0.1
 pt_aiming = 10.0
 first_reward = 100
-
-[node name="Player" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" index="4"]
-weapon_groups = {
-"main": {
-"base_accuracy": 0.0,
-"base_dispersion": 0.1,
-"base_reload": 1.0,
-"node_paths": [ NodePath("MainGun1"), NodePath("MainGun2"), NodePath("MainGun3"), NodePath("MainGun4") ]
-}
-}

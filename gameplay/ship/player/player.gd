@@ -8,13 +8,17 @@ signal player_repaired(h)
 signal weapon_relaod_time_left_changed(key,t)
 signal repair_cooldown_started(c)
 signal repair_cooldown_left_changed(t)
+signal subweapon_changed(sw)
 
 const line_color:=Color.darkgray
 const line_length:=64.0
 
-var lock_weapon:=false
+var subweapon:="" setget set_subweapon
+var block_user_input:=false
 var mouse_pos:Vector2
 var _class_Ship=load("res://gameplay/ship/ship.gd")
+var _class_NavalBaseObject=load("res://gameplay/base/naval_base_object.gd")
+var _class_Aircraft=load("res://gameplay/aircraft/aircraft.gd")
 
 var _speed_upgrade:int
 var _hp_upgrade:int
@@ -45,6 +49,7 @@ func _ready():
 	if Engine.editor_hint:
 		return
 	
+	subweapon=SaveData.read("subweapon")
 	_speed_upgrade=SaveData.read("upgrade_speed")*1.5
 	
 	_hp_upgrade=SaveData.read("upgrade_HP")*50
@@ -56,6 +61,12 @@ func _ready():
 		)
 	
 	_regeneration_per_sec=SaveData.read("upgrade_emergency_repair")+1
+	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
+	if weapon_groups.has("main"):
+		# restart reload timer to apply upgrade effect
+		weapon_states["main"].timer.start(get_weapon_reload("main"))
+	
+	_main_weapon_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.4
 	
 	var barrels_upgrade:int=SaveData.read("upgrade_main_weapon_barrels")
 	var num_barrels:=4+barrels_upgrade*2
@@ -71,10 +82,6 @@ func _ready():
 	var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
 	_main_weapon_shell_damage_upgrade=shell_upgrade*25.4
 	_main_weapon_reload_upgrade+=shell_upgrade*0.3
-	
-	_main_weapon_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.4
-	
-	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
 
 
 func _draw():
@@ -87,48 +94,26 @@ func _process(_delta:float):
 	if Engine.editor_hint:
 		return
 	
-	for key in weapon_groups:
-		var wg:Dictionary=weapon_groups[key]
-		var tm:Timer=weapon_states[key].timer
+	var mw:Dictionary=weapon_groups["main"]
+	var tm:Timer=weapon_states["main"].timer
+	if !tm.is_stopped():
+		emit_signal("weapon_relaod_time_left_changed","main",tm.time_left)
+	
+	if subweapon!="":
+		var sw:Dictionary=weapon_groups[subweapon]
+		tm=weapon_states[subweapon].timer
 		if !tm.is_stopped():
-			emit_signal("weapon_relaod_time_left_changed",key,tm.time_left)
+			emit_signal("weapon_relaod_time_left_changed",subweapon,tm.time_left)
 	
 	if !damage_timer.is_stopped():
 		emit_signal("repair_cooldown_left_changed",damage_timer.time_left)
 
 
-func _input(event:InputEvent):
-	if event is InputEventMouseMotion:
-		mouse_pos=get_local_mouse_position()
-		update()
-	elif event is InputEventMouseButton:
-		var mb:=event as InputEventMouseButton
-		if mb.pressed:
-			if mb.button_index==BUTTON_LEFT and weapon_states["main"].ready and !lock_weapon:
-				var rot:=mouse_pos.angle()
-				var mw:Weapon=weapon_states["main"].nodes[0]
-				var i:Projectile=get_projectile_instance("main")
-				var a:=0.5*i.gravity
-				var b:float=mw.get_muzzle_velocity()*sin(rot)
-				var c:=global_position.y-500
-				var sqrt_d:=sqrt(b*b-4*a*c)
-				var t:=(-b+sqrt_d)/(2*a)
-				var pos:=Vector2(mw.get_muzzle_velocity()*cos(rot)*t+global_position.x,500)
-				
-				i.queue_free()
-				fire_weapon2("main",pos,rot)
-				
-				var dist_min:float=INF
-				for n in GlobalScript.node2d_root.get_children():
-					if n is _class_Ship and n!=self:
-						if n.global_position.distance_to(pos)<dist_min:
-							dist_min=n.global_position.distance_to(pos)
-				if dist_min!=INF:
-					emit_signal("player_fired",dist_min)
-
-
 func _physics_process(delta:float):
 	if Engine.editor_hint:
+		return
+	
+	if block_user_input:
 		return
 	
 	var l:=Input.is_action_pressed("game_left")
@@ -146,6 +131,66 @@ func _physics_process(delta:float):
 	position.x=clamp(position.x+v*delta,0,OS.window_size.x)
 	if v!=0.0:
 		emit_signal("player_moved",position-prev)
+
+
+func _input(event:InputEvent):
+	if event is InputEventMouseMotion:
+		mouse_pos=get_local_mouse_position()
+		update()
+	elif event is InputEventMouseButton:
+		var mb:=event as InputEventMouseButton
+		if mb.pressed:
+			var weapon_key:=""
+			if !block_user_input:
+				if mb.button_index==BUTTON_LEFT:
+					weapon_key="main"
+				elif mb.button_index==BUTTON_RIGHT:
+					if subweapon!="":
+						weapon_key=subweapon
+					else:
+						return
+				if weapon_states[weapon_key].ready:
+					var rot:=mouse_pos.angle()
+					var wp:Weapon=weapon_states[weapon_key].nodes[0]
+					var i:Projectile=get_projectile_instance(weapon_key)
+					var a:=0.5*i.gravity
+					var b:float=wp.get_muzzle_velocity()*sin(rot)
+					var c:=global_position.y-500
+					var sqrt_d:=sqrt(b*b-4*a*c)
+					var t:=(-b+sqrt_d)/(2*a)
+					var pos:=Vector2(wp.get_muzzle_velocity()*cos(rot)*t+global_position.x,500)
+					
+					if weapon_key=="main" or weapon_key=="secondary":
+						i.queue_free()
+						fire_weapon2(weapon_key,pos,rot)
+						
+						var dist_min:float=INF
+						for n in get_tree().get_nodes_in_group("EnemyObjects"):
+							if n is _class_Ship or n is _class_NavalBaseObject:
+								if n.global_position.distance_to(pos)<dist_min:
+									dist_min=n.global_position.distance_to(pos)
+						if dist_min!=INF:
+							emit_signal("player_fired",dist_min)
+					elif weapon_key=="aa":
+						fire_aa(to_global(mouse_pos))
+						
+						var dist_min:float=INF
+						for n in get_tree().get_nodes_in_group("EnemyObjects"):
+							if n is _class_Aircraft:
+								# wip: dist_min for aircrafts
+								pass
+						if dist_min!=INF:
+							emit_signal("player_fired",dist_min)
+	elif event is InputEventKey:
+		var key:=event as InputEventKey
+		if key.pressed:
+			if key.scancode==KEY_SPACE:
+				if subweapon=="secondary":
+					subweapon="aa"
+					emit_signal("subweapon_changed","aa")
+				elif subweapon=="aa":
+					subweapon="secondary"
+					emit_signal("subweapon_changed","secondary")
 
 
 func get_max_hp()->int:
@@ -181,12 +226,22 @@ func get_protection()->Vector2:
 	return protection+_protection_upgrade
 
 
+func set_subweapon(sw:String):
+	subweapon=sw
+	emit_signal("subweapon_changed",sw)
+
+
 func get_projectile_instance(key:String="main")->Projectile:
 	if weapon_states[key].projectile_prototype==null:
 		var projectile_scene:PackedScene=weapon_states[key].nodes[0].projectile_scene
 		var i:Projectile=projectile_scene.instance()
 		i.set_collision_layer_bit(4,true)
-		i.set_collision_mask_bit(3,true)
+		if key=="main" or key=="secondary":
+			i.set_collision_mask_bit(3,true)
+			i.set_collision_mask_bit(9,true)
+		elif key=="aa":
+			i.set_collision_mask_bit(7,true)
+		
 		if key=="main":
 			i.damage_upgrade=_main_weapon_shell_damage_upgrade
 		weapon_states[key].projectile_prototype=i
@@ -197,7 +252,7 @@ func fire_weapon2(key:String,pos:Vector2,approx_rot:float):
 	var ws:WeaponState=weapon_states[key]
 	for w in ws.nodes:
 		var v_diff:Vector2=pos-w.global_position
-		var i:Projectile=get_projectile_instance()
+		var i:Projectile=get_projectile_instance(key)
 		var rot:float
 		var v:float=w.get_muzzle_velocity()
 		var a:=0.5*i.gravity*v_diff.x*v_diff.x/(v*v)
@@ -231,22 +286,28 @@ func fire_weapon2(key:String,pos:Vector2,approx_rot:float):
 				rot=-PI/2
 			else:
 				rot=PI/2
-		w.put_projectile(get_projectile_instance(key),rot,get_weapon_dispersion(key),get_weapon_accuracy(key))
+		w.put_projectile(i,rot,get_weapon_dispersion(key),get_weapon_accuracy(key))
 	ws.ready=false
-	ws.timer.start(get_weapon_reload())
+	ws.timer.start(get_weapon_reload(key))
 
 
-func _damage_popup(d:int,pos:Vector2):
-	var popup:DamageIndicator=preload("res://gameplay/ship/damage_indicator.tscn").instance()
-	popup.text=str(d)
-	popup.font_color=Color.red
-	popup.rect_position=pos+Vector2(0,-64)
-	GlobalScript.node2d_root.add_child(popup)
+func fire_aa(pos:Vector2):
+	var ws:WeaponState=weapon_states["aa"]
+	var mv:float=weapon_states["aa"].nodes[0].get_muzzle_velocity()
+	for w in ws.nodes:
+		var i:=get_projectile_instance("aa")
+		var delay:float=w.global_position.distance_to(pos)/mv
+		var disp:=get_weapon_dispersion("aa")
+		var acc:=get_weapon_accuracy("aa")
+		i.delay=delay*(1+Weapon.get_random_dispersion(disp,acc))
+		w.put_projectile(i,pos.angle_to_point(w.global_position),disp,acc)
+	ws.ready=false
+	ws.timer.start(get_weapon_reload("aa"))
 
 
 func _on_Player_damaged(d:int):
 	repair_timer.stop()
-	var cooldown:=damage_timer.time_left+sqrt(d)
+	var cooldown:=max(damage_timer.time_left,sqrt(d))
 	damage_timer.start(cooldown)
 	emit_signal("repair_cooldown_started",cooldown)
 

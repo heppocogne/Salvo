@@ -44,4 +44,4 @@ func _on_Enemy_killed():
 	elif kill_count==8:
 		set_label_text("作戦成功!")
 		stage_complete()
-#		SaveData.store("stage_3_unlocked",true)
+		SaveData.store("tutorial_2_unlocked",true)
