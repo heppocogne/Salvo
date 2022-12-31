@@ -19,7 +19,7 @@ func _ready():
 
 
 func _on_Timer_timeout():
-	set_label_text("矢印キー←→で左右に移動")
+	set_label_text("A,Dもしくは矢印キーで左右に移動")
 	step=MOVE_TUTORIAL
 
 
