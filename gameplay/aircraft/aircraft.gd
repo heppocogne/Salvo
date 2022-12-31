@@ -86,6 +86,9 @@ func _physics_process(delta:float):
 			_actual_velocity=Vector2(cos(r),sin(r))*target_velocity.length()
 
 	position+=_actual_velocity*delta
+	if 1024<position.y or position.x<-512 or 1536<position.x:
+		queue_free()
+
 	if sync_rotation:
 		if _actual_velocity!=Vector2.ZERO:
 			rotation=_actual_velocity.angle()

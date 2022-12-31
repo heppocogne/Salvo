@@ -10,8 +10,7 @@ func play_sound(path:String):
 	node2d_root.add_child(a)
 	a.stream=load(path)
 	a.play()
-	yield(a,"finished")
-	a.queue_free()
+	a.connect("finished",a,"queue_free")
 
 
 func damage_popup(dmg:int,pos:Vector2,color:Color=Color.black):

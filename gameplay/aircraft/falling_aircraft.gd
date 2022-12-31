@@ -50,3 +50,7 @@ func setup(s:Sprite,init_velocity:Vector2,parent_scale:Vector2=Vector2(1,1)):
 	global_position=s.global_position
 	
 	velocity=init_velocity
+
+
+func _on_Timer_timeout():
+	queue_free()

@@ -22,6 +22,9 @@ func _physics_process(delta:float):
 	
 	velocity+=gravity*gravity_vec*delta
 
+	if 1024<position.y or position.x<-512 or 1536<position.x:
+		queue_free()
+
 
 func set_base_damage(d:int):
 	base_damage=d
