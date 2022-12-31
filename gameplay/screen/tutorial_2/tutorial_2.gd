@@ -49,7 +49,6 @@ func _physics_process(_delta:float):
 				return
 			
 		if Input.is_mouse_button_pressed(BUTTON_RIGHT):
-			var flag:=false
 			for n in GlobalScript.node2d_root.get_children():
 				if n is Projectile:
 					right_clicked=true
@@ -68,12 +67,6 @@ func _physics_process(_delta:float):
 			if n is Aircraft:
 				if n.position.x<-64:
 					n.queue_free()
-#	if step==KILL_TUTORIAL:
-#		if enemy_killed:
-#			set_label_text("チュートリアル完了")
-#			stage_complete()
-#			step=TUTORIAL_END
-#			SaveData.store("stage_3_unlocked",true)
 
 
 func _on_Timer2_timeout():
@@ -159,4 +152,4 @@ func _on_Airport_killed():
 		fortress.get_node("Artillery").active=false
 		stage_complete()
 		step=TUTORIAL_END
-#		SaveData.store("stage_3_unlocked",true)
+		SaveData.store("stage_3_unlocked",true)
