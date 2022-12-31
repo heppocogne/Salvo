@@ -178,6 +178,7 @@ config/icon="res://icon.png"
 
 GlobalScript="*res://global_script.gd"
 SaveData="*res://gameplay/save_data.gd"
+SystemSaveData="*res://system_save_data.gd"
 
 [display]
 
