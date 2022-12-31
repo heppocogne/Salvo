@@ -7,7 +7,7 @@
 [ext_resource path="res://fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=5]
 [ext_resource path="res://gameplay/screen/hp_bar.gd" type="Script" id=6]
 [ext_resource path="res://gameplay/screen/weapon_reload_bar.gd" type="Script" id=7]
-[ext_resource path="res://gameplay/screen/subject_evaluation.tscn" type="PackedScene" id=8]
+[ext_resource path="res://gameplay/screen/play_evaluation.tscn" type="PackedScene" id=8]
 [ext_resource path="res://gameplay/screen/messages.gd" type="Script" id=9]
 [ext_resource path="res://gameplay/screen/repair_time_bar.gd" type="Script" id=10]
 [ext_resource path="res://gameplay/screen/subweapon_reload_bar.gd" type="Script" id=11]
@@ -126,14 +126,14 @@ visible = false
 margin_top = 28.0
 margin_right = 84.0
 margin_bottom = 52.0
-subject_name = "照準精度: "
+title_name = "照準精度:"
 
 [node name="Maneuver" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations" instance=ExtResource( 8 )]
 visible = false
 margin_top = 56.0
 margin_right = 84.0
 margin_bottom = 80.0
-subject_name = "操艦: "
+title_name = "操艦技術:"
 
 [node name="Reward" type="HBoxContainer" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations"]
 visible = false

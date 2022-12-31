@@ -94,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gameplay/effect/oneshot_particles2d.gd"
 }, {
+"base": "HBoxContainer",
+"class": "PlayEvaluation",
+"language": "GDScript",
+"path": "res://gameplay/screen/play_evaluation.gd"
+}, {
 "base": "Ship",
 "class": "Player",
 "language": "GDScript",
@@ -118,11 +123,6 @@ _global_script_classes=[ {
 "class": "StageDescription",
 "language": "GDScript",
 "path": "res://gameplay/screen/main/stage_description.gd"
-}, {
-"base": "HBoxContainer",
-"class": "SubjectEvaluation",
-"language": "GDScript",
-"path": "res://gameplay/screen/subject_evaluation.gd"
 }, {
 "base": "HBoxContainer",
 "class": "UpgradeFeature",
@@ -157,12 +157,12 @@ _global_script_class_icons={
 "NavaelBaseObject": "",
 "NavalFortress": "",
 "OneshotParticles2D": "",
+"PlayEvaluation": "",
 "Player": "",
 "Projectile": "",
 "Ship": "",
 "SinkingShip": "",
 "StageDescription": "",
-"SubjectEvaluation": "",
 "UpgradeFeature": "",
 "Weapon": "",
 "WeaponState": ""
@@ -212,6 +212,10 @@ game_right={
 2d_physics/layer_8="EnemyAircraft"
 2d_physics/layer_10="EnemyBuilding"
 2d_physics/layer_11="PlayerAntiAirProjectile"
+
+[locale]
+
+translations=PoolStringArray( "res://l10n/languages.en.translation", "res://l10n/languages.ja.translation" )
 
 [mono]
 

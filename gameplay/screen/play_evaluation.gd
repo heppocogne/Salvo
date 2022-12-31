@@ -1,5 +1,5 @@
 tool
-class_name SubjectEvaluation
+class_name PlayEvaluation
 extends HBoxContainer
 
 const colors:={
@@ -10,7 +10,7 @@ const colors:={
 	"D":Color.lightgray,
 }
 
-export var subject_name:String setget set_subject_name
+export var title_name:String setget set_title_name
 var evaluation:String setget set_evaluation
 
 
@@ -18,10 +18,10 @@ func _ready():
 	pass
 
 
-func set_subject_name(n:String):
-	subject_name=n
-	if has_node("Subject"):
-		$Subject.text=n
+func set_title_name(n:String):
+	title_name=n
+	if has_node("Title"):
+		$Title.text=n
 
 
 func set_evaluation(e:String):

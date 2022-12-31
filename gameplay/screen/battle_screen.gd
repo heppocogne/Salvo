@@ -20,8 +20,8 @@ onready var player:Player=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/P
 onready var player_move_timer:Timer=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player/Timer
 onready var tween:Tween=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Tween
 onready var timer:Timer=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Timer
-onready var aiming:SubjectEvaluation=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/AimingAccuracy
-onready var maneuver:SubjectEvaluation=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Maneuver
+onready var aiming:PlayEvaluation=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/AimingAccuracy
+onready var maneuver:PlayEvaluation=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Maneuver
 
 
 func _ready():
