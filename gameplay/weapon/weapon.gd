@@ -77,7 +77,7 @@ func put_projectile(projectile_prototype:Projectile,rot:float,dispersion:float,a
 			GlobalScript.node2d_root.add_child(instance)
 			instance.global_position=to_global(muzzle_position)
 			
-			rot+=PI/4*get_random_dispersion(dispersion,accuracy)
+			rot+=PI/6*get_random_dispersion(dispersion,accuracy)
 			if instance.sync_rotation:
 				instance.rotation=rot
 			instance.velocity=Vector2(cos(rot),sin(rot))*get_muzzle_velocity()

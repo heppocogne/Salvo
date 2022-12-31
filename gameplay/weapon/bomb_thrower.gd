@@ -18,7 +18,7 @@ func put_projectile(projectile_prototype:Projectile,rot:float,dispersion:float,a
 			
 			# enemy bomber
 			var d:=get_random_dispersion(dispersion,accuracy)+dispersion/2
-			rot-=PI/4*(d)
+			rot-=PI/6*d
 			if instance.sync_rotation:
 				instance.rotation=rot
 			instance.velocity=Vector2(cos(rot),sin(rot))*get_muzzle_velocity()
