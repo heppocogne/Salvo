@@ -30,6 +30,7 @@ func _ready():
 	GlobalScript.battele_screen=self
 	GlobalScript.node2d_root=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot
 	GlobalScript.water_area=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea
+	Input.set_custom_mouse_cursor(preload("res://gameplay/screen/cursor.svg"),0,Vector2(29,29))
 
 
 func _on_BattleScreen_tree_exiting():
@@ -89,6 +90,7 @@ func _on_Timer_timeout():
 
 func _on_Button_pressed():
 	SaveData.save_to_file()
+	Input.set_custom_mouse_cursor(null)
 	get_tree().change_scene_to(load("res://gameplay/screen/main/main.tscn"))
 
 
