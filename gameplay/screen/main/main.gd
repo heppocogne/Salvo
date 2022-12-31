@@ -13,20 +13,24 @@ func _ready():
 		s.connect("button_pressed",self,"_on_Stage_selected")
 
 
+func transition(scene:PackedScene):
+	get_tree().change_scene_to(scene)
+
+
 func _on_Stage_selected(n:String):
 	if n=="Tutorial 1":
-		get_tree().change_scene_to(preload("res://gameplay/screen/tutorial_1/tutorial_1.tscn"))
+		transition(preload("res://gameplay/screen/tutorial_1/tutorial_1.tscn"))
 	elif n=="Stage 1":
-		get_tree().change_scene_to(preload("res://gameplay/screen/stage_1/stage_1.tscn"))
+		transition(preload("res://gameplay/screen/stage_1/stage_1.tscn"))
 	elif n=="Stage 2":
-		get_tree().change_scene_to(preload("res://gameplay/screen/stage_2/stage_2.tscn"))
+		transition(preload("res://gameplay/screen/stage_2/stage_2.tscn"))
 	elif n=="Tutorial 2":
-		get_tree().change_scene_to(preload("res://gameplay/screen/tutorial_2/tutorial_2.tscn"))
+		transition(preload("res://gameplay/screen/tutorial_2/tutorial_2.tscn"))
+
+
+func _on_Upgrade_pressed():
+	transition(preload("res://gameplay/screen/main/ship_upgrade/ship_upgrade.tscn"))
 
 
 func _on_Exit_pressed():
 	get_tree().quit(0)
-
-
-func _on_Upgrade_pressed():
-	get_tree().change_scene_to(preload("res://gameplay/screen/main/ship_upgrade/ship_upgrade.tscn"))
