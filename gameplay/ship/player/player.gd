@@ -80,7 +80,7 @@ func _ready():
 	_main_weapon_dispersion_upgrade+=barrels_upgrade*0.03
 	
 	var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
-	_main_weapon_shell_damage_upgrade=shell_upgrade*25.4
+	_main_weapon_shell_damage_upgrade=round((shell_upgrade+12)*25.4)
 	_main_weapon_reload_upgrade+=shell_upgrade*0.3
 
 
@@ -243,7 +243,7 @@ func get_projectile_instance(key:String="main")->Projectile:
 			i.set_collision_mask_bit(7,true)
 		
 		if key=="main":
-			i.damage_upgrade=_main_weapon_shell_damage_upgrade
+			i.base_damage=_main_weapon_shell_damage_upgrade
 		weapon_states[key].projectile_prototype=i
 	return weapon_states[key].projectile_prototype.duplicate()
 
