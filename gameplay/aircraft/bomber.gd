@@ -28,18 +28,20 @@ func _physics_process(delta:float):
 	var g:float=weapon_states["main"].projectile_prototype.gravity
 	var sv:=sin(_actual_velocity.angle())
 	var d:=_actual_velocity.length_squared()*sv*sv-2*g*(position.y-water_level)
-	assert(0<=d)
+	if d<0:
+		return
+	
 	var t:=(-_actual_velocity.length()*sv+sqrt(d))/g
 	var p:=_actual_velocity*t+Vector2(0,0.5*g*t*t)+position
-#	print(p)
 	var r:=(p-position).length()
+	
+	if !weakref(player_node).get_ref():
+		return
 	
 	for n in weapon_states["main"].nodes:
 		n._set_range(r)
 	
-	if !weakref(player_node).get_ref():
-		return
-	elif p.x<=player_node.position.x and weapon_states["main"].ready and 0<=_actual_velocity.y:
+	if p.x<=player_node.position.x and weapon_states["main"].ready and 0<=_actual_velocity.y:
 		fire_weapon("main",p)
 		if _action==DIVE:
 			target_velocity=polar2cartesian(get_speed(),PI)
