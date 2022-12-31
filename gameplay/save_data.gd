@@ -6,6 +6,7 @@ const path:String="user://save.dat"
 const _default_savedata:={
 		"upgrade_point":0,
 		"tutorial_1_unlocked":true,
+		"subweapon":"",
 		"upgrade_speed":0,
 		"upgrade_HP":0,
 		"upgrade_belt_armor":0,
@@ -36,8 +37,16 @@ func _ready():
 		else:
 			_data=_default_savedata
 	else:
-		# use crypto data
-		pass
+		if f.open_encrypted(path,File.READ,GlobalScript.get_secret_key())==OK:
+			var s:=f.get_as_text()
+			var parse_result:=JSON.parse(s)
+			if parse_result.error==OK:
+				_data=parse_result.result
+			else:
+				push_error("Save data corrupted!\nat line:%d\nerror:%s"%[parse_result.error_line,parse_result.error_string])
+				get_tree().quit(1)
+		else:
+			_data=_default_savedata
 	
 	print_debug("save_data=",_data)
 
@@ -49,8 +58,9 @@ func save_to_file():
 			var json:=to_json(_data)
 			f.store_string(json)
 	else:
-		# use crypto data
-		pass
+		if f.open_encrypted(path,File.WRITE,GlobalScript.get_secret_key())==OK:
+			var json:=to_json(_data)
+			f.store_string(json)
 
 
 func _on_SaveData_tree_exiting():
