@@ -88,6 +88,7 @@ func _on_Timer_timeout():
 
 
 func _on_Button_pressed():
+	SaveData.save_to_file()
 	get_tree().change_scene_to(load("res://gameplay/screen/main/main.tscn"))
 
 
@@ -162,6 +163,7 @@ func _calculate_reward(success:bool,bonus:int=0):
 	yield(tm,"timeout")
 	aiming.visible=true
 	
+	# evaluation systemu is work in progress
 	var aiming_sum:=0.0
 	for a in _player_salvo_diff:
 		aiming_sum+=a
