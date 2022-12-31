@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gameplay/ship/damage_indicator.gd"
 }, {
+"base": "Sprite",
+"class": "FallingAircraft",
+"language": "GDScript",
+"path": "res://gameplay/aircraft/falling_aircraft.gd"
+}, {
 "base": "Aircraft",
 "class": "Fighter",
 "language": "GDScript",
@@ -104,7 +109,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gameplay/ship/ship.gd"
 }, {
-"base": "Node2D",
+"base": "Sprite",
 "class": "SinkingShip",
 "language": "GDScript",
 "path": "res://gameplay/ship/sinking_ship.gd"
@@ -144,6 +149,7 @@ _global_script_class_icons={
 "Bomber": "",
 "Bullet": "",
 "DamageIndicator": "",
+"FallingAircraft": "",
 "Fighter": "",
 "Gun": "",
 "MachineGun": "",

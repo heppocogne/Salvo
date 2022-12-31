@@ -214,7 +214,7 @@ func damage(p:Projectile):
 		explosion.global_position=global_position
 		explosion.scale=0.05*Vector2(1,1)
 		
-		_add_falling_plane()
+		_add_falling_aircraft()
 		
 		GlobalScript.play_sound("res://gameplay/effect/tm2_bom002.wav")
 		queue_free()
@@ -228,13 +228,10 @@ func _damage_popup(d:int,pos:Vector2):
 	GlobalScript.node2d_root.add_child(popup)
 
 
-func _add_falling_plane():
-#	var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
-#	var s:Sprite=$Sprite
-#	GlobalScript.node2d_root.add_child(sinking)
-#	sinking.setup(s.texture, s.offset, s.scale*scale, s.flip_h)
-#	sinking.global_position=global_position
-	pass
+func _add_falling_aircraft():
+	var falling:FallingAircraft=preload("res://gameplay/aircraft/falling_aircraft.tscn").instance()
+	GlobalScript.node2d_root.add_child(falling)
+	falling.setup($Sprite,_actual_velocity,scale)
 
 
 func _on_ReloadTimer_timeout(key:String):
