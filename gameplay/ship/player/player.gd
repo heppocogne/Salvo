@@ -63,12 +63,12 @@ func _ready():
 	_regeneration_per_sec=SaveData.read("upgrade_emergency_repair")
 	if _regeneration_per_sec!=0:
 		_regeneration_per_sec+=1
-	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
+	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.4
 	if weapon_groups.has("main"):
 		# restart reload timer to apply upgrade effect
 		weapon_states["main"].timer.start(get_weapon_reload("main"))
 	
-	_main_weapon_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.4
+	_main_weapon_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.3
 	
 	var barrels_upgrade:int=SaveData.read("upgrade_main_weapon_barrels")
 	var num_barrels:=4+barrels_upgrade*2
@@ -78,12 +78,12 @@ func _ready():
 	if num_barrels%4==2:
 		weapon_states["main"].nodes[0].num_barrels+=1
 		weapon_states["main"].nodes[3].num_barrels+=1
-	_main_weapon_reload_upgrade+=barrels_upgrade*0.3
-	_main_weapon_dispersion_upgrade+=barrels_upgrade*0.03
+	# _main_weapon_reload_upgrade+=barrels_upgrade*0.3
+	# _main_weapon_dispersion_upgrade+=barrels_upgrade*0.03
 	
 	var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
 	_main_weapon_shell_damage_upgrade=round((shell_upgrade+12)*25.4)
-	_main_weapon_reload_upgrade+=shell_upgrade*0.3
+	# _main_weapon_reload_upgrade+=shell_upgrade*0.3
 
 
 func _draw():
