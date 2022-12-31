@@ -3,10 +3,8 @@
 [ext_resource path="res://gameplay/effect/smoke.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/ship/sinking_ship.gd" type="Script" id=2]
 
-[node name="SinkingShip" type="Node2D"]
+[node name="Sprite" type="Sprite"]
 script = ExtResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="."]
 
 [node name="Smoke" parent="." instance=ExtResource( 1 )]
 emitting = true
@@ -15,5 +13,3 @@ emitting = true
 one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
-
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -200,10 +200,8 @@ func damage(p:Projectile):
 
 func _add_sinking_ship():
 	var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
-	var s:Sprite=$Sprite
 	GlobalScript.node2d_root.add_child(sinking)
-	sinking.setup(s.texture, s.offset, s.scale*scale, s.flip_h)
-	sinking.global_position=global_position
+	sinking.setup($Sprite,scale)
 
 
 func _on_ReloadTimer_timeout(key:String):

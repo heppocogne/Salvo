@@ -1,5 +1,5 @@
 class_name SinkingShip
-extends Node2D
+extends Sprite
 
 var duration:=3.0
 
@@ -7,7 +7,7 @@ var duration:=3.0
 func _ready():
 	var tm:Timer=$Timer
 	var tw:Tween=$Tween
-	$Sprite.rotation=rand_range(-PI,PI)/6.0
+	rotation=rand_range(-PI,PI)/6.0
 	tm.wait_time=duration
 	tm.start()
 	tw.interpolate_property(
@@ -26,12 +26,13 @@ func _physics_process(delta:float):
 	position.y+=3.0*delta
 
 
-func setup(t:Texture, o:Vector2, scale:Vector2, f_h:bool):
-	var s:Sprite=$Sprite
-	s.texture=t
-	s.offset=o
-	s.scale=scale
-	s.flip_h=f_h
+func setup(s:Sprite,parent_scale:Vector2=Vector2(1,1)):
+	$Smoke.rotation=-rotation
+	texture=s.texture
+	offset=s.offset
+	scale=s.scale*parent_scale
+	flip_h=s.flip_h
+	global_position=s.global_position
 
 
 func _on_Timer_timeout():
