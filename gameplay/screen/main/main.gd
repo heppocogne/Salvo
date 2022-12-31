@@ -2,7 +2,10 @@ extends Control
 
 
 func _ready():
-	TranslationServer.set_locale("en")
+	if OS.get_locale_language()=="ja":
+		TranslationServer.set_locale("ja")
+	else:
+		TranslationServer.set_locale("en")
 	
 	for b in $Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer.get_children():
 		if SaveData.has_key(b.save_data_key):
