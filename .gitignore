@@ -3,3 +3,6 @@ project_export/*
 .VSCodeCounter/*
 project_export/*
 .mono/
+.~lock.*
+*.translation
+.vscode/*
