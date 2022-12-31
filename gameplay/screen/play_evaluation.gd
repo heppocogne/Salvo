@@ -3,11 +3,11 @@ class_name PlayEvaluation
 extends HBoxContainer
 
 const colors:={
-	"S":Color.orangered,
-	"A":Color.yellow,
-	"B":Color.skyblue,
-	"C":Color.lightgreen,
-	"D":Color.lightgray,
+	"S":Color.purple,
+	"A":Color.skyblue,
+	"B":Color.lightgreen,
+	"C":Color.yellow,
+	"D":Color.orangered,
 }
 
 export var title_name:String setget set_title_name
