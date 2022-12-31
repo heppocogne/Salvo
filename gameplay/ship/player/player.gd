@@ -86,12 +86,6 @@ func _ready():
 	# _main_weapon_reload_upgrade+=shell_upgrade*0.3
 
 
-func _draw():
-	var dir:=mouse_pos.normalized()
-	draw_line(Vector2.ZERO,line_length*dir,line_color)
-	pass
-
-
 func _process(_delta:float):
 	if Engine.editor_hint:
 		return
