@@ -139,12 +139,14 @@ func _on_Fighter_killed():
 		tm.start(6.0)
 		yield(tm,"timeout")
 		_fadeout_mission_text("敵の海上要塞を確認\n要塞砲に注意しつつ航空基地を破壊せよ",5.0)
-		tm.start(6)
-		yield(tm,"timeout")
 		var airport:Airport=fortress.get_node("Airport")
 		airport.set_active(true)
 		var m:Marker=marker_scene.instance()
+		m.popup_offset=Vector2(0,-20)
 		m.target_node=airport
+		airport.add_child(m)
+		tm.start(6)
+		yield(tm,"timeout")
 		airport.connect("killed",m,"queue_free")
 		airport.connect("killed",self,"_on_Airport_killed")
 		fortress.get_node("Artillery").active=true
