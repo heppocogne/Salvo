@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://gameplay/ship/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/screen/battle_screen.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://gameplay/screen/messages.gd" type="Script" id=9]
 [ext_resource path="res://gameplay/screen/repair_time_bar.gd" type="Script" id=10]
 [ext_resource path="res://gameplay/screen/subweapon_reload_bar.gd" type="Script" id=11]
+[ext_resource path="res://gameplay/screen/fps_label.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1536, 64 )
@@ -65,6 +66,15 @@ position = Vector2( 100, 500 )
 [node name="Timer" type="Timer" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player"]
 wait_time = 1.5
 one_shot = true
+
+[node name="FpsLabel" type="Label" parent="VBoxContainer/ViewportContainer/Viewport"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 48.0
+margin_bottom = 22.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "fps:"
+script = ExtResource( 12 )
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/ViewportContainer"]
 margin_right = 1024.0
