@@ -1,19 +1,18 @@
 class_name Projectile
 extends Area2D
 
-export var base_damage:int=1
+export var base_damage:int=1 setget set_base_damage
 export var sync_rotation:bool=true
 
+var _original_scale:=scale
 var invalid:=false
 var velocity:Vector2
-var damage_upgrade:int
 var _class_Ship=load("res://gameplay/ship/ship.gd")
 var _scale_modifier:Vector2
 
 
 func _ready():
-	_scale_modifier=pow(get_damage()/100,1.0/3.0)*Vector2(1,1)
-	scale*=_scale_modifier
+	pass
 
 
 func _physics_process(delta:float):
@@ -24,8 +23,14 @@ func _physics_process(delta:float):
 	velocity+=gravity*gravity_vec*delta
 
 
+func set_base_damage(d:int):
+	base_damage=d
+	_scale_modifier=sqrt(get_damage()/100)*Vector2(1,1)
+	scale=_original_scale*_scale_modifier
+
+
 func get_damage()->int:
-	return base_damage+damage_upgrade
+	return base_damage
 
 
 func _on_Projectile_area_entered(area:Area2D):
@@ -54,3 +59,7 @@ func _on_Projectile_area_entered(area:Area2D):
 		
 		GlobalScript.play_sound("res://gameplay/effect/tm2_bom001.wav")
 	queue_free()
+
+
+func _on_SafetyTimer_timeout():
+	$CollisionShape2D.disabled=false
