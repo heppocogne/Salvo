@@ -60,7 +60,9 @@ func _ready():
 			SaveData.read("upgrade_deck_armor")*12.7
 		)
 	
-	_regeneration_per_sec=SaveData.read("upgrade_emergency_repair")+1
+	_regeneration_per_sec=SaveData.read("upgrade_emergency_repair")
+	if _regeneration_per_sec!=0:
+		_regeneration_per_sec+=1
 	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.5
 	if weapon_groups.has("main"):
 		# restart reload timer to apply upgrade effect
