@@ -27,7 +27,7 @@ func _ready():
 
 
 func _on_Timer_timeout():
-	set_label_text("右クリックで副兵装を発射")
+	set_label_text(tr(":HOW_TO_FIRE_SUB_WEAPON:"))
 	var ts:PackedScene=preload("res://gameplay/ship/enemy/tutorial_target.tscn")
 	spawn_enemy_ship(ts,500)
 	$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player.subweapon="secondary"
@@ -44,7 +44,7 @@ func _physics_process(_delta:float):
 					return
 		
 			if !flag:
-				set_label_text("スペースキーで副兵装を切り替え")
+				set_label_text(tr(":HOW_TO_SWITCH_SUB_WEAPON:"))
 				step=SUB_WEAPON_SWITCH_TUTORIAL
 				return
 			
@@ -56,7 +56,7 @@ func _physics_process(_delta:float):
 	
 	if step==SUB_WEAPON_SWITCH_TUTORIAL:
 		if Input.is_key_pressed(KEY_SPACE):
-			_fadeout_mission_text("爆撃機を撃墜せよ",3.0)
+			_fadeout_mission_text(tr(":SHOOT_DOWN_BOMBER:"),3.0)
 			timer2.start(7.5)
 			step=KILL_BOMBER_TUTORIAL
 			_on_Timer2_timeout()
@@ -100,7 +100,7 @@ func _on_Bomber_killed():
 		for n in GlobalScript.node2d_root.get_children():
 			if n is Marker:
 				n.set_disabled(true)
-		_fadeout_mission_text("戦闘機を撃墜せよ",3.0)
+		_fadeout_mission_text(tr(":SHOOT_DOWN_FIGHTER:"),3.0)
 		step=KILL_FIGHTER_TUTORIAL
 		timer2.start(5.0)
 		_on_Timer2_timeout()
@@ -131,7 +131,7 @@ func _on_Fighter_killed():
 		add_child(tm)
 		tm.start(6.0)
 		yield(tm,"timeout")
-		_fadeout_mission_text("敵の海上要塞を確認\n要塞砲に注意しつつ航空基地を破壊せよ",5.0)
+		_fadeout_mission_text(tr(":DESTROY_AIR_BASE_TUTORIAL:"),5.0)
 		var airport:Airport=fortress.get_node("Airport")
 		airport.set_active(true)
 		var m:Marker=marker_scene.instance()
@@ -148,7 +148,6 @@ func _on_Fighter_killed():
 
 func _on_Airport_killed():
 	if !player_killed:
-		set_label_text("チュートリアル 2 完了")
 		fortress.get_node("Artillery").active=false
 		stage_complete()
 		step=TUTORIAL_END

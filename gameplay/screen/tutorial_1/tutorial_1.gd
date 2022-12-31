@@ -19,7 +19,7 @@ func _ready():
 
 
 func _on_Timer_timeout():
-	set_label_text("A,Dもしくは矢印キーで左右に移動")
+	set_label_text(tr(":HOW_TO_MOVE:"))
 	step=MOVE_TUTORIAL
 
 
@@ -32,7 +32,7 @@ func _physics_process(_delta:float):
 			move_right=true
 		
 		if move_left and move_right:
-			set_label_text("左クリックで主砲を発射")
+			set_label_text(tr(":HOW_TO_FIRE_MAIN_WEAPON:"))
 			step=FIRE_TUTORIAL
 			return
 	
@@ -45,7 +45,7 @@ func _physics_process(_delta:float):
 					return
 			
 			if !flag:
-				set_label_text("敵を撃沈せよ")
+				set_label_text(tr(":KILL_THAT_ENEMY_SHIP:"))
 				step=KILL_TUTORIAL
 				var ship:=spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),500)
 				var m:Marker=preload("res://gameplay/misc/marker.tscn").instance()
@@ -63,7 +63,6 @@ func _physics_process(_delta:float):
 	
 	if step==KILL_TUTORIAL:
 		if enemy_killed:
-			set_label_text("チュートリアル 1 完了")
 			stage_complete()
 			step=TUTORIAL_END
 			SaveData.store("stage_1_unlocked",true)

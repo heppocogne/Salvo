@@ -16,6 +16,6 @@ func set_weapon_key(key:String):
 	else:
 		get_parent().visible=true
 		if key=="aa":
-			weap_name.text="[対空兵装]"
+			weap_name.text="["+tr(":ANTI_AIR_GUN:")+"]"
 		elif key=="secondary":
-			weap_name.text="[副砲]"
+			weap_name.text="["+tr(":SECONDARY_GUN:")+"]"

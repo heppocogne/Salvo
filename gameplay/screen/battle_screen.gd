@@ -135,6 +135,8 @@ func stage_complete():
 		return
 	
 	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
+	set_label_text(tr(":MISSION_COMPLETED:")+"!")
+	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label.add_color_override("font_color",Color.yellow)
 	player.block_user_input=true
 	player.disconnect("killed",self,"_on_Player_killed")
 	var c:int
@@ -243,7 +245,8 @@ func _on_Player_killed():
 
 func stage_fail():
 	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
-	set_label_text("作戦失敗!")
+	set_label_text(tr(":MISSION_FAILED:")+"!")
+	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label.add_color_override("font_color",Color.orangered)
 	
 	if !SaveData.has_key(clear_count_key):
 		SaveData.store(clear_count_key,0)

@@ -56,8 +56,8 @@ func _ready():
 	hp=get_max_hp()
 	
 	_protection_upgrade=Vector2(
-			SaveData.read("upgrade_h_protection")*25.4,
-			SaveData.read("upgrade_v_protection")*12.7
+			SaveData.read("upgrade_belt_armor")*25.4,
+			SaveData.read("upgrade_deck_armor")*12.7
 		)
 	
 	_regeneration_per_sec=SaveData.read("upgrade_emergency_repair")+1

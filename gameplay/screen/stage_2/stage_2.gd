@@ -13,7 +13,7 @@ func _ready():
 
 
 func _on_Timer_timeout():
-	_fadeout_mission_text("敵艦隊を撃沈せよ",4.0)
+	_fadeout_mission_text(tr(":KILL_THEM_ALL:"),4.0)
 	var s:=spawn_enemy_ship(_old_dd_scene,600)
 	s.connect("killed",self,"_on_Enemy_killed")
 	s=spawn_enemy_ship(_old_cl_scene,700)
@@ -42,6 +42,5 @@ func _on_Enemy_killed():
 		s=spawn_enemy_ship(_old_bb2_scene,900)
 		s.connect("killed",self,"_on_Enemy_killed")
 	elif kill_count==8:
-		set_label_text("作戦成功!")
 		stage_complete()
 		SaveData.store("tutorial_2_unlocked",true)

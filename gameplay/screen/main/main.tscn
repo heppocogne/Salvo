@@ -35,7 +35,7 @@ margin_top = 10.0
 margin_right = 650.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
-text = "ステージ選択"
+text = ":STAGE_SELECT:"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer"]
 margin_top = 62.0
@@ -57,7 +57,7 @@ margin_bottom = 30.0
 unlocked = true
 save_data_key = "tutorial_1_unlocked"
 stage_name = "Tutorial 1"
-description = "移動と主砲の使用"
+description = ":TUTORIAL_1_DESCRIPTION:"
 
 [node name="Stage1" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
 margin_top = 46.0
@@ -65,7 +65,7 @@ margin_right = 620.0
 margin_bottom = 76.0
 save_data_key = "stage_1_unlocked"
 stage_name = "Stage 1"
-description = "旧式駆逐艦5隻 + 旧式戦艦"
+description = ":STAGE_1_DESCRIPTION:"
 
 [node name="Stage2" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
 margin_top = 92.0
@@ -73,7 +73,7 @@ margin_right = 620.0
 margin_bottom = 122.0
 save_data_key = "stage_2_unlocked"
 stage_name = "Stage 2"
-description = "旧式駆逐艦3隻 + 旧式軽巡4隻 + 旧式戦艦改"
+description = ":STAGE_2_DESCRIPTION:"
 
 [node name="Tutorial2" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
 margin_top = 138.0
@@ -81,7 +81,7 @@ margin_right = 620.0
 margin_bottom = 168.0
 save_data_key = "tutorial_2_unlocked"
 stage_name = "Tutorial 2"
-description = "副兵装の使用、航空機への対処"
+description = ":TUTORIAL_2_DESCRIPTION:"
 
 [node name="HSplitContainer" type="VSeparator" parent="Panel/VBoxContainer"]
 margin_left = 654.0
@@ -90,11 +90,11 @@ margin_bottom = 768.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
 margin_left = 662.0
-margin_right = 960.0
+margin_right = 976.0
 margin_bottom = 768.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/VBoxContainer"]
-margin_right = 298.0
+margin_right = 314.0
 margin_bottom = 58.0
 custom_constants/margin_top = 10
 custom_constants/margin_left = 30
@@ -102,14 +102,14 @@ custom_constants/margin_left = 30
 [node name="Label" type="Label" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer"]
 margin_left = 30.0
 margin_top = 10.0
-margin_right = 298.0
+margin_right = 314.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
-text = "メニュー"
+text = ":MENU:"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/VBoxContainer"]
 margin_top = 62.0
-margin_right = 298.0
+margin_right = 314.0
 margin_bottom = 178.0
 custom_constants/margin_top = 30
 custom_constants/margin_left = 30
@@ -117,25 +117,25 @@ custom_constants/margin_left = 30
 [node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2"]
 margin_left = 30.0
 margin_top = 30.0
-margin_right = 298.0
+margin_right = 314.0
 margin_bottom = 116.0
 custom_constants/vseparation = 26
 custom_constants/hseparation = 32
 columns = 2
 
 [node name="Upgrade" type="Button" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
-margin_right = 44.0
+margin_right = 84.0
 margin_bottom = 30.0
 custom_fonts/font = ExtResource( 4 )
-text = "強化"
+text = ":UPGRADE:"
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
-margin_left = 76.0
+margin_left = 116.0
 margin_top = 3.0
-margin_right = 268.0
+margin_right = 284.0
 margin_bottom = 27.0
 custom_fonts/font = ExtResource( 4 )
-text = "プレイヤー艦を強化します"
+text = ":UPGRADE_DESCRIPTION:"
 
 [node name="Statistics" type="Button" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
 visible = false
@@ -143,7 +143,7 @@ margin_top = 56.0
 margin_right = 44.0
 margin_bottom = 86.0
 custom_fonts/font = ExtResource( 4 )
-text = "統計"
+text = ":STATISTICS:"
 
 [node name="Label2" type="Label" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
 visible = false
@@ -151,7 +151,7 @@ margin_top = 59.0
 margin_right = 144.0
 margin_bottom = 83.0
 custom_fonts/font = ExtResource( 4 )
-text = "プレイの記録です"
+text = ":STATISTICS_DESCRIPTION:"
 
 [node name="Setting" type="Button" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
 visible = false
@@ -159,7 +159,7 @@ margin_top = 56.0
 margin_right = 44.0
 margin_bottom = 86.0
 custom_fonts/font = ExtResource( 4 )
-text = "設定"
+text = ":OPTIONS:"
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
 visible = false
@@ -167,22 +167,22 @@ margin_top = 59.0
 margin_right = 144.0
 margin_bottom = 83.0
 custom_fonts/font = ExtResource( 4 )
-text = "設定を変更します"
+text = ":OPTIONS_DESCRIPTION:"
 
 [node name="Exit" type="Button" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
 margin_top = 56.0
-margin_right = 44.0
+margin_right = 84.0
 margin_bottom = 86.0
 custom_fonts/font = ExtResource( 4 )
-text = "終了"
+text = ":QUIT:"
 
 [node name="Label4" type="Label" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
-margin_left = 76.0
+margin_left = 116.0
 margin_top = 59.0
-margin_right = 268.0
+margin_right = 284.0
 margin_bottom = 83.0
 custom_fonts/font = ExtResource( 4 )
-text = "ゲームを終了します"
+text = ":QUIT_DESCRIPTION:"
 
 [connection signal="pressed" from="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Upgrade" to="." method="_on_Upgrade_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Exit" to="." method="_on_Exit_pressed"]

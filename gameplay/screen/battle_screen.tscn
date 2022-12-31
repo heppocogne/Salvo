@@ -110,15 +110,17 @@ custom_constants/margin_left = 32
 [node name="Evaluations" type="VBoxContainer" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer"]
 visible = false
 margin_left = 32.0
-margin_right = 64.0
+margin_right = 192.0
 margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations"]
 margin_right = 32.0
 margin_bottom = 24.0
+rect_min_size = Vector2( 160, 0 )
 size_flags_horizontal = 4
+custom_colors/font_color = Color( 1, 1, 0.784314, 1 )
 custom_fonts/font = ExtResource( 5 )
-text = "評価"
+text = ":PLAY_EVALUATION:"
 align = 1
 
 [node name="AimingAccuracy" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations" instance=ExtResource( 8 )]
@@ -126,14 +128,14 @@ visible = false
 margin_top = 28.0
 margin_right = 84.0
 margin_bottom = 52.0
-title_name = "照準精度:"
+subject_name = ":AIMING_SKILL:"
 
 [node name="Maneuver" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations" instance=ExtResource( 8 )]
 visible = false
 margin_top = 56.0
 margin_right = 84.0
 margin_bottom = 80.0
-title_name = "操艦技術:"
+subject_name = ":STEERING_SKILL:"
 
 [node name="Reward" type="HBoxContainer" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations"]
 visible = false
@@ -144,8 +146,9 @@ margin_bottom = 108.0
 [node name="Label" type="Label" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Reward"]
 margin_right = 48.0
 margin_bottom = 24.0
+custom_colors/font_color = Color( 0, 1, 0.784314, 1 )
 custom_fonts/font = ExtResource( 5 )
-text = "報酬: "
+text = ":REWARD:"
 
 [node name="Point" type="Label" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Reward"]
 margin_left = 52.0
@@ -183,14 +186,14 @@ margin_right = 1010.0
 margin_bottom = 24.0
 
 [node name="HP" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
-margin_right = 48.0
+margin_right = 96.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
-text = "耐久: "
+text = ":DURABILITY:"
 
 [node name="HPBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
-margin_left = 52.0
-margin_right = 502.0
+margin_left = 100.0
+margin_right = 550.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 450, 0 )
 size_flags_vertical = 3
@@ -198,21 +201,21 @@ percent_visible = false
 script = ExtResource( 6 )
 
 [node name="Control" type="Control" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
-margin_left = 506.0
-margin_right = 530.0
+margin_left = 554.0
+margin_right = 578.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 
 [node name="RepairTime" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
-margin_left = 534.0
-margin_right = 574.0
+margin_left = 582.0
+margin_right = 646.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
-text = "修理:"
+text = ":REPAIR:"
 
 [node name="RepairTimeBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
-margin_left = 578.0
-margin_right = 878.0
+margin_left = 650.0
+margin_right = 950.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_vertical = 3
@@ -226,14 +229,14 @@ margin_right = 1010.0
 margin_bottom = 58.0
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon"]
-margin_right = 48.0
+margin_right = 104.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
-text = "主砲: "
+text = ":MAIN_WEAPON:"
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon"]
-margin_left = 52.0
-margin_right = 352.0
+margin_left = 108.0
+margin_right = 408.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 300, 24 )
 size_flags_vertical = 3
@@ -246,14 +249,14 @@ margin_right = 1010.0
 margin_bottom = 92.0
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon"]
-margin_right = 64.0
+margin_right = 96.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
-text = "副兵装: "
+text = ":SUB_WEAPON:"
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon"]
-margin_left = 68.0
-margin_right = 368.0
+margin_left = 100.0
+margin_right = 400.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 300, 24 )
 size_flags_vertical = 3
@@ -262,9 +265,9 @@ script = ExtResource( 11 )
 weapon_key = ""
 
 [node name="WeaponName" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon"]
-margin_left = 372.0
+margin_left = 404.0
 margin_top = 5.0
-margin_right = 372.0
+margin_right = 404.0
 margin_bottom = 19.0
 
 [connection signal="tree_exiting" from="." to="." method="_on_BattleScreen_tree_exiting"]
