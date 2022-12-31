@@ -30,7 +30,7 @@ keys,en,ja
 :SHELL_DAMAGE:,Shell damage,砲弾威力
 :ACCURACY:,Accuracy,射撃制度
 :RELOAD:,Reloading time,装填時間
-:SUB_WEAPON:,Sub weapon,副兵装の使用と航空機の撃墜
+:SUB_WEAPON:,Sub weapon,副兵装
 ,,
 :DURABILITY:,Durability,耐久力
 :REPAIR:,Repair,修理
@@ -52,3 +52,9 @@ keys,en,ja
 :SHOOT_DOWN_BOMBER:,Shoot down a bomber,爆撃機を撃墜せよ
 :SHOOT_DOWN_FIGHTER:,Shhot down a fighter,戦闘機を撃墜せよ
 :DESTROY_AIR_BASE_TUTORIAL:,We found the enemy naval fortress!\nDestroy the air base.\nPay attention to shells from the fortress artillery.,敵の海上要塞を確認!\n要塞砲からの砲撃に注意しつつ航空基地を破壊せよ
+,,
+:LANGUAGE:,Language,言語
+:SE_VOLUME:,SE volume,SE音量
+:USE_DEFAULT_CURSOR:,Use default cursor,通常のカーソルを使用する
+:SHOW_FPS:,Show fps,FPSを表示
+:RESET:,Reset,初期値に戻す

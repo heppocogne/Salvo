@@ -30,7 +30,11 @@ func _ready():
 	GlobalScript.battele_screen=self
 	GlobalScript.node2d_root=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot
 	GlobalScript.water_area=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea
-	Input.set_custom_mouse_cursor(preload("res://gameplay/screen/cursor.svg"),0,Vector2(29,29))
+	if !SystemSaveData.read("use_default_cursor"):
+		Input.set_custom_mouse_cursor(preload("res://gameplay/screen/cursor.svg"),0,Vector2(30,30))
+	
+	if !SystemSaveData.read("show_fps"):
+		$VBoxContainer/ViewportContainer/Viewport/FpsLabel.queue_free()
 
 
 func _on_BattleScreen_tree_exiting():

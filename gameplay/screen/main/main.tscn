@@ -110,7 +110,7 @@ text = ":MENU:"
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/VBoxContainer"]
 margin_top = 62.0
 margin_right = 314.0
-margin_bottom = 178.0
+margin_bottom = 234.0
 custom_constants/margin_top = 30
 custom_constants/margin_left = 30
 
@@ -118,7 +118,7 @@ custom_constants/margin_left = 30
 margin_left = 30.0
 margin_top = 30.0
 margin_right = 314.0
-margin_bottom = 116.0
+margin_bottom = 172.0
 custom_constants/vseparation = 26
 custom_constants/hseparation = 32
 columns = 2
@@ -153,36 +153,36 @@ margin_bottom = 83.0
 custom_fonts/font = ExtResource( 4 )
 text = ":STATISTICS_DESCRIPTION:"
 
-[node name="Setting" type="Button" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
-visible = false
+[node name="Options" type="Button" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
 margin_top = 56.0
-margin_right = 44.0
+margin_right = 84.0
 margin_bottom = 86.0
 custom_fonts/font = ExtResource( 4 )
 text = ":OPTIONS:"
 
 [node name="Label3" type="Label" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
-visible = false
-margin_top = 59.0
-margin_right = 144.0
-margin_bottom = 83.0
-custom_fonts/font = ExtResource( 4 )
-text = ":OPTIONS_DESCRIPTION:"
-
-[node name="Exit" type="Button" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
-margin_top = 56.0
-margin_right = 84.0
-margin_bottom = 86.0
-custom_fonts/font = ExtResource( 4 )
-text = ":QUIT:"
-
-[node name="Label4" type="Label" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
 margin_left = 116.0
 margin_top = 59.0
 margin_right = 284.0
 margin_bottom = 83.0
 custom_fonts/font = ExtResource( 4 )
+text = ":OPTIONS_DESCRIPTION:"
+
+[node name="Exit" type="Button" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+margin_top = 112.0
+margin_right = 84.0
+margin_bottom = 142.0
+custom_fonts/font = ExtResource( 4 )
+text = ":QUIT:"
+
+[node name="Label4" type="Label" parent="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer"]
+margin_left = 116.0
+margin_top = 115.0
+margin_right = 284.0
+margin_bottom = 139.0
+custom_fonts/font = ExtResource( 4 )
 text = ":QUIT_DESCRIPTION:"
 
 [connection signal="pressed" from="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Upgrade" to="." method="_on_Upgrade_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/VBoxContainer/MarginContainer2/GridContainer/Exit" to="." method="_on_Exit_pressed"]
