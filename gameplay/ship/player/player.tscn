@@ -4,7 +4,7 @@
 [ext_resource path="res://gameplay/ship/player/player.gd" type="Script" id=2]
 [ext_resource path="res://gameplay/ship/bb.svg" type="Texture" id=3]
 [ext_resource path="res://gameplay/weapon/gun/gun.tscn" type="PackedScene" id=4]
-[ext_resource path="res://gameplay/projectile/152mm_shell.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gameplay/projectile/base_samll_shell.tscn" type="PackedScene" id=5]
 [ext_resource path="res://gameplay/weapon/gun/anti_air_gun.tscn" type="PackedScene" id=6]
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -20,7 +20,7 @@ weapon_groups = {
 "aa": {
 "base_accuracy": 1.0,
 "base_dispersion": 0.1,
-"base_reload": 2.0,
+"base_reload": 1.8,
 "node_paths": [ NodePath("AntiAirGun"), NodePath("AntiAirGun2"), NodePath("AntiAirGun3"), NodePath("AntiAirGun4") ]
 },
 "main": {
@@ -32,7 +32,7 @@ weapon_groups = {
 "secondary": {
 "base_accuracy": 0.0,
 "base_dispersion": 0.3,
-"base_reload": 5.5,
+"base_reload": 2.5,
 "node_paths": [ NodePath("MediumGun"), NodePath("MediumGun2"), NodePath("MediumGun3"), NodePath("MediumGun4") ]
 }
 }
