@@ -68,3 +68,7 @@ func fire_weapon(key:String,_pos:Vector2):
 	ws.ready=false
 
 	emit_signal("weapon_fired",key,n)
+
+
+func _on_AscendingTimer_timeout():
+	target_velocity=get_speed()*Vector2.LEFT

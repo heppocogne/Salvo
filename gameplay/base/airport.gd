@@ -79,17 +79,12 @@ func _on_BomberTakeoffTimer_timeout():
 		return
 	
 	var a:Bomber
-	if randf()<0.5:
+	if randf()<0:
 		a=spawn_aircraft(b1_scene)
 	else:
 		a=spawn_aircraft(b2_scene)
 	
 	a.position=global_position
-	a.target_velocity=polar2cartesian(a.get_speed(),deg2rad(225))
+	a.target_velocity=polar2cartesian(a.get_speed(),deg2rad(240))
 	a._actual_velocity=a.target_velocity
-	var tm:=Timer.new()
-	add_child(tm)
-	tm.start(sqrt(2)*(rand_range(bomber_y_min,bomber_y_max))/a.get_speed())
-	yield(tm,"timeout")
-	a.target_velocity=polar2cartesian(a.get_speed(),PI)
-	tm.queue_free()
+	a.get_node("AscendingTimer").start(2.0/sqrt(3)*(global_position.y-rand_range(bomber_y_min,bomber_y_max))/a.get_speed())

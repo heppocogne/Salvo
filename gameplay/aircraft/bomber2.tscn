@@ -32,3 +32,8 @@ texture = ExtResource( 2 )
 projectile_scene = ExtResource( 4 )
 num_barrels = 2
 _range = 0.0102041
+
+[node name="AscendingTimer" type="Timer" parent="." index="3"]
+one_shot = true
+
+[connection signal="timeout" from="AscendingTimer" to="." method="_on_AscendingTimer_timeout"]

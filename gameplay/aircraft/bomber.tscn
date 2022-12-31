@@ -31,3 +31,8 @@ texture = ExtResource( 2 )
 [node name="BombThrower" parent="." index="2" instance=ExtResource( 3 )]
 projectile_scene = ExtResource( 4 )
 _range = 0.0102041
+
+[node name="AscendingTimer" type="Timer" parent="." index="3"]
+one_shot = true
+
+[connection signal="timeout" from="AscendingTimer" to="." method="_on_AscendingTimer_timeout"]
