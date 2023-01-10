@@ -1,6 +1,8 @@
 class_name Projectile
 extends Area2D
 
+const water_level:=500
+
 export var base_damage:int=1 setget set_base_damage
 export var sync_rotation:bool=true
 
@@ -16,7 +18,10 @@ func _ready():
 
 
 func _physics_process(delta:float):
-	position+=velocity*delta
+	if (position+velocity*delta).y<water_level:
+		position+=velocity*delta
+	else:
+		position+=velocity.normalized()*(500-position.y)
 	if sync_rotation and velocity.length_squared()!=0:
 		rotation=velocity.angle()
 	
@@ -39,7 +44,6 @@ func get_damage()->int:
 func _on_Projectile_area_entered(area:Area2D):
 	if invalid:
 		return
-	invalid=true
 	if area==GlobalScript.water_area:
 		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
 		GlobalScript.node2d_root.add_child(splash)
@@ -52,6 +56,7 @@ func _on_Projectile_area_entered(area:Area2D):
 		
 		GlobalScript.play_sound("res://gameplay/effect/bom00.wav")
 	else:
+		invalid=true
 		if area.has_method("damage"):
 			area.damage(self)
 		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
