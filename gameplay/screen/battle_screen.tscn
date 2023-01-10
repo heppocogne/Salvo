@@ -276,9 +276,9 @@ weapon_key = ""
 
 [node name="WeaponName" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon"]
 margin_left = 404.0
-margin_top = 5.0
 margin_right = 404.0
-margin_bottom = 19.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 5 )
 
 [connection signal="tree_exiting" from="." to="." method="_on_BattleScreen_tree_exiting"]
 [connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_damaged"]

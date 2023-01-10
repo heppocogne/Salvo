@@ -49,7 +49,7 @@ func _ready():
 	if Engine.editor_hint:
 		return
 	
-	subweapon=SaveData.read("subweapon")
+	set_subweapon(SaveData.read("subweapon"))
 	_speed_upgrade=SaveData.read("upgrade_speed")*1.5
 	
 	_hp_upgrade=SaveData.read("upgrade_HP")*50

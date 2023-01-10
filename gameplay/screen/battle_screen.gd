@@ -147,7 +147,9 @@ func stage_complete():
 	player.block_user_input=true
 	player.disconnect("killed",self,"_on_Player_killed")
 	var c:int
-
+	
+	SaveData.store("subweapon",player.subweapon)
+	
 	if SaveData.has_key(clear_count_key):
 		c=SaveData.read(clear_count_key)+1
 	else:
@@ -255,6 +257,8 @@ func stage_fail():
 	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
 	set_label_text(tr(":MISSION_FAILED:")+"!")
 	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label.add_color_override("font_color",Color.orangered)
+	
+	SaveData.store("subweapon",player.subweapon)
 	
 	if !SaveData.has_key(clear_count_key):
 		SaveData.store(clear_count_key,0)

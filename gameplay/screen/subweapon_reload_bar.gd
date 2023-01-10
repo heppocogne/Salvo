@@ -9,8 +9,10 @@ func _ready():
 
 func set_weapon_key(key:String):
 	.set_weapon_key(key)
-	if !get_parent():
-		return
+	call_deferred("_set_weapon_key_impl",key)
+
+
+func _set_weapon_key_impl(key:String):
 	if key=="":
 		get_parent().visible=false
 	else:
