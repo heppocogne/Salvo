@@ -28,7 +28,7 @@ keys,en,ja
 :MAIN_WEAPON:,Main weapon,主兵装
 :NUM_OF_SHOTS:,Number of shots,砲門数
 :SHELL_DAMAGE:,Shell damage,砲弾威力
-:ACCURACY:,Accuracy,射撃制度
+:ACCURACY:,Accuracy,射撃精度
 :RELOAD:,Reloading time,装填時間
 :SUB_WEAPON:,Sub weapon,副兵装
 ,,
