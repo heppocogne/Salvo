@@ -6,6 +6,9 @@
 
 [node name="Tutorial2" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+pt_per_damage = 0.1
+pt_aiming = 10.0
+first_reward = 100
 
 [node name="Timer2" type="Timer" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" index="5"]
 wait_time = 5.0

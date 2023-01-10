@@ -9,15 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "NavaelBaseObject",
+"class": "Airbase",
+"language": "GDScript",
+"path": "res://gameplay/base/airbase.gd"
+}, {
 "base": "Area2D",
 "class": "Aircraft",
 "language": "GDScript",
 "path": "res://gameplay/aircraft/aircraft.gd"
-}, {
-"base": "NavaelBaseObject",
-"class": "Airport",
-"language": "GDScript",
-"path": "res://gameplay/base/airport.gd"
 }, {
 "base": "Projectile",
 "class": "AntiAirProjectile",
@@ -140,8 +140,8 @@ _global_script_classes=[ {
 "path": "res://gameplay/misc/weapon_state.gd"
 } ]
 _global_script_class_icons={
+"Airbase": "",
 "Aircraft": "",
-"Airport": "",
 "AntiAirProjectile": "",
 "Artillery": "",
 "BattleScreen": "",

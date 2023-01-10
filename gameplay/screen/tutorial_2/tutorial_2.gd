@@ -132,16 +132,16 @@ func _on_Fighter_killed():
 		tm.start(6.0)
 		yield(tm,"timeout")
 		_fadeout_mission_text(tr(":DESTROY_AIR_BASE_TUTORIAL:"),5.0)
-		var airport:Airport=fortress.get_node("Airport")
-		airport.set_active(true)
+		var airbase:Airbase=fortress.get_node("Airbase")
+		airbase.set_active(true)
 		var m:Marker=marker_scene.instance()
 		m.popup_offset=Vector2(0,-20)
-		m.target_node=airport
-		airport.add_child(m)
+		m.target_node=airbase
+		airbase.add_child(m)
 		tm.start(6)
 		yield(tm,"timeout")
-		airport.connect("killed",m,"queue_free")
-		airport.connect("killed",self,"_on_Airport_killed")
+		airbase.connect("killed",m,"queue_free")
+		airbase.connect("killed",self,"_on_Airport_killed")
 		fortress.get_node("Artillery").active=true
 		tm.queue_free()
 

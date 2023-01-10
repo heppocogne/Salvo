@@ -1,4 +1,4 @@
-class_name Airport
+class_name Airbase
 extends NavaelBaseObject
 
 const f1_scene:PackedScene=preload("res://gameplay/aircraft/fighter.tscn")

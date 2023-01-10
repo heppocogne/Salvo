@@ -2,7 +2,7 @@
 
 [ext_resource path="res://gameplay/base/naval_fortress.gd" type="Script" id=1]
 [ext_resource path="res://gameplay/base/artillery.tscn" type="PackedScene" id=2]
-[ext_resource path="res://gameplay/base/airport.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gameplay/base/airbase.tscn" type="PackedScene" id=3]
 
 [node name="NavalFortress" type="Area2D"]
 collision_layer = 2
@@ -21,7 +21,7 @@ hp = 2000
 active = false
 reload = 15.0
 
-[node name="Airport" parent="." instance=ExtResource( 3 )]
+[node name="Airbase" parent="." instance=ExtResource( 3 )]
 position = Vector2( -64, -64 )
 hp = 2500
 fighter_takeoff_duration = 6.0

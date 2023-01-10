@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/airport.svg-81a19e54d7563bbc45833bb92b70c588.stex"
+path="res://.import/airbase.svg-1c68f39984d41515ad26e7c85dcbec91.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gameplay/base/airport.svg"
-dest_files=[ "res://.import/airport.svg-81a19e54d7563bbc45833bb92b70c588.stex" ]
+source_file="res://gameplay/base/airbase.svg"
+dest_files=[ "res://.import/airbase.svg-1c68f39984d41515ad26e7c85dcbec91.stex" ]
 
 [params]
 
