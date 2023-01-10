@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://gameplay/aircraft/fighter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gameplay/weapon/bomb_thrower.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gameplay/projectile/250kg_bomb.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gameplay/aircraft/fighter_bomber.gd" type="Script" id=4]
+
+[node name="FighterBomber" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+base_speed = 160.0
+base_hp = 100
+weapon_groups = {
+"main": {
+"base_accuracy": 0.0,
+"base_dispersion": 0.2,
+"base_reload": 0.2,
+"node_paths": [ NodePath("MachineGun") ]
+},
+"main2": {
+"base_accuracy": 0.0,
+"base_dispersion": 0.2,
+"base_reload": 10000.0,
+"node_paths": [ NodePath("BombThrower") ]
+}
+}
+
+[node name="MachineGun" parent="." index="2"]
+num_barrels = 1
+
+[node name="BombThrower" parent="." index="3" instance=ExtResource( 2 )]
+projectile_scene = ExtResource( 3 )
+_range = 0.0102041

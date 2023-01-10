@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://gameplay/ship/ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gameplay/ship/enemy/cvl.svg" type="Texture" id=2]
+[ext_resource path="res://gameplay/weapon/gun/gun.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gameplay/ship/enemy/bot_cvl.gd" type="Script" id=4]
+[ext_resource path="res://gameplay/projectile/152mm_shell.tscn" type="PackedScene" id=5]
+
+[node name="LightCarrier" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+base_hp = 900
+protection = Vector2( 150, 25 )
+weapon_groups = {
+"main": {
+"base_accuracy": 0.0,
+"base_dispersion": 0.2,
+"base_reload": 5.5,
+"node_paths": [ NodePath("MediumGun") ]
+}
+}
+fighter_takeoff_duration = 5.0
+fighter_y_min = 360.0
+fighter_y_max = 400.0
+
+[node name="CollisionPolygon2D" parent="." index="0"]
+polygon = PoolVector2Array( -47, -7, 49, -7, 50, -3, 49, 0, -48, 0, -50, -4 )
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2( 0, -5.5 )
+texture = ExtResource( 2 )
+
+[node name="MediumGun" parent="." index="2" instance=ExtResource( 3 )]
+position = Vector2( -16, -8 )
+projectile_scene = ExtResource( 5 )
+num_barrels = 2
+_range = 408.163
+
+[node name="FighterTakeoffTimer" type="Timer" parent="." index="3"]
+wait_time = 4.0
+
+[connection signal="timeout" from="FighterTakeoffTimer" to="." method="_on_FighterTakeoffTimer_timeout"]
