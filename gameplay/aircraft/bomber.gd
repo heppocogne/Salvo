@@ -20,7 +20,7 @@ func _ready():
 		player_node=GlobalScript.node2d_root.get_node("Player")
 
 
-func _physics_process(delta:float):
+func _physics_process(_delta:float):
 	if Engine.editor_hint:
 		return
 	
