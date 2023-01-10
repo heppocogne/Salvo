@@ -31,13 +31,13 @@ func _on_FighterTakeoffTimer_timeout():
 		return
 	
 	var a:Fighter
-	var r:=randi()
-	if r%3==0:
-		a=spawn_aircraft(f1_scene)
-	elif r%3==1:
-		a=spawn_aircraft(f2_scene)
-	elif r%3==2:
+	if randi()%4==0:
 		a=spawn_aircraft(fb_scene)
+	elif randf()<0.5:
+		a=spawn_aircraft(f1_scene)
+	else:
+		a=spawn_aircraft(f2_scene)
+		
 	
 	a.position=global_position
 	a.target_velocity=polar2cartesian(a.get_speed(),deg2rad(225))

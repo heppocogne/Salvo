@@ -5,3 +5,7 @@
 
 [node name="Stage3" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+pt_per_damage = 0.1
+pt_aiming = 10.0
+pt_maneuver = 0.1
+first_reward = 200

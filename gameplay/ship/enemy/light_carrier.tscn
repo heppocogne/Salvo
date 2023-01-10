@@ -18,7 +18,7 @@ weapon_groups = {
 "node_paths": [ NodePath("MediumGun") ]
 }
 }
-fighter_takeoff_duration = 5.0
+fighter_takeoff_duration = 6.0
 fighter_y_min = 360.0
 fighter_y_max = 400.0
 

@@ -40,7 +40,7 @@ text = ":STAGE_SELECT:"
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer/HBoxContainer"]
 margin_top = 62.0
 margin_right = 650.0
-margin_bottom = 260.0
+margin_bottom = 306.0
 custom_constants/margin_top = 30
 custom_constants/margin_left = 30
 
@@ -48,7 +48,7 @@ custom_constants/margin_left = 30
 margin_left = 30.0
 margin_top = 30.0
 margin_right = 650.0
-margin_bottom = 198.0
+margin_bottom = 244.0
 custom_constants/separation = 16
 
 [node name="Tutorial1" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
@@ -82,6 +82,14 @@ margin_bottom = 168.0
 save_data_key = "tutorial_2_unlocked"
 stage_name = "Tutorial 2"
 description = ":TUTORIAL_2_DESCRIPTION:"
+
+[node name="Stage3" parent="Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
+margin_top = 184.0
+margin_right = 620.0
+margin_bottom = 214.0
+save_data_key = "stage_3_unlocked"
+stage_name = "Stage 3"
+description = ":STAGE_3_DESCRIPTION:"
 
 [node name="HSplitContainer" type="VSeparator" parent="Panel/VBoxContainer"]
 margin_left = 654.0
