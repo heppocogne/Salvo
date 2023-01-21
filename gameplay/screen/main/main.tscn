@@ -2,8 +2,8 @@
 
 [ext_resource path="res://gameplay/screen/main/main.gd" type="Script" id=1]
 [ext_resource path="res://gameplay/screen/main/stage_description.tscn" type="PackedScene" id=2]
-[ext_resource path="res://fonts/SourceHanSansHW-Regular.32.tres" type="DynamicFont" id=3]
-[ext_resource path="res://fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=4]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.32.tres" type="DynamicFont" id=3]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=4]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0

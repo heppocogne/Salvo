@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=1]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://gameplay/screen/play_evaluation.gd" type="Script" id=2]
+
 
 [node name="PlayEvaluataion" type="HBoxContainer"]
 margin_right = 4.0

@@ -2,8 +2,9 @@
 
 [ext_resource path="res://gameplay/screen/main/ship_upgrade/upgrade_feature.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/screen/main/ship_upgrade/ship_upgrade.gd" type="Script" id=4]
-[ext_resource path="res://fonts/SourceHanSansHW-Regular.32.tres" type="DynamicFont" id=5]
-[ext_resource path="res://fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=6]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.32.tres" type="DynamicFont" id=5]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=6]
+
 
 [node name="ShipUpgrade" type="Control"]
 anchor_right = 1.0

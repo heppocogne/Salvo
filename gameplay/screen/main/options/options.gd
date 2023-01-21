@@ -6,7 +6,7 @@ onready var current_volume:Label=$Panel/MarginContainer/VBoxContainer/SoundVolum
 func _ready():
 	var lang:OptionButton=$Panel/MarginContainer/VBoxContainer/Language/OptionButton
 	lang.theme=Theme.new()
-	lang.theme.default_font=preload("res://fonts/SourceHanSansHW-Regular.16.tres")
+	lang.theme.default_font=preload("res://gui/fonts/SourceHanSansHW-Regular.16.tres")
 	if SystemSaveData.read("language")=="ja":
 		lang.select(0)
 	else:
