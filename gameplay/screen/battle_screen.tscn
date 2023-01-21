@@ -14,7 +14,7 @@
 [ext_resource path="res://gameplay/screen/fps_label.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1536, 64 )
+extents = Vector2( 1536, 34 )
 
 [node name="BattleScreen" type="Control"]
 anchor_right = 1.0
@@ -28,10 +28,10 @@ custom_constants/separation = 0
 
 [node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 576.0
+margin_bottom = 640.0
 
 [node name="Viewport" type="Viewport" parent="VBoxContainer/ViewportContainer"]
-size = Vector2( 1024, 576 )
+size = Vector2( 1024, 640 )
 handle_input_locally = false
 render_target_update_mode = 3
 audio_listener_enable_2d = true
@@ -39,7 +39,7 @@ audio_listener_enable_2d = true
 [node name="Node2DRoot" type="Node2D" parent="VBoxContainer/ViewportContainer/Viewport"]
 
 [node name="Simple" type="Sprite" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot"]
-self_modulate = Color( 0.88, 0.88, 0.88, 1 )
+self_modulate = Color( 0.862745, 0.862745, 0.862745, 1 )
 scale = Vector2( 1, 6 )
 texture = ExtResource( 3 )
 centered = false
@@ -51,17 +51,18 @@ centered = false
 [node name="WaterArea" type="Area2D" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea"]
-position = Vector2( 512, 564 )
+position = Vector2( 512, 594 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea"]
 self_modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
-position = Vector2( 0, 500 )
+position = Vector2( 0, 560 )
+scale = Vector2( 1, 1.5 )
 texture = ExtResource( 3 )
 centered = false
 
 [node name="Player" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" instance=ExtResource( 1 )]
-position = Vector2( 100, 500 )
+position = Vector2( 100, 560 )
 
 [node name="Timer" type="Timer" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player"]
 wait_time = 1.5
@@ -78,20 +79,20 @@ script = ExtResource( 12 )
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/ViewportContainer"]
 margin_right = 1024.0
-margin_bottom = 576.0
+margin_bottom = 640.0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ViewportContainer/CenterContainer"]
 visible = false
 margin_left = 505.0
-margin_top = 281.0
+margin_top = 313.0
 margin_right = 519.0
-margin_bottom = 295.0
+margin_bottom = 327.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ViewportContainer/CenterContainer"]
 margin_left = 480.0
-margin_top = 268.0
+margin_top = 300.0
 margin_right = 544.0
-margin_bottom = 307.0
+margin_bottom = 339.0
 script = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer"]
@@ -179,29 +180,35 @@ custom_fonts/font = ExtResource( 5 )
 text = ":RETURN:"
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 576.0
+margin_top = 640.0
 margin_right = 1024.0
 margin_bottom = 768.0
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1017.0
-margin_bottom = 185.0
+margin_bottom = 121.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/CenterContainer"]
+margin_left = 30.0
+margin_top = 11.0
+margin_right = 980.0
+margin_bottom = 103.0
 custom_constants/separation = 10
 
-[node name="Durability" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
-margin_right = 1010.0
+[node name="Durability" type="HBoxContainer" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
+margin_right = 950.0
 margin_bottom = 24.0
 
-[node name="HP" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+[node name="HP" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
 margin_right = 96.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = ":DURABILITY:"
 
-[node name="HPBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+[node name="HPBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
 margin_left = 100.0
 margin_right = 550.0
 margin_bottom = 24.0
@@ -210,20 +217,20 @@ size_flags_vertical = 3
 percent_visible = false
 script = ExtResource( 6 )
 
-[node name="Control" type="Control" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+[node name="Control" type="Control" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
 margin_left = 554.0
 margin_right = 578.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 
-[node name="RepairTime" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+[node name="RepairTime" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
 margin_left = 582.0
 margin_right = 646.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = ":REPAIR:"
 
-[node name="RepairTimeBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/Durability"]
+[node name="RepairTimeBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
 margin_left = 650.0
 margin_right = 950.0
 margin_bottom = 24.0
@@ -233,18 +240,18 @@ value = 100.0
 percent_visible = false
 script = ExtResource( 10 )
 
-[node name="MainWeapon" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="MainWeapon" type="HBoxContainer" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
 margin_top = 34.0
-margin_right = 1010.0
+margin_right = 950.0
 margin_bottom = 58.0
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/MainWeapon"]
 margin_right = 104.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = ":MAIN_WEAPON:"
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/MainWeapon"]
 margin_left = 108.0
 margin_right = 408.0
 margin_bottom = 24.0
@@ -252,19 +259,20 @@ rect_min_size = Vector2( 300, 24 )
 size_flags_vertical = 3
 percent_visible = false
 script = ExtResource( 7 )
+player_nodepath = NodePath("../../../../../ViewportContainer/Viewport/Node2DRoot/Player")
 
-[node name="SubWeapon" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="SubWeapon" type="HBoxContainer" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
 margin_top = 68.0
-margin_right = 1010.0
+margin_right = 950.0
 margin_bottom = 92.0
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/SubWeapon"]
 margin_right = 96.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = ":SUB_WEAPON:"
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/SubWeapon"]
 margin_left = 100.0
 margin_right = 400.0
 margin_bottom = 24.0
@@ -273,8 +281,9 @@ size_flags_vertical = 3
 percent_visible = false
 script = ExtResource( 11 )
 weapon_key = ""
+player_nodepath = NodePath("../../../../../ViewportContainer/Viewport/Node2DRoot/Player")
 
-[node name="WeaponName" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon"]
+[node name="WeaponName" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/SubWeapon"]
 margin_left = 404.0
 margin_right = 404.0
 margin_bottom = 24.0
@@ -282,18 +291,18 @@ custom_fonts/font = ExtResource( 5 )
 
 [connection signal="tree_exiting" from="." to="." method="_on_BattleScreen_tree_exiting"]
 [connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_damaged"]
-[connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/HPBar" method="_on_Player_hp_changed"]
+[connection signal="damaged" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability/HPBar" method="_on_Player_hp_changed"]
 [connection signal="killed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_killed"]
 [connection signal="player_fired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_player_fired"]
 [connection signal="player_moved" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="." method="_on_Player_player_moved"]
-[connection signal="player_repaired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/HPBar" method="_on_Player_hp_changed"]
-[connection signal="repair_cooldown_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/RepairTimeBar" method="_on_Player_repair_cooldown_left_changed"]
-[connection signal="repair_cooldown_started" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/Durability/RepairTimeBar" method="_on_Player_repair_cooldown_started"]
-[connection signal="subweapon_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon/ProgressBar" method="set_weapon_key"]
-[connection signal="weapon_relaod_time_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_weapon_relaod_time_left_changed"]
-[connection signal="weapon_relaod_time_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon/ProgressBar" method="_on_Player_weapon_relaod_time_left_changed"]
-[connection signal="weapon_reloaded" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_weapon_reloaded"]
-[connection signal="weapon_reloaded" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/VBoxContainer/SubWeapon/ProgressBar" method="_on_Player_weapon_reloaded"]
+[connection signal="player_repaired" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability/HPBar" method="_on_Player_hp_changed"]
+[connection signal="repair_cooldown_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability/RepairTimeBar" method="_on_Player_repair_cooldown_left_changed"]
+[connection signal="repair_cooldown_started" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability/RepairTimeBar" method="_on_Player_repair_cooldown_started"]
+[connection signal="subweapon_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/SubWeapon/ProgressBar" method="set_weapon_key"]
+[connection signal="weapon_relaod_time_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_weapon_relaod_time_left_changed"]
+[connection signal="weapon_relaod_time_left_changed" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/SubWeapon/ProgressBar" method="_on_Player_weapon_relaod_time_left_changed"]
+[connection signal="weapon_reloaded" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/MainWeapon/ProgressBar" method="_on_Player_weapon_reloaded"]
+[connection signal="weapon_reloaded" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player" to="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/SubWeapon/ProgressBar" method="_on_Player_weapon_reloaded"]
 [connection signal="timeout" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player/Timer" to="." method="_on_PlayerMoveTimer_timeout"]
 [connection signal="minimum_size_changed" from="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer" to="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer" method="_on_VBoxContainer_minimum_size_changed"]
 [connection signal="visibility_changed" from="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label" to="VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer" method="_on_Label_visibility_changed"]

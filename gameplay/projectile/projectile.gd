@@ -1,8 +1,6 @@
 class_name Projectile
 extends Area2D
 
-const water_level:=500
-
 export var base_damage:int=1 setget set_base_damage
 export var sync_rotation:bool=true
 
@@ -18,10 +16,10 @@ func _ready():
 
 
 func _physics_process(delta:float):
-	if (position+velocity*delta).y<water_level:
+	if (position+velocity*delta).y<GlobalScript.water_level:
 		position+=velocity*delta
 	else:
-		position+=velocity.normalized()*(500-position.y)
+		position+=velocity.normalized()*(GlobalScript.water_level-position.y)
 	if sync_rotation and velocity.length_squared()!=0:
 		rotation=velocity.angle()
 	

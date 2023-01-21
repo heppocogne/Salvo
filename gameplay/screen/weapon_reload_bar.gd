@@ -1,12 +1,13 @@
 extends ProgressBar
 
 export var weapon_key:String="main" setget set_weapon_key
+export var player_nodepath:NodePath
 var player_node:Player
 var timer:Timer
 
 
 func _ready():
-	player_node=$"../../../../ViewportContainer/Viewport/Node2DRoot/Player"
+	player_node=get_node(player_nodepath)
 	set_weapon_key(weapon_key)
 
 

@@ -7,8 +7,6 @@ signal weapon_fired(key,n)
 signal damaged(d)
 signal killed()
 
-const water_level:=500
-
 export var is_enemy:=true setget set_is_enemy
 export var base_speed:=0.0 setget ,get_speed
 export var base_turn_radius:float=100.0 setget ,get_turn_radius

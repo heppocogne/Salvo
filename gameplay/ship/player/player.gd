@@ -149,10 +149,10 @@ func _input(event:InputEvent):
 					var i:Projectile=get_projectile_instance(weapon_key)
 					var a:=0.5*i.gravity
 					var b:float=wp.get_muzzle_velocity()*sin(rot)
-					var c:=global_position.y-500
+					var c:=global_position.y-GlobalScript.water_level
 					var sqrt_d:=sqrt(b*b-4*a*c)
 					var t:=(-b+sqrt_d)/(2*a)
-					var pos:=Vector2(wp.get_muzzle_velocity()*cos(rot)*t+global_position.x,500)
+					var pos:=Vector2(wp.get_muzzle_velocity()*cos(rot)*t+global_position.x,GlobalScript.water_level)
 					
 					if weapon_key=="main" or weapon_key=="secondary":
 						i.queue_free()

@@ -29,7 +29,7 @@ func _ready():
 func _on_Timer_timeout():
 	set_label_text(tr(":HOW_TO_FIRE_SUB_WEAPON:"))
 	var ts:PackedScene=preload("res://gameplay/ship/enemy/tutorial_target.tscn")
-	spawn_enemy_ship(ts,500)
+	spawn_enemy_ship(ts,GlobalScript.water_level)
 	$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player.subweapon="secondary"
 	step=SUB_WEAPON_TUTORIAL
 
@@ -115,7 +115,7 @@ func _on_Fighter_killed():
 		step=FORTRESS_TUTORIAL
 		timer2.stop()
 		fortress=preload("res://gameplay/screen/tutorial_2/tutorial_fortress.tscn").instance()
-		fortress.position=Vector2(1400,500)
+		fortress.position=Vector2(1400,GlobalScript.water_level)
 		GlobalScript.node2d_root.call_deferred("add_child",fortress)
 		tween.interpolate_property(
 			fortress,

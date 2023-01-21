@@ -1,8 +1,6 @@
 class_name FallingAircraft
 extends Sprite
 
-const water_level:=500
-
 var duration:=5.0
 var velocity:Vector2
 var gravity:float
@@ -32,7 +30,7 @@ func _physics_process(delta:float):
 	position+=velocity*delta
 	rotation=velocity.angle()
 	
-	if water_level<position.y:
+	if GlobalScript.water_level<position.y:
 		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
 		GlobalScript.node2d_root.add_child(splash)
 		splash.global_position=global_position

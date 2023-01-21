@@ -1,5 +1,7 @@
 extends Node
 
+const water_level:=560
+
 var battele_screen:Control
 var node2d_root:Node2D
 var water_area:Area2D

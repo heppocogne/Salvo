@@ -27,7 +27,7 @@ func _physics_process(_delta:float):
 	# set bomb range
 	var g:float=weapon_states["main"].projectile_prototype.gravity
 	var sv:=sin(_actual_velocity.angle())
-	var d:=_actual_velocity.length_squared()*sv*sv-2*g*(position.y-water_level)
+	var d:=_actual_velocity.length_squared()*sv*sv-2*g*(position.y-GlobalScript.water_level)
 	if d<0:
 		return
 	
