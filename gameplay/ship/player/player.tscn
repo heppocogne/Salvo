@@ -19,8 +19,8 @@ protection = Vector2( 254, 51 )
 weapon_groups = {
 "aa": {
 "base_accuracy": 1.0,
-"base_dispersion": 0.1,
-"base_reload": 1.8,
+"base_dispersion": 0.15,
+"base_reload": 2.0,
 "node_paths": [ NodePath("AntiAirGun"), NodePath("AntiAirGun2"), NodePath("AntiAirGun3"), NodePath("AntiAirGun4") ]
 },
 "main": {
@@ -32,7 +32,7 @@ weapon_groups = {
 "secondary": {
 "base_accuracy": 0.0,
 "base_dispersion": 0.3,
-"base_reload": 2.5,
+"base_reload": 3.0,
 "node_paths": [ NodePath("MediumGun"), NodePath("MediumGun2"), NodePath("MediumGun3"), NodePath("MediumGun4") ]
 }
 }

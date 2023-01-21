@@ -28,6 +28,11 @@ var _main_weapon_shell_damage_upgrade:int
 var _main_weapon_accuracy_upgrade:float
 var _main_weapon_dispersion_upgrade:float
 var _main_weapon_reload_upgrade:float
+var _secondary_shell_damage_upgrade:int
+var _aa_explosion_radius_upgrade:int
+var _sub_weapon_accuracy_upgrade:float
+var _sub_weapon_dispersion_upgrade:float
+var _sub_weapon_reload_upgrade:float
 
 onready var damage_timer:Timer=$DamageTimer
 onready var repair_timer:Timer=$RpairTimer
@@ -61,7 +66,7 @@ func _ready():
 		)
 	
 	_regeneration_per_sec=SaveData.read("upgrade_emergency_repair")*2
-	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.4
+	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.3
 	if weapon_groups.has("main"):
 		# restart reload timer to apply upgrade effect
 		weapon_states["main"].timer.start(get_weapon_reload("main"))
@@ -82,6 +87,27 @@ func _ready():
 	var shell_upgrade:int=SaveData.read("upgrade_main_weapon_caliber")
 	_main_weapon_shell_damage_upgrade=round((shell_upgrade+12)*25.4)
 	# _main_weapon_reload_upgrade+=shell_upgrade*0.3
+	
+	_sub_weapon_reload_upgrade-=SaveData.read("upgrade_sub_weapon_reload")*0.1
+	_sub_weapon_accuracy_upgrade=SaveData.read("upgrade_sub_weapon_accuracy")*0.3
+	barrels_upgrade=SaveData.read("upgrade_sub_weapon_barrels")
+	num_barrels=4+barrels_upgrade*2
+	if weapon_groups.has("secondary"):
+		for w in weapon_states["secondary"].nodes:
+			w.num_barrels=num_barrels/4
+	if num_barrels%4==2:
+		weapon_states["secondary"].nodes[0].num_barrels+=1
+		weapon_states["secondary"].nodes[3].num_barrels+=1
+	if weapon_groups.has("aa"):
+		for w in weapon_states["aa"].nodes:
+			w.num_barrels=num_barrels/4
+	if num_barrels%4==2:
+		weapon_states["aa"].nodes[0].num_barrels+=1
+		weapon_states["aa"].nodes[3].num_barrels+=1
+	
+	shell_upgrade=SaveData.read("upgrade_sub_weapon_caliber")
+	_secondary_shell_damage_upgrade=round((shell_upgrade/2.0+4)*25.4)
+	_aa_explosion_radius_upgrade=20+shell_upgrade
 
 
 func _process(_delta:float):
@@ -238,6 +264,10 @@ func get_projectile_instance(key:String="main")->Projectile:
 		
 		if key=="main":
 			i.base_damage=_main_weapon_shell_damage_upgrade
+		elif key=="secondary":
+			i.base_damage=_secondary_shell_damage_upgrade
+		elif key=="aa":
+			i.radius=_aa_explosion_radius_upgrade
 		weapon_states[key].projectile_prototype=i
 	return weapon_states[key].projectile_prototype.duplicate()
 

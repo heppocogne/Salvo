@@ -159,7 +159,7 @@ custom_styles/bg = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/ScrollContainer"]
 margin_right = 830.0
-margin_bottom = 392.0
+margin_bottom = 572.0
 
 [node name="Speed" parent="ColorRect/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_right = 830.0
@@ -257,6 +257,54 @@ margin_right = 830.0
 margin_bottom = 392.0
 status_name = ":RELOAD:"
 save_data_key = "upgrade_main_weapon_reload"
+costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
+
+[node name="HSeparator3" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 396.0
+margin_right = 830.0
+margin_bottom = 400.0
+theme = ExtResource( 3 )
+
+[node name="SubWeapon" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 404.0
+margin_right = 830.0
+margin_bottom = 428.0
+custom_colors/font_color = Color( 0, 0.501961, 0.752941, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = ":SUB_WEAPON:"
+
+[node name="Barrels2" parent="ColorRect/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 432.0
+margin_right = 830.0
+margin_bottom = 464.0
+status_name = ":NUM_OF_SHOTS:"
+save_data_key = "upgrade_sub_weapon_barrels"
+max_level = 5
+costs = PoolIntArray( 200, 400, 800, 1600, 3200, 6400 )
+
+[node name="Shell2" parent="ColorRect/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 468.0
+margin_right = 830.0
+margin_bottom = 500.0
+status_name = ":SHELL_DAMAGE:"
+save_data_key = "upgrade_sub_weapon_caliber"
+max_level = 8
+costs = PoolIntArray( 100, 200, 300, 400, 500, 600, 700, 800, 900 )
+
+[node name="Accuracy2" parent="ColorRect/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 504.0
+margin_right = 830.0
+margin_bottom = 536.0
+status_name = ":ACCURACY:"
+save_data_key = "upgrade_sub_weapon_accuracy"
+costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
+
+[node name="Reload2" parent="ColorRect/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 540.0
+margin_right = 830.0
+margin_bottom = 572.0
+status_name = ":RELOAD:"
+save_data_key = "upgrade_subn_weapon_reload"
 costs = PoolIntArray( 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 )
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/Return" to="." method="_on_Return_pressed"]

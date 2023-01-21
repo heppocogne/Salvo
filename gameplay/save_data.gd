@@ -16,6 +16,10 @@ const _default_savedata:={
 		"upgrade_main_weapon_caliber":0,
 		"upgrade_main_weapon_accuracy":0,
 		"upgrade_main_weapon_reload":0,
+		"upgrade_sub_weapon_barrels":0,
+		"upgrade_sub_weapon_caliber":0,
+		"upgrade_sub_weapon_accuracy":0,
+		"upgrade_sub_weapon_reload":0,
 	}
 
 var _data:Dictionary
