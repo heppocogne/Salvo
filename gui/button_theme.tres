@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=6 format=2]
+
+[ext_resource path="res://gui/normal_styleboxtexture.tres" type="StyleBox" id=1]
+[ext_resource path="res://gui/pressed_styleboxtexture.tres" type="StyleBox" id=2]
+[ext_resource path="res://gui/hoverd_styleboxtexture.tres" type="StyleBox" id=3]
+[ext_resource path="res://gui/disabled_styleboxtexture.tres" type="StyleBox" id=4]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=5]
+
+[resource]
+default_font = ExtResource( 5 )
+Button/styles/disabled = ExtResource( 4 )
+Button/styles/focus = null
+Button/styles/hover = ExtResource( 3 )
+Button/styles/normal = ExtResource( 1 )
+Button/styles/pressed = ExtResource( 2 )

@@ -4,15 +4,13 @@ extends Control
 func _ready():
 	TranslationServer.set_locale(SystemSaveData.read("language"))
 	
-	for b in $Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer.get_children():
+	for b in $ColorRect/HBoxContainer/MarginContainer2/HBoxContainer.get_children():
 		if SaveData.has_key(b.save_data_key):
 			b.set_unlocked(SaveData.read(b.save_data_key))
 		else:
 			SaveData.store(b.save_data_key,false)
 			b.set_unlocked(false)
-	
-	for s in $Panel/VBoxContainer/HBoxContainer/MarginContainer2/HBoxContainer.get_children():
-		s.connect("button_pressed",self,"_on_Stage_selected")
+		b.connect("button_pressed",self,"_on_Stage_selected")
 
 
 func transition(scene:PackedScene):
@@ -34,11 +32,3 @@ func _on_Stage_selected(n:String):
 
 func _on_Upgrade_pressed():
 	transition(preload("res://gameplay/screen/main/ship_upgrade/ship_upgrade.tscn"))
-
-
-func _on_Options_pressed():
-	transition(preload("res://gameplay/screen/main/options/options.tscn"))
-
-
-func _on_Exit_pressed():
-	get_tree().quit(0)

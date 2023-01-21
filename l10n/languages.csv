@@ -1,4 +1,8 @@
 keys,en,ja
+:GAME_START:,Game Start,ゲームスタート
+:OPTIONS:,Options,設定
+:QUIT:,Quit,終了
+,,
 :STAGE_SELECT:,Select a stage,ステージ選択
 :MENU:,Menu,メニュー
 :TUTORIAL_1_DESCRIPTION:,How to move your ship and fire main guns,移動と主砲の使用
@@ -11,7 +15,7 @@ keys,en,ja
 :UPGRADE_DESCRIPTION:,Upgrade your ship,プレイヤー艦を強化
 :STATISTICS:,Statistics,統計
 :STATISTICS_DESCRIPTION:,Statistics and records of your gameplay,プレイの記録と統計
-:OPTIONS:,Options,設定
+,,
 :OPTIONS_DESCRIPTION:,Set game options,設定の変更
 :QUIT:,Quit,終了
 :QUIT_DESCRIPTION:,Quit game,ゲームを終了

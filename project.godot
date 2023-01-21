@@ -171,7 +171,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Salvo"
-run/main_scene="res://gameplay/screen/main/main.tscn"
+run/main_scene="res://gameplay/screen/title.tscn"
 config/icon="res://salvo_icon.png"
 
 [autoload]
