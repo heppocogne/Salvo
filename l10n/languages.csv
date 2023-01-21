@@ -6,13 +6,13 @@ keys,en,ja
 :STAGE_SELECT:,Select a stage,ステージ選択
 :MENU:,Menu,メニュー
 :TUTORIAL_1_DESCRIPTION:,How to move your ship and fire main guns,移動と主砲の使用
-:STAGE_1_DESCRIPTION:,Destroyers x 5 + Battleship,旧式駆逐艦5隻 + 旧式戦艦
-:STAGE_2_DESCRIPTION:,Destroyers x 3 + Light cruiser x 4 + mod Battleship,旧式駆逐艦3隻 + 旧式軽巡4隻 + 旧式戦艦改
+:STAGE_1_DESCRIPTION:,Destroy all enemy ships,全敵艦を撃沈せよ
+:STAGE_2_DESCRIPTION:,Destroy all enemy ships,全敵艦を撃沈せよ
 :TUTORIAL_2_DESCRIPTION:,How to use subweapons and shoot down aircrafts,副兵装の使用と航空機の撃墜
-:STAGE_3_DESCRIPTION:,Destroyers x 2 + Light carrier x2 + Carrier,旧式駆逐艦2隻 + 軽空母2隻 + 空母1隻
+:STAGE_3_DESCRIPTION:,Destroy 2 aircraft carriers,敵正規空母2隻を撃沈せよ
 ,,
-:UPGRADE:,Upgrade,強化
-:UPGRADE_DESCRIPTION:,Upgrade your ship,プレイヤー艦を強化
+:UPGRADE_SHIP:,Upgrade ship,艦艇の強化
+:UPGRADE_DESCRIPTION:,Upgrade your battleship,プレイヤー艦を強化
 :STATISTICS:,Statistics,統計
 :STATISTICS_DESCRIPTION:,Statistics and records of your gameplay,プレイの記録と統計
 ,,
@@ -20,7 +20,6 @@ keys,en,ja
 :QUIT:,Quit,終了
 :QUIT_DESCRIPTION:,Quit game,ゲームを終了
 ,,
-:UPGRADE_SHIP:,Upgrade your battleship,艦艇の強化
 :AVAILABLE_POINTS:,Available upgrade points:,所有強化pt:
 :RETURN:,Return,戻る
 :COSTS:,Costs,費用
@@ -56,7 +55,10 @@ keys,en,ja
 :HOW_TO_SWITCH_SUB_WEAPON:,Press space key to switch sub weapon,スペースキーで副兵装を切り替え
 :SHOOT_DOWN_BOMBER:,Shoot down a bomber,爆撃機を撃墜せよ
 :SHOOT_DOWN_FIGHTER:,Shhot down a fighter,戦闘機を撃墜せよ
-:DESTROY_AIR_BASE_TUTORIAL:,The enemy naval fortress detected!\nDestroy the air base.\nPay attention to shells from the fortress artillery.,敵の海上要塞を確認!\n要塞砲からの砲撃に注意しつつ航空基地を破壊せよ
+:DESTROY_AIR_BASE_TUTORIAL:,"The enemy naval fortress detected!
+Destroy the air base.
+Pay attention to shells from the fortress artillery.","敵の海上要塞を確認!
+要塞砲からの砲撃に注意しつつ航空基地を破壊せよ"
 :KILL_ENEMY_CV:,Kill the enemy aircraft carrier,敵航空母艦を撃沈せよ
 ,,
 :LANGUAGE:,Language,言語

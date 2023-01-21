@@ -50,7 +50,7 @@ margin_bottom = 202.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "Warship Salvo"
+text = "WARSHP SALVO"
 align = 1
 
 [node name="Control2" type="Control" parent="VBoxContainer"]

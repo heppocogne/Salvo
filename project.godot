@@ -170,7 +170,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Salvo"
+config/name="Warship Salvo"
 run/main_scene="res://gameplay/screen/title.tscn"
 config/icon="res://salvo_icon.png"
 
