@@ -18,11 +18,11 @@ weapon_groups = {
 }
 }
 fighter_takeoff_duration = 5.0
-fighter_y_min = 360.0
-fighter_y_max = 400.0
+fighter_y_min = 420.0
+fighter_y_max = 460.0
 bomber_takeoff_duration = 6.0
-bomber_y_min = 100.0
-bomber_y_max = 150.0
+bomber_y_min = 460.0
+bomber_y_max = 210.0
 
 [node name="CollisionPolygon2D" parent="." index="0"]
 polygon = PoolVector2Array( -62, -7, 63, -7, 63, -3, 59, 0, -60, 0 )

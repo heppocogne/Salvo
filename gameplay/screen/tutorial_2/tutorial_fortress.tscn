@@ -24,5 +24,9 @@ reload = 15.0
 [node name="Airbase" parent="." instance=ExtResource( 3 )]
 position = Vector2( -64, -64 )
 hp = 2500
-fighter_takeoff_duration = 6.0
+fighter_takeoff_duration = 8.0
+fighter_y_min = 420.0
+fighter_y_max = 460.0
 bomber_takeoff_duration = 8.0
+bomber_y_min = 460.0
+bomber_y_max = 210.0
