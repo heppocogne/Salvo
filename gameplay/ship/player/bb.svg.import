@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/plus.svg-e14064bec3292d8a1caa285bffb9ad17.stex"
+path="res://.import/bb.svg-5a69655cbf78c459847ec6db6c7f4d4e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gameplay/screen/main/plus.svg"
-dest_files=[ "res://.import/plus.svg-e14064bec3292d8a1caa285bffb9ad17.stex" ]
+source_file="res://gameplay/ship/player/bb.svg"
+dest_files=[ "res://.import/bb.svg-5a69655cbf78c459847ec6db6c7f4d4e.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -32,4 +32,4 @@ process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false
-svg/scale=0.8
+svg/scale=2.0

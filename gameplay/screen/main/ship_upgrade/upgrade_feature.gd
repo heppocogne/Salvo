@@ -23,7 +23,7 @@ func _ready():
 		if !SaveData.has_key(save_data_key):
 			SaveData.store(save_data_key,0)
 		var lvl:int=SaveData.read(save_data_key)
-		$ProgressBar.value=lvl
+		$TextureProgress.value=lvl
 		var pt:int=SaveData.read(pt_save_data_key)
 		if lvl==0:
 			$MinusButton.disabled=true
@@ -74,7 +74,7 @@ func _update_cost_color():
 	if pt<costs[lvl]:
 		$Cost.add_color_override("font_color",Color("ff6060"))
 	else:
-		$Cost.add_color_override("font_color",Color("#ffff9b"))
+		$Cost.add_color_override("font_color",Color("40c040"))
 
 
 func _update_button_state():
@@ -99,7 +99,7 @@ func _on_MinusButton_pressed():
 	_update_cost_text()
 	_update_cost_color()
 	_change_upgrade_point(costs[lvl]/2)
-	$ProgressBar.value=lvl
+	$TextureProgress.value=lvl
 	
 	_update_button_state()
 
@@ -111,7 +111,7 @@ func _on_PlusButton_pressed():
 	SaveData.store(save_data_key,lvl)
 	_update_cost_text()
 	_update_cost_color()
-	$ProgressBar.value=lvl
+	$TextureProgress.value=lvl
 	
 	_update_button_state()
 
