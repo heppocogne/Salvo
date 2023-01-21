@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	pass
+	TranslationServer.set_locale(SystemSaveData.read("language"))
 
 
 func _on_Start_pressed():

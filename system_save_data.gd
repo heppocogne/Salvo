@@ -3,7 +3,7 @@ extends Node
 
 const json_path:String="user://system_save.json"
 const _default_savedata:={
-		"language":"ja",
+		"language":"",
 		"se_volume":100,
 		"use_default_cursor":false,
 		"show_fps":true,
@@ -26,7 +26,9 @@ func _ready():
 			get_tree().quit(1)
 	else:
 		_data=_default_savedata
-		if OS.get_locale_language()!="ja":
+		if OS.get_locale_language()=="ja":
+			_data["language"]="ja"
+		else:
 			_data["language"]="en"
 	
 	print_debug("system_save_data=",_data)
@@ -59,5 +61,7 @@ func read(key:String,use_default_unlesss_exists:=true):
 
 func reset():
 	_data=_default_savedata
-	if OS.get_locale_language()!="ja":
+	if OS.get_locale_language()=="ja":
+		_data["language"]="ja"
+	else:
 		_data["language"]="en"

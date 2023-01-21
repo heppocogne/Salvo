@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.32.tres" type="DynamicFont" id=1]
 [ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://gui/disabled_styleboxtexture.tres" type="StyleBox" id=8]
 [ext_resource path="res://gui/checkbox_theme.tres" type="Theme" id=9]
 [ext_resource path="res://gameplay/screen/bb_large.svg" type="Texture" id=10]
+[ext_resource path="res://gui/separator_style.tres" type="StyleBox" id=11]
+[ext_resource path="res://gui/hseparator_theme.tres" type="Theme" id=12]
 
 [sub_resource type="Theme" id=2]
 default_font = ExtResource( 2 )
@@ -95,6 +97,8 @@ text = ":RETURN:"
 margin_top = 52.0
 margin_right = 964.0
 margin_bottom = 56.0
+theme = ExtResource( 12 )
+custom_styles/separator = ExtResource( 11 )
 
 [node name="Language" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 margin_top = 60.0

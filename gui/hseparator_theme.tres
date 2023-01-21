@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=2]
+
+[ext_resource path="res://gui/separator_style.tres" type="StyleBox" id=1]
+
+[resource]
+HSeparator/styles/separator = ExtResource( 1 )

@@ -2,8 +2,6 @@ extends Control
 
 
 func _ready():
-	TranslationServer.set_locale(SystemSaveData.read("language"))
-	
 	for b in $ColorRect/HBoxContainer/MarginContainer2/HBoxContainer.get_children():
 		if SaveData.has_key(b.save_data_key):
 			b.set_unlocked(SaveData.read(b.save_data_key))
