@@ -7,7 +7,7 @@
 script = ExtResource( 2 )
 pt_per_damage = 0.1
 pt_aiming = 10.0
-pt_maneuver = 0.1
+pt_maneuver = 0.01
 first_reward = 100
 
 [node name="Timer2" type="Timer" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" index="5"]

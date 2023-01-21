@@ -67,9 +67,6 @@ func _ready():
 	
 	_regeneration_per_sec=SaveData.read("upgrade_emergency_repair")*2
 	_main_weapon_reload_upgrade-=SaveData.read("upgrade_main_weapon_reload")*0.3
-	if weapon_groups.has("main"):
-		# restart reload timer to apply upgrade effect
-		weapon_states["main"].timer.start(get_weapon_reload("main"))
 	
 	_main_weapon_accuracy_upgrade=SaveData.read("upgrade_main_weapon_accuracy")*0.3
 	
@@ -108,6 +105,11 @@ func _ready():
 	shell_upgrade=SaveData.read("upgrade_sub_weapon_caliber")
 	_secondary_shell_damage_upgrade=round((shell_upgrade/2.0+4)*25.4)
 	_aa_explosion_radius_upgrade=20+shell_upgrade
+	
+	for key in weapon_groups:
+		weapon_states[key].timer.stop()
+		weapon_states[key].ready=true
+		emit_signal("weapon_relaod_time_left_changed",key,0)
 
 
 func _process(_delta:float):
