@@ -98,6 +98,14 @@ func _on_Button_pressed():
 	get_tree().change_scene_to(load("res://gameplay/screen/main/main.tscn"))
 
 
+func _attach_marker(target:Node2D,offset:Vector2=Vector2(0,-10)):
+	var m:Marker=preload("res://gameplay/misc/marker.tscn").instance()
+	GlobalScript.node2d_root.add_child(m)
+	m.popup_offset=offset
+	m.target_node=target
+	target.connect("killed",m,"queue_free")
+
+
 func _fadeout_mission_text(mission_message:String,duration:float):
 	set_label_text(mission_message)
 	

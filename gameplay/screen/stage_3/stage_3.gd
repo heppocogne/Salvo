@@ -33,22 +33,15 @@ func _on_Enemy_killed():
 		
 		var s:=spawn_enemy_ship(_cv_scene,700)
 		s.connect("killed",self,"_on_CV_killed")
-		var m:Marker=preload("res://gameplay/misc/marker.tscn").instance()
-		m.target_node=s
-		m.popup_offset=Vector2(0,-20)
-		s.connect("killed",m,"queue_free")
-		GlobalScript.node2d_root.call_deferred("add_child",m)
+		_attach_marker(s,Vector2(0,-20))
 		
 		s=spawn_enemy_ship(_cv_scene,850)
 		s.connect("killed",self,"_on_CV_killed")
-		m=preload("res://gameplay/misc/marker.tscn").instance()
-		m.target_node=s
-		m.popup_offset=Vector2(0,-20)
-		s.connect("killed",m,"queue_free")
-		GlobalScript.node2d_root.call_deferred("add_child",m)
+		_attach_marker(s,Vector2(0,-20))
 
 
 func _on_CV_killed():
 	cv_kill_count+=1
 	if cv_kill_count==2:
 		stage_complete()
+		SaveData.store("stage_4_unlocked",true)

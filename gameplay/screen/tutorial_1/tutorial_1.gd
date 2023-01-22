@@ -48,10 +48,7 @@ func _physics_process(_delta:float):
 				set_label_text(tr(":KILL_THAT_ENEMY_SHIP:"))
 				step=KILL_TUTORIAL
 				var ship:=spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),GlobalScript.water_level)
-				var m:Marker=preload("res://gameplay/misc/marker.tscn").instance()
-				m.target_node=ship
-				m.popup_offset=Vector2(0,-15)
-				ship.add_child(m)
+				_attach_marker(ship,Vector2(0,-15))
 				ship.connect("killed",self,"_on_Enemy_Killed")
 				return
 		

@@ -2,7 +2,6 @@ extends BattleScreen
 
 const bomber_scene:PackedScene=preload("res://gameplay/aircraft/bomber.tscn")
 const fighter_scene:PackedScene=preload("res://gameplay/aircraft/fighter.tscn")
-const marker_scene:PackedScene=preload("res://gameplay/misc/marker.tscn")
 
 enum{
 	NONE,
@@ -72,24 +71,18 @@ func _physics_process(_delta:float):
 func _on_Timer2_timeout():
 	if step==KILL_BOMBER_TUTORIAL:
 		var b:Aircraft=bomber_scene.instance()
-		var m:Marker=marker_scene.instance()
-		m.target_node=b
+		_attach_marker(b)
 		b.connect("killed",self,"_on_Bomber_killed")
-		b.connect("tree_exiting",m,"queue_free")
 		b.target_velocity=-Vector2(b.get_speed(),0)
 		GlobalScript.node2d_root.call_deferred("add_child",b)
-		GlobalScript.node2d_root.call_deferred("add_child",m)
 		b.rotation=PI
 		b.position=Vector2(1050,120)
 	elif step==KILL_FIGHTER_TUTORIAL:
 		var f:Aircraft=fighter_scene.instance()
-		var m:Marker=marker_scene.instance()
-		m.target_node=f
+		_attach_marker(f)
 		f.connect("killed",self,"_on_Fighter_killed")
-		f.connect("tree_exiting",m,"queue_free")
 		f.target_velocity=-Vector2(f.get_speed(),0)
 		GlobalScript.node2d_root.call_deferred("add_child",f)
-		GlobalScript.node2d_root.call_deferred("add_child",m)
 		f.rotation=PI
 		f.position=Vector2(1050,380)
 
@@ -134,13 +127,9 @@ func _on_Fighter_killed():
 		_fadeout_mission_text(tr(":DESTROY_AIR_BASE_TUTORIAL:"),5.0)
 		var airbase:Airbase=fortress.get_node("Airbase")
 		airbase.set_active(true)
-		var m:Marker=marker_scene.instance()
-		m.popup_offset=Vector2(0,-20)
-		m.target_node=airbase
-		airbase.add_child(m)
+		_attach_marker(airbase,Vector2(0,-20))
 		tm.start(6)
 		yield(tm,"timeout")
-		airbase.connect("killed",m,"queue_free")
 		airbase.connect("killed",self,"_on_Airport_killed")
 		fortress.get_node("Artillery").active=true
 		tm.queue_free()
