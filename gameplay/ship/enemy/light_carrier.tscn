@@ -7,8 +7,9 @@
 [ext_resource path="res://gameplay/projectile/152mm_shell.tscn" type="PackedScene" id=5]
 
 [node name="LightCarrier" instance=ExtResource( 1 )]
+position = Vector2( 200, 200 )
 script = ExtResource( 4 )
-base_hp = 900
+base_hp = 1500
 protection = Vector2( 150, 25 )
 weapon_groups = {
 "main": {
@@ -32,8 +33,9 @@ texture = ExtResource( 2 )
 [node name="MediumGun" parent="." index="2" instance=ExtResource( 3 )]
 position = Vector2( -16, -8 )
 projectile_scene = ExtResource( 5 )
+base_muzzle_velocity = 240.0
 num_barrels = 2
-_range = 408.163
+_range = 587.755
 
 [node name="FighterTakeoffTimer" type="Timer" parent="." index="3"]
 wait_time = 4.0

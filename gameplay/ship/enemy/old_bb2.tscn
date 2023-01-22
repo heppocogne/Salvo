@@ -39,14 +39,14 @@ position = Vector2( 62, -14 )
 projectile_scene = ExtResource( 5 )
 base_muzzle_velocity = 215.0
 num_barrels = 2
-_range = 711.154
+_range = 770.417
 
 [node name="LargeGun2" parent="." index="3" instance=ExtResource( 3 )]
 position = Vector2( -52, -14 )
 projectile_scene = ExtResource( 5 )
 base_muzzle_velocity = 215.0
 num_barrels = 2
-_range = 711.154
+_range = 770.417
 
 [node name="MediumGun" parent="." index="4" instance=ExtResource( 3 )]
 position = Vector2( -32, -12 )

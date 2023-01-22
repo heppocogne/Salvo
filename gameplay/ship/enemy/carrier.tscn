@@ -38,22 +38,26 @@ texture = ExtResource( 3 )
 [node name="SmallGun" parent="." index="4" instance=ExtResource( 4 )]
 position = Vector2( -23, -8 )
 projectile_scene = ExtResource( 6 )
-_range = 408.163
+base_muzzle_velocity = 240.0
+_range = 587.755
 
 [node name="SmallGun2" parent="." index="5" instance=ExtResource( 4 )]
 position = Vector2( -19, -9 )
 projectile_scene = ExtResource( 6 )
-_range = 408.163
+base_muzzle_velocity = 240.0
+_range = 587.755
 
 [node name="SmallGun3" parent="." index="6" instance=ExtResource( 4 )]
 position = Vector2( 11, -9 )
 projectile_scene = ExtResource( 6 )
-_range = 408.163
+base_muzzle_velocity = 240.0
+_range = 587.755
 
 [node name="SmallGun4" parent="." index="7" instance=ExtResource( 4 )]
 position = Vector2( 15, -8 )
 projectile_scene = ExtResource( 6 )
-_range = 408.163
+base_muzzle_velocity = 240.0
+_range = 587.755
 
 [connection signal="timeout" from="FighterTakeoffTimer" to="." method="_on_FighterTakeoffTimer_timeout"]
 [connection signal="timeout" from="BomberTakeoffTimer" to="." method="_on_BomberTakeoffTimer_timeout"]
