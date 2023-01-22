@@ -10,6 +10,7 @@ keys,en,ja
 :STAGE_2_DESCRIPTION:,Destroy all enemy ships,全敵艦を撃沈せよ
 :TUTORIAL_2_DESCRIPTION:,How to use subweapons and shoot down aircrafts,副兵装の使用と航空機の撃墜
 :STAGE_3_DESCRIPTION:,Destroy 2 aircraft carriers,敵正規空母2隻を撃沈せよ
+:STAGE_4_DESCRIPTION:,Destroy all fortress batteries,全ての要塞砲を破壊せよ
 ,,
 :UPGRADE_SHIP:,Upgrade ship,艦艇の強化
 :UPGRADE_DESCRIPTION:,Upgrade your battleship,プレイヤー艦を強化
@@ -60,6 +61,7 @@ Destroy the air base.
 Pay attention to shells from the fortress artillery.","敵の海上要塞を確認!
 要塞砲からの砲撃に注意しつつ航空基地を破壊せよ"
 :KILL_ENEMY_CV:,Kill the enemy aircraft carrier,敵航空母艦を撃沈せよ
+:DESTROY_ARTILLERIES:,Destroy all fortress batteries,全ての要塞砲を破壊せよ
 ,,
 :LANGUAGE:,Language,言語
 :SE_VOLUME:,SE volume,SE音量

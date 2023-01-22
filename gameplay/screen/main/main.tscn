@@ -52,7 +52,7 @@ text = ":STAGE_SELECT:"
 [node name="MarginContainer2" type="MarginContainer" parent="ColorRect/HBoxContainer"]
 margin_top = 62.0
 margin_right = 650.0
-margin_bottom = 326.0
+margin_bottom = 376.0
 custom_constants/margin_top = 30
 custom_constants/margin_left = 30
 
@@ -60,7 +60,7 @@ custom_constants/margin_left = 30
 margin_left = 30.0
 margin_top = 30.0
 margin_right = 650.0
-margin_bottom = 264.0
+margin_bottom = 314.0
 custom_constants/separation = 16
 
 [node name="Tutorial1" parent="ColorRect/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
@@ -102,6 +102,14 @@ margin_bottom = 234.0
 save_data_key = "stage_3_unlocked"
 stage_name = "Stage 3"
 description = ":STAGE_3_DESCRIPTION:"
+
+[node name="Stage4" parent="ColorRect/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
+margin_top = 250.0
+margin_right = 620.0
+margin_bottom = 284.0
+save_data_key = "stage_4_unlocked"
+stage_name = "Stage 4"
+description = ":STAGE_4_DESCRIPTION:"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5

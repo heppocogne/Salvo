@@ -26,6 +26,8 @@ func _on_Stage_selected(n:String):
 		transition(preload("res://gameplay/screen/tutorial_2/tutorial_2.tscn"))
 	elif n=="Stage 3":
 		transition(preload("res://gameplay/screen/stage_3/stage_3.tscn"))
+	elif n=="Stage 4":
+		transition(preload("res://gameplay/screen/stage_4/stage_4.tscn"))
 
 
 func _on_Upgrade_pressed():
