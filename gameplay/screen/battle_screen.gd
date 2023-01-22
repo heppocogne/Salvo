@@ -16,25 +16,25 @@ var _damage_sum:=0.0
 var _enemy_shoot:=0
 var _enemy_hit:=0
 
-onready var player:Player=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player
-onready var player_move_timer:Timer=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player/Timer
-onready var tween:Tween=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Tween
-onready var timer:Timer=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Timer
-onready var aiming:PlayEvaluation=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/AimingAccuracy
-onready var maneuver:PlayEvaluation=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Maneuver
+onready var player:Player=$Node2DRoot/Player
+onready var player_move_timer:Timer=$Node2DRoot/Player/Timer
+onready var tween:Tween=$Node2DRoot/Tween
+onready var timer:Timer=$Node2DRoot/Timer
+onready var aiming:PlayEvaluation=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/AimingAccuracy
+onready var maneuver:PlayEvaluation=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Maneuver
 
 
 func _ready():
 	_player_salvo_diff=[]
 	_enemy_shell_diff=[]
 	GlobalScript.battele_screen=self
-	GlobalScript.node2d_root=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot
-	GlobalScript.water_area=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/WaterArea
+	GlobalScript.node2d_root=$Node2DRoot
+	GlobalScript.water_area=$Node2DRoot/WaterArea
 	if !SystemSaveData.read("use_default_cursor"):
 		Input.set_custom_mouse_cursor(preload("res://gameplay/screen/cursor.svg"),0,Vector2(30,30))
 	
 	if !SystemSaveData.read("show_fps"):
-		$VBoxContainer/ViewportContainer/Viewport/FpsLabel.queue_free()
+		$VBoxContainer/FpsLabel.queue_free()
 
 
 func _on_BattleScreen_tree_exiting():
@@ -67,10 +67,10 @@ func spawn_enemy_ship(scene:PackedScene, x:float)->Ship:
 
 
 func set_label_text(text:String):
-	var l:Label=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label
+	var l:Label=$VBoxContainer/CenterContainer/VBoxContainer/Label
 	l.text=text
 	if l.text=="":
-		$VBoxContainer/ViewportContainer/CenterContainer/PanelContainer.hide()
+		$VBoxContainer/CenterContainer/PanelContainer.hide()
 		l.hide()
 	else:
 		l.visible=true
@@ -114,7 +114,7 @@ func _fadeout_mission_text(mission_message:String,duration:float):
 	tm.start(duration)
 	yield(tm,"timeout")
 	
-	var l:Label=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label
+	var l:Label=$VBoxContainer/CenterContainer/VBoxContainer/Label
 	var t:Tween=l.get_node("Tween")
 	t.interpolate_property(
 		l,
@@ -126,7 +126,7 @@ func _fadeout_mission_text(mission_message:String,duration:float):
 		Tween.EASE_IN_OUT
 	)
 	t.start()
-	var p:PanelContainer=$VBoxContainer/ViewportContainer/CenterContainer/PanelContainer
+	var p:PanelContainer=$VBoxContainer/CenterContainer/PanelContainer
 	t.interpolate_property(
 		p,
 		"self_modulate:a",
@@ -149,9 +149,9 @@ func stage_complete():
 	if player_killed:
 		return
 	
-	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
+	$VBoxContainer/CenterContainer/VBoxContainer/Button.visible=true
 	set_label_text(tr(":MISSION_COMPLETED:")+"!")
-	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label.add_color_override("font_color",Color.yellow)
+	$VBoxContainer/CenterContainer/VBoxContainer/Label.add_color_override("font_color",Color.yellow)
 	player.block_user_input=true
 	player.disconnect("killed",self,"_on_Player_killed")
 	var c:int
@@ -172,7 +172,7 @@ func stage_complete():
 
 
 func _calculate_reward(success:bool,bonus:int=0):
-	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations.visible=true
+	$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations.visible=true
 	var tm:Timer=Timer.new()
 	add_child(tm)
 	tm.start(0.5)
@@ -233,7 +233,7 @@ func _calculate_reward(success:bool,bonus:int=0):
 	tm.start(0.5)
 	yield(tm,"timeout")
 	tm.queue_free()
-	var reward_node:=$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Reward
+	var reward_node:=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Reward
 	reward_node.visible=true
 	
 	var reward:=int(pt_per_damage*_damage_sum)
@@ -262,9 +262,9 @@ func _on_Player_killed():
 
 
 func stage_fail():
-	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Button.visible=true
+	$VBoxContainer/CenterContainer/VBoxContainer/Button.visible=true
 	set_label_text(tr(":MISSION_FAILED:")+"!")
-	$VBoxContainer/ViewportContainer/CenterContainer/VBoxContainer/Label.add_color_override("font_color",Color.orangered)
+	$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Label.add_color_override("font_color",Color.orangered)
 	
 	SaveData.store("subweapon",player.subweapon)
 	
