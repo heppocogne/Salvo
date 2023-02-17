@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Evil_Jackal.mp3-e460f0f778a66260952f6ef0fef216ac.mp3str"
+
+[deps]
+
+source_file="res://gameplay/music/Evil_Jackal.mp3"
+dest_files=[ "res://.import/Evil_Jackal.mp3-e460f0f778a66260952f6ef0fef216ac.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

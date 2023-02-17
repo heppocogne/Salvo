@@ -42,8 +42,8 @@ func set_status_name(n:String):
 
 func set_max_level(m:int):
 	max_level=m
-	if has_node("ProgressBar"):
-		$ProgressBar.max_value=m
+	if has_node("TextureProgress"):
+		$TextureProgress.max_value=m
 
 
 func set_costs(a:PoolIntArray):
