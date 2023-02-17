@@ -1,20 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://2m5chjmsy3a2"]
 
-[ext_resource path="res://gameplay/effect/smoke3_11.png" type="Texture2D" id=1]
-[ext_resource path="res://gameplay/effect/explosion.tres" type="Material" id=2]
-[ext_resource path="res://gameplay/effect/oneshot_particles2d.gd" type="Script" id=3]
+[ext_resource type="Texture2D" uid="uid://bvjk0180fhgk7" path="res://gameplay/effect/smoke3_11.png" id="1"]
+[ext_resource type="Material" uid="uid://dgay5le6sbdv2" path="res://gameplay/effect/explosion.tres" id="2"]
+[ext_resource type="Script" path="res://gameplay/effect/oneshot_particles2d.gd" id="3"]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id="1"]
 blend_mode = 1
 
 [node name="Explosion" type="GPUParticles2D"]
-material = SubResource( 1 )
+material = SubResource("1")
 emitting = false
 amount = 16
+process_material = ExtResource("2")
+texture = ExtResource("1")
 one_shot = true
 explosiveness = 0.95
 randomness = 1.0
-visibility_rect = Rect2( -1024, -1024, 2048, 2048 )
-process_material = ExtResource( 2 )
-texture = ExtResource( 1 )
-script = ExtResource( 3 )
+visibility_rect = Rect2(-1024, -1024, 2048, 2048)
+script = ExtResource("3")
