@@ -6,12 +6,12 @@ const f2_scene:PackedScene=preload("res://gameplay/aircraft/fighter2.tscn")
 const b1_scene:PackedScene=preload("res://gameplay/aircraft/bomber.tscn")
 const b2_scene:PackedScene=preload("res://gameplay/aircraft/bomber2.tscn")
 
-export var fighter_takeoff_duration:float=4.0
-export var fighter_y_min:float=360
-export var fighter_y_max:float=400
-export var bomber_takeoff_duration:float=6.0
-export var bomber_y_min:float=100
-export var bomber_y_max:float=150
+@export var fighter_takeoff_duration:float=4.0
+@export var fighter_y_min:float=360
+@export var fighter_y_max:float=400
+@export var bomber_takeoff_duration:float=6.0
+@export var bomber_y_min:float=100
+@export var bomber_y_max:float=150
 
 
 func _ready():
@@ -40,7 +40,7 @@ func damage(p:Projectile):
 	GlobalScript.damage_popup(dmg,p.position)
 	if hp<=0:
 		emit_signal("killed")
-		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
+		var explosion:GPUParticles2D=preload("res://gameplay/effect/explosion.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(explosion)
 		explosion.global_position=global_position
 		explosion.scale=0.2*Vector2(1,1)
@@ -51,9 +51,9 @@ func damage(p:Projectile):
 
 
 func spawn_aircraft(aircraft_scene:PackedScene)->Aircraft:
-	var a:Aircraft=aircraft_scene.instance()
-	a.connect("damaged",GlobalScript.battele_screen,"_on_Enemy_damaged")
-	a.connect("weapon_fired",GlobalScript.battele_screen,"_on_Enemy_fired")
+	var a:Aircraft=aircraft_scene.instantiate()
+	a.connect("damaged",Callable(GlobalScript.battele_screen,"_on_Enemy_damaged"))
+	a.connect("weapon_fired",Callable(GlobalScript.battele_screen,"_on_Enemy_fired"))
 	GlobalScript.node2d_root.add_child(a)
 	return a
 
@@ -69,9 +69,9 @@ func _on_FighterTakeoffTimer_timeout():
 		a=spawn_aircraft(f2_scene)
 	
 	a.position=global_position
-	a.target_velocity=polar2cartesian(a.get_speed(),deg2rad(225))
+	a.target_velocity=polar2cartesian(a.get_velocity(),deg_to_rad(225))
 	a._actual_velocity=a.target_velocity
-	a.target_y=rand_range(fighter_y_min,fighter_y_max)
+	a.target_y=randf_range(fighter_y_min,fighter_y_max)
 
 
 func _on_BomberTakeoffTimer_timeout():
@@ -85,6 +85,6 @@ func _on_BomberTakeoffTimer_timeout():
 		a=spawn_aircraft(b2_scene)
 	
 	a.position=global_position
-	a.target_velocity=polar2cartesian(a.get_speed(),deg2rad(240))
+	a.target_velocity=polar2cartesian(a.get_velocity(),deg_to_rad(240))
 	a._actual_velocity=a.target_velocity
-	a.get_node("AscendingTimer").start(2.0/sqrt(3)*(global_position.y-rand_range(bomber_y_min,bomber_y_max))/a.get_speed())
+	a.get_node("AscendingTimer").start(2.0/sqrt(3)*(global_position.y-randf_range(bomber_y_min,bomber_y_max))/a.get_velocity())

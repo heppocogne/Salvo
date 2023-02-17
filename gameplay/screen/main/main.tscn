@@ -2,9 +2,9 @@
 
 [ext_resource path="res://gameplay/screen/main/main.gd" type="Script" id=1]
 [ext_resource path="res://gameplay/screen/main/stage_description.tscn" type="PackedScene" id=2]
-[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.32.tres" type="DynamicFont" id=3]
-[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.24.tres" type="DynamicFont" id=4]
-[ext_resource path="res://gameplay/screen/bb_large.svg" type="Texture" id=5]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.32.tres" type="FontFile" id=3]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.24.tres" type="FontFile" id=4]
+[ext_resource path="res://gameplay/screen/bb_large.svg" type="Texture2D" id=5]
 [ext_resource path="res://gui/button_theme.tres" type="Theme" id=6]
 
 [node name="Main" type="Control"]
@@ -17,96 +17,96 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.862745, 0.862745, 0.862745, 1 )
 
-[node name="Battleship" type="Sprite" parent="ColorRect"]
+[node name="Battleship" type="Sprite2D" parent="ColorRect"]
 modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
 position = Vector2( 512, 584 )
 scale = Vector2( 1.00312, 1 )
 texture = ExtResource( 5 )
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect"]
-margin_top = 664.0
-margin_right = 1024.0
-margin_bottom = 768.0
+offset_top = 664.0
+offset_right = 1024.0
+offset_bottom = 768.0
 color = Color( 0.376471, 0.376471, 0.376471, 1 )
 
 [node name="HBoxContainer" type="VBoxContainer" parent="ColorRect"]
-margin_right = 650.0
-margin_bottom = 768.0
-rect_min_size = Vector2( 650, 0 )
+offset_right = 650.0
+offset_bottom = 768.0
+custom_minimum_size = Vector2( 650, 0 )
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect/HBoxContainer"]
-margin_right = 650.0
-margin_bottom = 58.0
-custom_constants/margin_top = 10
-custom_constants/margin_left = 30
+offset_right = 650.0
+offset_bottom = 58.0
+custom_constants/offset_top = 10
+custom_constants/offset_left = 30
 
 [node name="Label" type="Label" parent="ColorRect/HBoxContainer/MarginContainer"]
-margin_left = 30.0
-margin_top = 10.0
-margin_right = 650.0
-margin_bottom = 58.0
+offset_left = 30.0
+offset_top = 10.0
+offset_right = 650.0
+offset_bottom = 58.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = ":STAGE_SELECT:"
 
 [node name="MarginContainer2" type="MarginContainer" parent="ColorRect/HBoxContainer"]
-margin_top = 62.0
-margin_right = 650.0
-margin_bottom = 376.0
-custom_constants/margin_top = 30
-custom_constants/margin_left = 30
+offset_top = 62.0
+offset_right = 650.0
+offset_bottom = 376.0
+custom_constants/offset_top = 30
+custom_constants/offset_left = 30
 
 [node name="HBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer/MarginContainer2"]
-margin_left = 30.0
-margin_top = 30.0
-margin_right = 650.0
-margin_bottom = 314.0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 650.0
+offset_bottom = 314.0
 custom_constants/separation = 16
 
 [node name="Tutorial1" parent="ColorRect/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
-margin_right = 620.0
-margin_bottom = 34.0
+offset_right = 620.0
+offset_bottom = 34.0
 unlocked = true
 save_data_key = "tutorial_1_unlocked"
 stage_name = "Tutorial 1"
 description = ":TUTORIAL_1_DESCRIPTION:"
 
 [node name="Stage1" parent="ColorRect/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
-margin_top = 50.0
-margin_right = 620.0
-margin_bottom = 84.0
+offset_top = 50.0
+offset_right = 620.0
+offset_bottom = 84.0
 save_data_key = "stage_1_unlocked"
 stage_name = "Stage 1"
 description = ":STAGE_1_DESCRIPTION:"
 
 [node name="Stage2" parent="ColorRect/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
-margin_top = 100.0
-margin_right = 620.0
-margin_bottom = 134.0
+offset_top = 100.0
+offset_right = 620.0
+offset_bottom = 134.0
 save_data_key = "stage_2_unlocked"
 stage_name = "Stage 2"
 description = ":STAGE_2_DESCRIPTION:"
 
 [node name="Tutorial2" parent="ColorRect/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
-margin_top = 150.0
-margin_right = 620.0
-margin_bottom = 184.0
+offset_top = 150.0
+offset_right = 620.0
+offset_bottom = 184.0
 save_data_key = "tutorial_2_unlocked"
 stage_name = "Tutorial 2"
 description = ":TUTORIAL_2_DESCRIPTION:"
 
 [node name="Stage3" parent="ColorRect/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
-margin_top = 200.0
-margin_right = 620.0
-margin_bottom = 234.0
+offset_top = 200.0
+offset_right = 620.0
+offset_bottom = 234.0
 save_data_key = "stage_3_unlocked"
 stage_name = "Stage 3"
 description = ":STAGE_3_DESCRIPTION:"
 
 [node name="Stage4" parent="ColorRect/HBoxContainer/MarginContainer2/HBoxContainer" instance=ExtResource( 2 )]
-margin_top = 250.0
-margin_right = 620.0
-margin_bottom = 284.0
+offset_top = 250.0
+offset_right = 620.0
+offset_bottom = 284.0
 save_data_key = "stage_4_unlocked"
 stage_name = "Stage 4"
 description = ":STAGE_4_DESCRIPTION:"
@@ -116,18 +116,18 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -126.0
-margin_top = -125.0
-margin_right = 126.0
+offset_left = -126.0
+offset_top = -125.0
+offset_right = 126.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_right = 252.0
-margin_bottom = 125.0
+offset_right = 252.0
+offset_bottom = 125.0
 alignment = 1
 
 [node name="Upgrade" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_right = 252.0
-margin_bottom = 58.0
+offset_right = 252.0
+offset_bottom = 58.0
 theme = ExtResource( 6 )
 custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -137,16 +137,16 @@ custom_fonts/font = ExtResource( 3 )
 text = ":UPGRADE_SHIP:"
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 62.0
-margin_right = 252.0
-margin_bottom = 97.0
+offset_top = 62.0
+offset_right = 252.0
+offset_bottom = 97.0
 custom_fonts/font = ExtResource( 4 )
 text = ":UPGRADE_DESCRIPTION:"
 
 [node name="Control" type="Control" parent="CenterContainer/VBoxContainer"]
-margin_top = 101.0
-margin_right = 252.0
-margin_bottom = 125.0
-rect_min_size = Vector2( 0, 24 )
+offset_top = 101.0
+offset_right = 252.0
+offset_bottom = 125.0
+custom_minimum_size = Vector2( 0, 24 )
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Upgrade" to="." method="_on_Upgrade_pressed"]

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Ship
 
 var player_node:Area2D

@@ -1,8 +1,8 @@
 class_name Projectile
 extends Area2D
 
-export var base_damage:int=1 setget set_base_damage
-export var sync_rotation:bool=true
+@export var base_damage:int=1 : set = set_base_damage
+@export var sync_rotation:bool=true
 
 var _original_scale:=scale
 var invalid:=false
@@ -23,7 +23,7 @@ func _physics_process(delta:float):
 	if sync_rotation and velocity.length_squared()!=0:
 		rotation=velocity.angle()
 	
-	velocity+=gravity*gravity_vec*delta
+	velocity+=gravity*gravity_direction*delta
 
 	if 1024<position.y or position.x<-512 or 1536<position.x:
 		queue_free()
@@ -43,13 +43,13 @@ func _on_Projectile_area_entered(area:Area2D):
 	if invalid:
 		return
 	if area==GlobalScript.water_area:
-		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
+		var splash:GPUParticles2D=preload("res://gameplay/effect/water_splash.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(splash)
 		splash.scale=_scale_modifier
 		splash.global_position=global_position
 		
 		# enemy projectile
-		if get_collision_layer_bit(5):
+		if get_collision_layer_value(5):
 			GlobalScript.battele_screen.on_EnemyShell_off(position)
 		
 		GlobalScript.play_sound("res://gameplay/effect/bom00.wav")
@@ -57,7 +57,7 @@ func _on_Projectile_area_entered(area:Area2D):
 		invalid=true
 		if area.has_method("damage"):
 			area.damage(self)
-		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
+		var explosion:GPUParticles2D=preload("res://gameplay/effect/explosion.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(explosion)
 		explosion.global_position=global_position
 		explosion.scale=0.05*_scale_modifier

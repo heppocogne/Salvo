@@ -18,7 +18,7 @@ var bomber_killed:=false
 var fighter_killed:=false
 var artillery_killed:=false
 var fortress:NavalFortress
-onready var timer2:Timer=$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Timer2
+@onready var timer2:Timer=$VBoxContainer/SubViewportContainer/SubViewport/Node2DRoot/Timer2
 
 
 func _ready():
@@ -29,7 +29,7 @@ func _on_Timer_timeout():
 	set_label_text(tr(":HOW_TO_FIRE_SUB_WEAPON:"))
 	var ts:PackedScene=preload("res://gameplay/ship/enemy/tutorial_target.tscn")
 	spawn_enemy_ship(ts,GlobalScript.water_level)
-	$VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Player.subweapon="secondary"
+	$VBoxContainer/SubViewportContainer/SubViewport/Node2DRoot/Player.subweapon="secondary"
 	step=SUB_WEAPON_TUTORIAL
 
 
@@ -47,7 +47,7 @@ func _physics_process(_delta:float):
 				step=SUB_WEAPON_SWITCH_TUTORIAL
 				return
 			
-		if Input.is_mouse_button_pressed(BUTTON_RIGHT):
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 			for n in GlobalScript.node2d_root.get_children():
 				if n is Projectile:
 					right_clicked=true
@@ -70,18 +70,18 @@ func _physics_process(_delta:float):
 
 func _on_Timer2_timeout():
 	if step==KILL_BOMBER_TUTORIAL:
-		var b:Aircraft=bomber_scene.instance()
+		var b:Aircraft=bomber_scene.instantiate()
 		_attach_marker(b)
-		b.connect("killed",self,"_on_Bomber_killed")
-		b.target_velocity=-Vector2(b.get_speed(),0)
+		b.connect("killed",Callable(self,"_on_Bomber_killed"))
+		b.target_velocity=-Vector2(b.get_velocity(),0)
 		GlobalScript.node2d_root.call_deferred("add_child",b)
 		b.rotation=PI
 		b.position=Vector2(1050,120)
 	elif step==KILL_FIGHTER_TUTORIAL:
-		var f:Aircraft=fighter_scene.instance()
+		var f:Aircraft=fighter_scene.instantiate()
 		_attach_marker(f)
-		f.connect("killed",self,"_on_Fighter_killed")
-		f.target_velocity=-Vector2(f.get_speed(),0)
+		f.connect("killed",Callable(self,"_on_Fighter_killed"))
+		f.target_velocity=-Vector2(f.get_velocity(),0)
 		GlobalScript.node2d_root.call_deferred("add_child",f)
 		f.rotation=PI
 		f.position=Vector2(1050,380)
@@ -107,7 +107,7 @@ func _on_Fighter_killed():
 				n.set_disabled(true)
 		step=FORTRESS_TUTORIAL
 		timer2.stop()
-		fortress=preload("res://gameplay/screen/tutorial_2/tutorial_fortress.tscn").instance()
+		fortress=preload("res://gameplay/screen/tutorial_2/tutorial_fortress.tscn").instantiate()
 		fortress.position=Vector2(1400,GlobalScript.water_level)
 		GlobalScript.node2d_root.call_deferred("add_child",fortress)
 		tween.interpolate_property(
@@ -123,14 +123,14 @@ func _on_Fighter_killed():
 		var tm:=Timer.new()
 		add_child(tm)
 		tm.start(6.0)
-		yield(tm,"timeout")
+		await tm.timeout
 		_fadeout_mission_text(tr(":DESTROY_AIR_BASE_TUTORIAL:"),5.0)
 		var airbase:Airbase=fortress.get_node("Airbase")
 		airbase.set_active(true)
 		_attach_marker(airbase,Vector2(0,-20))
 		tm.start(6)
-		yield(tm,"timeout")
-		airbase.connect("killed",self,"_on_Airport_killed")
+		await tm.timeout
+		airbase.connect("killed",Callable(self,"_on_Airport_killed"))
 		fortress.get_node("Artillery").active=true
 		tm.queue_free()
 

@@ -16,14 +16,14 @@ func _on_Timer_timeout():
 	_fadeout_mission_text(tr(":DESTROY_ARTILLERIES:"),4.0)
 #	spawn_enemy_ship(_new_cl_scene,600)
 	
-	fortress=preload("res://gameplay/screen/stage_4/stage_4_fortress.tscn").instance()
+	fortress=preload("res://gameplay/screen/stage_4/stage_4_fortress.tscn").instantiate()
 	GlobalScript.node2d_root.add_child(fortress)
 	fortress.position=Vector2(1250,GlobalScript.water_level)
 	var a=fortress.get_node("Artillery")
 	_attach_marker(a,Vector2(4,-20))
-	a.connect("killed",self,"_on_Artillery_killed")
+	a.connect("killed",Callable(self,"_on_Artillery_killed"))
 	a=fortress.get_node("Artillery2")
-	a.connect("killed",self,"_on_Artillery_killed")
+	a.connect("killed",Callable(self,"_on_Artillery_killed"))
 	_attach_marker(a,Vector2(4,-20))
 	fortress.get_node("Airbase").set_active(true)
 	tween.interpolate_property(
@@ -56,10 +56,10 @@ func _on_Artillery_killed():
 		var tm:=Timer.new()
 		add_child(tm)
 		tm.start(6.0)
-		yield(tm,"timeout")
+		await tm.timeout
 		fortress.queue_free()
 		
-		fortress=preload("res://gameplay/screen/stage_4/stage_4_fortress2.tscn").instance()
+		fortress=preload("res://gameplay/screen/stage_4/stage_4_fortress2.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(fortress)
 		fortress.position=Vector2(1400,GlobalScript.water_level)
 		tween.interpolate_property(
@@ -74,15 +74,15 @@ func _on_Artillery_killed():
 		tween.start()
 		var a=fortress.get_node("Artillery")
 		_attach_marker(a,Vector2(4,-20))
-		a.connect("killed",self,"_on_Artillery_killed")
+		a.connect("killed",Callable(self,"_on_Artillery_killed"))
 		a=fortress.get_node("Artillery2")
-		a.connect("killed",self,"_on_Artillery_killed")
+		a.connect("killed",Callable(self,"_on_Artillery_killed"))
 		_attach_marker(a,Vector2(4,-20))
 		a=fortress.get_node("Artillery3")
-		a.connect("killed",self,"_on_Artillery_killed")
+		a.connect("killed",Callable(self,"_on_Artillery_killed"))
 		_attach_marker(a,Vector2(4,-20))
 		a=fortress.get_node("Artillery4")
-		a.connect("killed",self,"_on_Artillery_killed")
+		a.connect("killed",Callable(self,"_on_Artillery_killed"))
 		_attach_marker(a,Vector2(4,-20))
 	
 	elif artillery_killed==6:

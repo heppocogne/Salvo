@@ -1,4 +1,4 @@
-tool
+@tool
 class_name Aircraft
 extends Area2D
 
@@ -7,18 +7,18 @@ signal weapon_fired(key,n)
 signal damaged(d)
 signal killed()
 
-export var is_enemy:=true setget set_is_enemy
-export var base_speed:=0.0 setget ,get_speed
-export var base_turn_radius:float=100.0 setget ,get_turn_radius
-export var base_hp:=100 setget ,get_max_hp
-export var sync_rotation:=true
-export var weapon_groups:Dictionary setget _set_weapon_groups
+@export var is_enemy:=true : set = set_is_enemy
+@export var base_speed:=0.0 : get = get_velocity
+@export var base_turn_radius:float=100.0 : get = get_turn_radius
+@export var base_hp:=100 : get = get_max_hp
+@export var sync_rotation:=true
+@export var weapon_groups:Dictionary : set = _set_weapon_groups
 
 var target_velocity:Vector2
 var _actual_velocity:Vector2
 
-onready var sprite:Sprite=$Sprite
-onready var hp:=get_max_hp()
+@onready var sprite:Sprite2D=$Sprite2D
+@onready var hp:=get_max_hp()
 var weapon_states:Dictionary
 
 
@@ -57,10 +57,10 @@ func _ready():
 		weapon_states[key]=ws
 		for np in wg["node_paths"]:
 			var w:Weapon=get_node(np)
-			assert(w,str(np)+" is not a Weapon")
+			assert(w) #,str(np)+" is not a Weapon")
 			ws.nodes.push_back(w)
 		ws.timer.wait_time=get_weapon_reload(key)
-		ws.timer.connect("timeout",self,"_on_ReloadTimer_timeout",[key])
+		ws.timer.connect("timeout",Callable(self,"_on_ReloadTimer_timeout").bind(key))
 		add_child(ws)
 
 
@@ -104,7 +104,7 @@ func set_is_enemy(f:bool):
 		remove_from_group("EnemyObjects")
 
 
-func get_speed()->float:
+func get_velocity()->float:
 	return base_speed
 
 
@@ -136,7 +136,7 @@ func get_weapon_dispersion(key:String="main")->float:
 func _set_weapon_groups(wg:Dictionary):
 	weapon_groups=wg
 	for key in weapon_groups:
-		if weapon_groups[key]==null or weapon_groups[key].empty():
+		if weapon_groups[key]==null or weapon_groups[key].is_empty():
 			weapon_groups[key]={
 					"node_paths":[],
 					"base_reload":1.0,
@@ -149,9 +149,9 @@ func _set_weapon_groups(wg:Dictionary):
 func get_projectile_instance(key:String="main")->Projectile:
 	if weapon_states[key].projectile_prototype==null:
 		var projectile_scene:PackedScene=weapon_states[key].nodes[0].projectile_scene
-		var i:Projectile=projectile_scene.instance()
-		i.set_collision_layer_bit(5,true)
-		i.set_collision_mask_bit(2,true)
+		var i:Projectile=projectile_scene.instantiate()
+		i.set_collision_layer_value(5,true)
+		i.set_collision_mask_value(2,true)
 		weapon_states[key].projectile_prototype=i
 	return weapon_states[key].projectile_prototype.duplicate()
 
@@ -210,7 +210,7 @@ func damage(p:Projectile):
 	_damage_popup(dmg_mod,p.position)
 	if hp<=0:
 		emit_signal("killed")
-		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
+		var explosion:GPUParticles2D=preload("res://gameplay/effect/explosion.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(explosion)
 		explosion.global_position=global_position
 		explosion.scale=0.05*Vector2(1,1)
@@ -222,17 +222,17 @@ func damage(p:Projectile):
 
 
 func _damage_popup(d:int,pos:Vector2):
-	var popup:DamageIndicator=preload("res://gameplay/ship/damage_indicator.tscn").instance()
+	var popup:DamageIndicator=preload("res://gameplay/ship/damage_indicator.tscn").instantiate()
 	popup.text=str(d)
-	popup.font_color=Color.black
-	popup.rect_position=pos+Vector2(0,-64)
+	popup.font_color=Color.BLACK
+	popup.position=pos+Vector2(0,-64)
 	GlobalScript.node2d_root.add_child(popup)
 
 
 func _add_falling_aircraft():
-	var falling:FallingAircraft=preload("res://gameplay/aircraft/falling_aircraft.tscn").instance()
+	var falling:FallingAircraft=preload("res://gameplay/aircraft/falling_aircraft.tscn").instantiate()
 	GlobalScript.node2d_root.add_child(falling)
-	falling.setup($Sprite,_actual_velocity,scale)
+	falling.setup($Sprite2D,_actual_velocity,scale)
 
 
 func _on_ReloadTimer_timeout(key:String):

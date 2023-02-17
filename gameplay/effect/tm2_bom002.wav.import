@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/tm2_bom002.wav-3847333f51c62659c4bc6fe00d987a9e.sample"
+type="AudioStreamWAV"
+uid="uid://dkxk82vv255jf"
+path="res://.godot/imported/tm2_bom002.wav-3847333f51c62659c4bc6fe00d987a9e.sample"
 
 [deps]
 
 source_file="res://gameplay/effect/tm2_bom002.wav"
-dest_files=[ "res://.import/tm2_bom002.wav-3847333f51c62659c4bc6fe00d987a9e.sample" ]
+dest_files=["res://.godot/imported/tm2_bom002.wav-3847333f51c62659c4bc6fe00d987a9e.sample"]
 
 [params]
 

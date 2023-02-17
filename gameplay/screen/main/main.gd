@@ -8,11 +8,11 @@ func _ready():
 		else:
 			SaveData.store(b.save_data_key,false)
 			b.set_unlocked(false)
-		b.connect("button_pressed",self,"_on_Stage_selected")
+		b.connect("button_pressed",Callable(self,"_on_Stage_selected"))
 
 
 func transition(scene:PackedScene):
-	get_tree().change_scene_to(scene)
+	get_tree().change_scene_to_packed(scene)
 
 
 func _on_Stage_selected(n:String):

@@ -1,4 +1,4 @@
-tool
+@tool
 class_name Ship
 extends Area2D
 
@@ -7,11 +7,11 @@ signal weapon_fired(key,n)
 signal damaged(d)
 signal killed()
 
-export var is_enemy:=true setget set_is_enemy
-export var base_speed:=0.0
-export var base_hp:=100
-export var protection:Vector2
-export var weapon_groups:Dictionary setget _set_weapon_groups
+@export var is_enemy:=true : set = set_is_enemy
+@export var base_speed:=0.0
+@export var base_hp:=100
+@export var protection:Vector2
+@export var weapon_groups:Dictionary : set = _set_weapon_groups
 # key:groupname:String
 #{
 #	"node_paths":Array,
@@ -20,7 +20,7 @@ export var weapon_groups:Dictionary setget _set_weapon_groups
 #	"base_dispersion":float,
 #}
 
-onready var hp:=get_max_hp()
+@onready var hp:=get_max_hp()
 var weapon_states:Dictionary
 
 
@@ -60,10 +60,10 @@ func _ready():
 		weapon_states[key]=ws
 		for np in wg["node_paths"]:
 			var w:Weapon=get_node(np)
-			assert(w,str(np)+" is not a Weapon")
+			assert(w) #,str(np)+" is not a Weapon")
 			ws.nodes.push_back(w)
 		ws.timer.wait_time=get_weapon_reload(key)
-		ws.timer.connect("timeout",self,"_on_ReloadTimer_timeout",[key])
+		ws.timer.connect("timeout",Callable(self,"_on_ReloadTimer_timeout").bind(key))
 		add_child(ws)
 
 
@@ -83,7 +83,7 @@ func get_max_hp()->int:
 	return base_hp
 
 
-func get_speed()->float:
+func get_velocity()->float:
 	return base_speed
 
 
@@ -111,7 +111,7 @@ func get_protection()->Vector2:
 func _set_weapon_groups(wg:Dictionary):
 	weapon_groups=wg
 	for key in weapon_groups:
-		if weapon_groups[key]==null or weapon_groups[key].empty():
+		if weapon_groups[key]==null or weapon_groups[key].is_empty():
 			weapon_groups[key]={
 					"node_paths":[],
 					"base_reload":1.0,
@@ -124,9 +124,9 @@ func _set_weapon_groups(wg:Dictionary):
 func get_projectile_instance(key:String="main")->Projectile:
 	if weapon_states[key].projectile_prototype==null:
 		var projectile_scene:PackedScene=weapon_states[key].nodes[0].projectile_scene
-		var i:Projectile=projectile_scene.instance()
-		i.set_collision_layer_bit(5,true)
-		i.set_collision_mask_bit(2,true)
+		var i:Projectile=projectile_scene.instantiate()
+		i.set_collision_layer_value(5,true)
+		i.set_collision_mask_value(2,true)
 		weapon_states[key].projectile_prototype=i
 	return weapon_states[key].projectile_prototype.duplicate()
 
@@ -185,7 +185,7 @@ func damage(p:Projectile):
 	GlobalScript.damage_popup(dmg_mod,p.position)
 	if hp<=0:
 		emit_signal("killed")
-		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
+		var explosion:GPUParticles2D=preload("res://gameplay/effect/explosion.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(explosion)
 		explosion.global_position=global_position
 		explosion.scale=0.15*Vector2(1,1)
@@ -197,9 +197,9 @@ func damage(p:Projectile):
 
 
 func _add_sinking_ship():
-	var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instance()
+	var sinking:SinkingShip=preload("res://gameplay/ship/sinking_ship.tscn").instantiate()
 	GlobalScript.node2d_root.add_child(sinking)
-	sinking.setup($Sprite,scale)
+	sinking.setup($Sprite2D,scale)
 
 
 func _on_ReloadTimer_timeout(key:String):

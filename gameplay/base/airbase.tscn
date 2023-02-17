@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://gameplay/base/airbase.svg" type="Texture" id=1]
+[ext_resource path="res://gameplay/base/airbase.svg" type="Texture2D" id=1]
 [ext_resource path="res://gameplay/base/airbase.gd" type="Script" id=2]
 [ext_resource path="res://gameplay/effect/smoke.tscn" type="PackedScene" id=3]
 
@@ -16,7 +16,7 @@ script = ExtResource( 2 )
 position = Vector2( 0, -4 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2( 0, -10 )
 texture = ExtResource( 1 )
 

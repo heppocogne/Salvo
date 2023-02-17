@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://gameplay/ship/ship.tscn" type="PackedScene" id=1]
-[ext_resource path="res://gameplay/ship/enemy/new_cl.svg" type="Texture" id=2]
+[ext_resource path="res://gameplay/ship/enemy/new_cl.svg" type="Texture2D" id=2]
 [ext_resource path="res://gameplay/projectile/152mm_light_shell.tscn" type="PackedScene" id=3]
 [ext_resource path="res://gameplay/weapon/gun/gun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://gameplay/projectile/127mm_shell.tscn" type="PackedScene" id=5]
@@ -27,9 +27,9 @@ weapon_groups = {
 }
 
 [node name="CollisionPolygon2D" parent="." index="0"]
-polygon = PoolVector2Array( -46, 0, 47, 0, 47, -4, 16.6518, -4.32285, 13, -8, -13, -8, -14.6434, -4.65578, -47, -5 )
+polygon = PackedVector2Array( -46, 0, 47, 0, 47, -4, 16.6518, -4.32285, 13, -8, -13, -8, -14.6434, -4.65578, -47, -5 )
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2( 0, -8.75 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )

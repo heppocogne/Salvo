@@ -14,12 +14,12 @@ func _ready():
 	
 	for u in $ColorRect/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer.get_children():
 		if u is UpgradeFeature:
-			connect("upgrade_point_changed",u,"_on_upgrade_point_changed")
-			u.connect("upgraded_or_donwgraded",self,"_on_upgraded_or_donwgraded")
+			connect("upgrade_point_changed",Callable(u,"_on_upgrade_point_changed"))
+			u.connect("upgraded_or_donwgraded",Callable(self,"_on_upgraded_or_donwgraded"))
 	
-	var v_scrollbar:VScrollBar=$ColorRect/MarginContainer/VBoxContainer/ScrollContainer.get_v_scrollbar()
+	var v_scrollbar:VScrollBar=$ColorRect/MarginContainer/VBoxContainer/ScrollContainer.get_v_scroll_bar()
 	v_scrollbar.theme=preload("res://gui/vscrollbar_theme.tres")
-	v_scrollbar.rect_min_size=Vector2(8,0)
+	v_scrollbar.custom_minimum_size=Vector2(8,0)
 
 
 func _on_upgraded_or_donwgraded():
@@ -30,4 +30,4 @@ func _on_upgraded_or_donwgraded():
 
 func _on_Return_pressed():
 	SaveData.save_to_file()
-	get_tree().change_scene_to(load("res://gameplay/screen/main/main.tscn"))
+	get_tree().change_scene_to_packed(load("res://gameplay/screen/main/main.tscn"))

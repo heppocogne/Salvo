@@ -1,4 +1,4 @@
-tool
+@tool
 class_name UpgradeFeature
 extends HBoxContainer
 
@@ -6,10 +6,10 @@ const pt_save_data_key:String="upgrade_point"
 
 signal upgraded_or_donwgraded(cost)
 
-export var status_name:String setget set_status_name
-export var save_data_key:String
-export var max_level:=10 setget set_max_level
-export var costs:PoolIntArray setget set_costs
+@export var status_name:String : set = set_status_name
+@export var save_data_key:String
+@export var max_level:=10 : set = set_max_level
+@export var costs:PackedInt32Array : set = set_costs
 
 
 func _ready():
@@ -23,7 +23,7 @@ func _ready():
 		if !SaveData.has_key(save_data_key):
 			SaveData.store(save_data_key,0)
 		var lvl:int=SaveData.read(save_data_key)
-		$TextureProgress.value=lvl
+		$TextureProgressBar.value=lvl
 		var pt:int=SaveData.read(pt_save_data_key)
 		if lvl==0:
 			$MinusButton.disabled=true
@@ -42,11 +42,11 @@ func set_status_name(n:String):
 
 func set_max_level(m:int):
 	max_level=m
-	if has_node("TextureProgress"):
-		$TextureProgress.max_value=m
+	if has_node("TextureProgressBar"):
+		$TextureProgressBar.max_value=m
 
 
-func set_costs(a:PoolIntArray):
+func set_costs(a:PackedInt32Array):
 	costs=a
 
 
@@ -72,9 +72,9 @@ func _update_cost_color():
 	var lvl:int=SaveData.read(save_data_key)
 	var pt:int=SaveData.read(pt_save_data_key)
 	if pt<costs[lvl]:
-		$Cost.add_color_override("font_color",Color("ff6060"))
+		$Cost.add_theme_color_override("font_color",Color("ff6060"))
 	else:
-		$Cost.add_color_override("font_color",Color("40c040"))
+		$Cost.add_theme_color_override("font_color",Color("40c040"))
 
 
 func _update_button_state():
@@ -99,7 +99,7 @@ func _on_MinusButton_pressed():
 	_update_cost_text()
 	_update_cost_color()
 	_change_upgrade_point(costs[lvl]/2)
-	$TextureProgress.value=lvl
+	$TextureProgressBar.value=lvl
 	
 	_update_button_state()
 
@@ -111,7 +111,7 @@ func _on_PlusButton_pressed():
 	SaveData.store(save_data_key,lvl)
 	_update_cost_text()
 	_update_cost_color()
-	$TextureProgress.value=lvl
+	$TextureProgressBar.value=lvl
 	
 	_update_button_state()
 

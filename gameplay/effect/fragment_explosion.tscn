@@ -4,13 +4,13 @@
 blend_mode = 1
 
 [sub_resource type="Gradient" id=5]
-offsets = PoolRealArray( 0, 0.848485, 1 )
-colors = PoolColorArray( 1, 0.854902, 0, 1, 0.811765, 0.372549, 0, 0.882353, 0, 0, 0, 0.6 )
+offsets = PackedFloat32Array( 0, 0.848485, 1 )
+colors = PackedColorArray( 1, 0.854902, 0, 1, 0.811765, 0.372549, 0, 0.882353, 0, 0, 0, 0.6 )
 
-[sub_resource type="GradientTexture" id=6]
+[sub_resource type="GradientTexture2D" id=6]
 gradient = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticleProcessMaterial" id=3]
 lifetime_randomness = 0.28
 flag_disable_z = true
 spread = 180.0
@@ -25,7 +25,7 @@ angle_random = 1.0
 color = Color( 1, 0.164706, 0, 1 )
 color_ramp = SubResource( 6 )
 
-[node name="FragmentExplosion" type="Particles2D"]
+[node name="FragmentExplosion" type="GPUParticles2D"]
 material = SubResource( 4 )
 emitting = false
 amount = 64

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/metal05.wav-e304ee9193dc220e0ec67e4c98fee262.sample"
+type="AudioStreamWAV"
+uid="uid://ijk3sgdoyjtf"
+path="res://.godot/imported/metal05.wav-e304ee9193dc220e0ec67e4c98fee262.sample"
 
 [deps]
 
 source_file="res://gameplay/effect/metal05.wav"
-dest_files=[ "res://.import/metal05.wav-e304ee9193dc220e0ec67e4c98fee262.sample" ]
+dest_files=["res://.godot/imported/metal05.wav-e304ee9193dc220e0ec67e4c98fee262.sample"]
 
 [params]
 

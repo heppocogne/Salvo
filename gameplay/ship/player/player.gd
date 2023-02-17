@@ -1,4 +1,4 @@
-tool
+@tool
 class_name Player
 extends Ship
 
@@ -10,10 +10,10 @@ signal repair_cooldown_started(c)
 signal repair_cooldown_left_changed(t)
 signal subweapon_changed(sw)
 
-const line_color:=Color.darkgray
+const line_color:=Color.DARK_GRAY
 const line_length:=64.0
 
-var subweapon:="" setget set_subweapon
+var subweapon:="" : set = set_subweapon
 var block_user_input:=false
 var mouse_pos:Vector2
 var _class_Ship=load("res://gameplay/ship/ship.gd")
@@ -34,8 +34,8 @@ var _sub_weapon_accuracy_upgrade:float
 var _sub_weapon_dispersion_upgrade:float
 var _sub_weapon_reload_upgrade:float
 
-onready var damage_timer:Timer=$DamageTimer
-onready var repair_timer:Timer=$RpairTimer
+@onready var damage_timer:Timer=$DamageTimer
+@onready var repair_timer:Timer=$RpairTimer
 
 # speed: +1.5
 
@@ -143,14 +143,14 @@ func _physics_process(delta:float):
 	
 	var v:float
 	if r and !l:
-		v=get_speed()
+		v=get_velocity()
 	elif l and !r:
-		v=-get_speed()
+		v=-get_velocity()
 	else:
 		v=0.0
 	
 	var prev:=position
-	position.x=clamp(position.x+v*delta,0,OS.window_size.x)
+
 	if v!=0.0:
 		emit_signal("player_moved",position-prev)
 
@@ -164,9 +164,9 @@ func _input(event:InputEvent):
 		if mb.pressed:
 			var weapon_key:=""
 			if !block_user_input:
-				if mb.button_index==BUTTON_LEFT:
+				if mb.button_index==MOUSE_BUTTON_LEFT:
 					weapon_key="main"
-				elif mb.button_index==BUTTON_RIGHT:
+				elif mb.button_index==MOUSE_BUTTON_RIGHT:
 					if subweapon!="":
 						weapon_key=subweapon
 					else:
@@ -216,32 +216,32 @@ func _input(event:InputEvent):
 
 
 func get_max_hp()->int:
-	return .get_max_hp()+_hp_upgrade
+	return super.get_max_hp()+_hp_upgrade
 
 
-func get_speed()->float:
+func get_velocity()->float:
 	return base_speed+_speed_upgrade
 
 
 func get_weapon_reload(key:String="main")->float:
 	if key=="main":
-		return .get_weapon_reload(key)+_main_weapon_reload_upgrade
+		return super.get_weapon_reload(key)+_main_weapon_reload_upgrade
 	else:
-		return .get_weapon_reload(key)
+		return super.get_weapon_reload(key)
 
 
 func get_weapon_accuracy(key:String="main")->float:
 	if key=="main":
-		return .get_weapon_accuracy(key)+_main_weapon_accuracy_upgrade
+		return super.get_weapon_accuracy(key)+_main_weapon_accuracy_upgrade
 	else:
-		return .get_weapon_accuracy(key)
+		return super.get_weapon_accuracy(key)
 
 
 func get_weapon_dispersion(key:String="main")->float:
 	if key=="main":
-		return .get_weapon_dispersion(key)+_main_weapon_dispersion_upgrade
+		return super.get_weapon_dispersion(key)+_main_weapon_dispersion_upgrade
 	else:
-		return .get_weapon_dispersion(key)
+		return super.get_weapon_dispersion(key)
 
 
 func get_protection()->Vector2:
@@ -256,13 +256,13 @@ func set_subweapon(sw:String):
 func get_projectile_instance(key:String="main")->Projectile:
 	if weapon_states[key].projectile_prototype==null:
 		var projectile_scene:PackedScene=weapon_states[key].nodes[0].projectile_scene
-		var i:Projectile=projectile_scene.instance()
-		i.set_collision_layer_bit(4,true)
+		var i:Projectile=projectile_scene.instantiate()
+		i.set_collision_layer_value(4,true)
 		if key=="main" or key=="secondary":
-			i.set_collision_mask_bit(3,true)
-			i.set_collision_mask_bit(9,true)
+			i.set_collision_mask_value(3,true)
+			i.set_collision_mask_value(9,true)
 		elif key=="aa":
-			i.set_collision_mask_bit(7,true)
+			i.set_collision_mask_value(7,true)
 		
 		if key=="main":
 			i.base_damage=_main_weapon_shell_damage_upgrade
@@ -346,9 +346,9 @@ func _on_DamageTimer_timeout():
 func _on_RpairTimer_timeout():
 	if hp!=get_max_hp():
 		hp=min(get_max_hp(),hp+_regeneration_per_sec)
-		var popup:=preload("res://gameplay/ship/repair_indicator.tscn").instance()
+		var popup:=preload("res://gameplay/ship/repair_indicator.tscn").instantiate()
 		popup.text="+"+str(_regeneration_per_sec)
-		popup.rect_position=position+Vector2(0,-64)
+		popup.position=position+Vector2(0,-64)
 		GlobalScript.node2d_root.add_child(popup)
 		emit_signal("player_repaired",hp)
 	else:

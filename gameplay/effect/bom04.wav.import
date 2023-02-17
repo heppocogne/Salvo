@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/bom04.wav-652770c09193841916b041c683f64fe3.sample"
+type="AudioStreamWAV"
+uid="uid://bvgycepno2kqg"
+path="res://.godot/imported/bom04.wav-652770c09193841916b041c683f64fe3.sample"
 
 [deps]
 
 source_file="res://gameplay/effect/bom04.wav"
-dest_files=[ "res://.import/bom04.wav-652770c09193841916b041c683f64fe3.sample" ]
+dest_files=["res://.godot/imported/bom04.wav-652770c09193841916b041c683f64fe3.sample"]
 
 [params]
 

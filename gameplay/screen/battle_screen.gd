@@ -1,11 +1,11 @@
 class_name BattleScreen
 extends Control
 
-export var clear_count_key:String
-export var pt_per_damage:=1.0
-export var pt_aiming:=1.0
-export var pt_maneuver:=1.0
-export var first_reward:=0
+@export var clear_count_key:String
+@export var pt_per_damage:=1.0
+@export var pt_aiming:=1.0
+@export var pt_maneuver:=1.0
+@export var first_reward:=0
 
 var player_killed:=false
 var _player_salvo_diff:Array
@@ -16,12 +16,12 @@ var _damage_sum:=0.0
 var _enemy_shoot:=0
 var _enemy_hit:=0
 
-onready var player:Player=$Node2DRoot/Player
-onready var player_move_timer:Timer=$Node2DRoot/Player/Timer
-onready var tween:Tween=$Node2DRoot/Tween
-onready var timer:Timer=$Node2DRoot/Timer
-onready var aiming:PlayEvaluation=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/AimingAccuracy
-onready var maneuver:PlayEvaluation=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Maneuver
+@onready var player:Player=$Node2DRoot/Player
+@onready var player_move_timer:Timer=$Node2DRoot/Player/Timer
+@onready var tween:Tween=$Node2DRoot/Tween
+@onready var timer:Timer=$Node2DRoot/Timer
+@onready var aiming:PlayEvaluation=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/AimingAccuracy
+@onready var maneuver:PlayEvaluation=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Maneuver
 
 
 func _ready():
@@ -48,11 +48,11 @@ func _process(_delta:float):
 
 
 func spawn_enemy_ship(scene:PackedScene, x:float)->Ship:
-	var ship:Ship=scene.instance()
+	var ship:Ship=scene.instantiate()
 	GlobalScript.node2d_root.call_deferred("add_child",ship)
 	ship.position.y=GlobalScript.water_level
-	ship.connect("damaged",self,"_on_Enemy_damaged")
-	ship.connect("weapon_fired",self,"_on_Enemy_fired")
+	ship.connect("damaged",Callable(self,"_on_Enemy_damaged"))
+	ship.connect("weapon_fired",Callable(self,"_on_Enemy_fired"))
 	tween.interpolate_property(
 		ship,
 		"position:x",
@@ -95,15 +95,15 @@ func _on_Timer_timeout():
 func _on_Button_pressed():
 	SaveData.save_to_file()
 	Input.set_custom_mouse_cursor(null)
-	get_tree().change_scene_to(load("res://gameplay/screen/main/main.tscn"))
+	get_tree().change_scene_to_packed(load("res://gameplay/screen/main/main.tscn"))
 
 
 func _attach_marker(target:Node2D,offset:Vector2=Vector2(0,-10)):
-	var m:Marker=preload("res://gameplay/misc/marker.tscn").instance()
+	var m:Marker=preload("res://gameplay/misc/marker.tscn").instantiate()
 	GlobalScript.node2d_root.add_child(m)
 	m.popup_offset=offset
 	m.target_node=target
-	target.connect("killed",m,"queue_free")
+	target.connect("killed",Callable(m,"queue_free"))
 
 
 func _fadeout_mission_text(mission_message:String,duration:float):
@@ -112,7 +112,7 @@ func _fadeout_mission_text(mission_message:String,duration:float):
 	var tm:=Timer.new()
 	add_child(tm)
 	tm.start(duration)
-	yield(tm,"timeout")
+	await tm.timeout
 	
 	var l:Label=$VBoxContainer/CenterContainer/VBoxContainer/Label
 	var t:Tween=l.get_node("Tween")
@@ -138,7 +138,7 @@ func _fadeout_mission_text(mission_message:String,duration:float):
 	)
 	t.start()
 	tm.start(1.1)
-	yield(tm,"timeout")
+	await tm.timeout
 	tm.queue_free()
 	set_label_text("")
 	l.self_modulate.a=1.0
@@ -151,9 +151,9 @@ func stage_complete():
 	
 	$VBoxContainer/CenterContainer/VBoxContainer/Button.visible=true
 	set_label_text(tr(":MISSION_COMPLETED:")+"!")
-	$VBoxContainer/CenterContainer/VBoxContainer/Label.add_color_override("font_color",Color.yellow)
+	$VBoxContainer/CenterContainer/VBoxContainer/Label.add_theme_color_override("font_color",Color.YELLOW)
 	player.block_user_input=true
-	player.disconnect("killed",self,"_on_Player_killed")
+	player.disconnect("killed",Callable(self,"_on_Player_killed"))
 	var c:int
 	
 	SaveData.store("subweapon",player.subweapon)
@@ -176,7 +176,7 @@ func _calculate_reward(success:bool,bonus:int=0):
 	var tm:Timer=Timer.new()
 	add_child(tm)
 	tm.start(0.5)
-	yield(tm,"timeout")
+	await tm.timeout
 	aiming.visible=true
 	
 	# evaluation systemu is work in progress
@@ -201,7 +201,7 @@ func _calculate_reward(success:bool,bonus:int=0):
 		aiming.set_evaluation("D")
 	
 	tm.start(0.5)
-	yield(tm,"timeout")
+	await tm.timeout
 	maneuver.visible=true
 	
 	var diff_sum:=0.0
@@ -231,7 +231,7 @@ func _calculate_reward(success:bool,bonus:int=0):
 		maneuver.set_evaluation("D")
 	
 	tm.start(0.5)
-	yield(tm,"timeout")
+	await tm.timeout
 	tm.queue_free()
 	var reward_node:=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Reward
 	reward_node.visible=true
@@ -264,7 +264,7 @@ func _on_Player_killed():
 func stage_fail():
 	$VBoxContainer/CenterContainer/VBoxContainer/Button.visible=true
 	set_label_text(tr(":MISSION_FAILED:")+"!")
-	$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Label.add_color_override("font_color",Color.orangered)
+	$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Label.add_theme_color_override("font_color",Color.ORANGE_RED)
 	
 	SaveData.store("subweapon",player.subweapon)
 	

@@ -1,6 +1,6 @@
 extends "res://gameplay/screen/weapon_reload_bar.gd"
 
-onready var weap_name:Label=$"../WeaponName"
+@onready var weap_name:Label=$"../WeaponName"
 
 
 func _ready():
@@ -8,7 +8,7 @@ func _ready():
 
 
 func set_weapon_key(key:String):
-	.set_weapon_key(key)
+	super.set_weapon_key(key)
 	call_deferred("_set_weapon_key_impl",key)
 
 

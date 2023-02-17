@@ -1,6 +1,6 @@
 extends Control
 
-onready var current_volume:Label=$ColorRect/MarginContainer/VBoxContainer/SoundVolume/CurrentVolume
+@onready var current_volume:Label=$ColorRect/MarginContainer/VBoxContainer/SoundVolume/CurrentVolume
 
 
 func _ready():
@@ -12,13 +12,13 @@ func _ready():
 	else:
 		lang.select(1)
 	$ColorRect/MarginContainer/VBoxContainer/SoundVolume/CenterContainer/HBoxContainer/HSlider.value=SystemSaveData.read("se_volume")
-	$ColorRect/MarginContainer/VBoxContainer/UseCursor/CheckBox.pressed=SystemSaveData.read("use_default_cursor")
-	$ColorRect/MarginContainer/VBoxContainer/ShowFps/CheckBox.pressed=SystemSaveData.read("show_fps")
+	$ColorRect/MarginContainer/VBoxContainer/UseCursor/CheckBox.button_pressed=SystemSaveData.read("use_default_cursor")
+	$ColorRect/MarginContainer/VBoxContainer/ShowFps/CheckBox.button_pressed=SystemSaveData.read("show_fps")
 
 
 func _on_Return_pressed():
 	SystemSaveData.save_to_file()
-	get_tree().change_scene_to(load("res://gameplay/screen/title.tscn"))
+	get_tree().change_scene_to_packed(load("res://gameplay/screen/title.tscn"))
 
 
 func _on_Language_item_selected(index:int):
@@ -54,6 +54,6 @@ func _on_Button_pressed():
 		TranslationServer.set_locale("en")
 	$ColorRect/MarginContainer/VBoxContainer/SoundVolume/CenterContainer/HBoxContainer/HSlider.value=SystemSaveData.read("se_volume")
 
-	$ColorRect/MarginContainer/VBoxContainer/UseCursor/CheckBox.pressed=SystemSaveData.read("use_default_cursor")
-	$ColorRect/MarginContainer/VBoxContainer/ShowFps/CheckBox.pressed=SystemSaveData.read("show_fps")
+	$ColorRect/MarginContainer/VBoxContainer/UseCursor/CheckBox.button_pressed=SystemSaveData.read("use_default_cursor")
+	$ColorRect/MarginContainer/VBoxContainer/ShowFps/CheckBox.button_pressed=SystemSaveData.read("show_fps")
 

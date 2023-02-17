@@ -1,8 +1,8 @@
 class_name AntiAirProjectile
 extends Projectile
 
-export var radius:float=20
-var delay:float setget set_delay
+@export var radius:float=20
+var delay:float : set = set_delay
 
 var _circle_shape:CircleShape2D
 
@@ -23,9 +23,9 @@ func set_delay(d:float):
 
 
 func _on_Timer_timeout():
-	$Sprite.queue_free()
+	$Sprite2D.queue_free()
 	velocity=Vector2.ZERO
-	set_collision_mask_bit(0,false)
+	set_collision_mask_value(0,false)
 	$CollisionShape2D.shape=_circle_shape
 	$AudioStreamPlayer.play()
 	$FragmentExplosion.emitting=true
@@ -34,5 +34,5 @@ func _on_Timer_timeout():
 	var tm:=Timer.new()
 	add_child(tm)
 	tm.start(0.4)
-	yield(tm,"timeout")
+	await tm.timeout
 	queue_free()

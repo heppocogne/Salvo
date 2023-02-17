@@ -4,8 +4,8 @@ extends Area2D
 signal damaged(d)
 signal killed()
 
-export var hp:int=1000
-export var active:=true setget set_active
+@export var hp:int=1000
+@export var active:=true : set = set_active
 
 
 func _ready():

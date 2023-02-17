@@ -2,9 +2,9 @@
 
 [ext_resource path="res://gameplay/ship/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/screen/battle_screen.gd" type="Script" id=2]
-[ext_resource path="res://gameplay/screen/simple.png" type="Texture" id=3]
-[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.24.tres" type="DynamicFont" id=4]
-[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=5]
+[ext_resource path="res://gameplay/screen/simple.png" type="Texture2D" id=3]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.24.tres" type="FontFile" id=4]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.16.tres" type="FontFile" id=5]
 [ext_resource path="res://gameplay/screen/hp_bar.gd" type="Script" id=6]
 [ext_resource path="res://gameplay/screen/weapon_reload_bar.gd" type="Script" id=7]
 [ext_resource path="res://gameplay/screen/play_evaluation.tscn" type="PackedScene" id=8]
@@ -28,7 +28,7 @@ autoplay = true
 
 [node name="Node2DRoot" type="Node2D" parent="."]
 
-[node name="Simple" type="Sprite" parent="Node2DRoot"]
+[node name="Simple" type="Sprite2D" parent="Node2DRoot"]
 self_modulate = Color( 0.862745, 0.862745, 0.862745, 1 )
 scale = Vector2( 1, 6 )
 texture = ExtResource( 3 )
@@ -44,7 +44,7 @@ centered = false
 position = Vector2( 512, 594 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="Node2DRoot/WaterArea"]
+[node name="Sprite2D" type="Sprite2D" parent="Node2DRoot/WaterArea"]
 self_modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
 position = Vector2( 0, 560 )
 scale = Vector2( 1, 1.5 )
@@ -64,37 +64,37 @@ anchor_bottom = 1.0
 custom_constants/separation = 0
 
 [node name="FpsLabel" type="Label" parent="VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 14.0
+offset_right = 1024.0
+offset_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "fps:"
 script = ExtResource( 12 )
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 14.0
-margin_right = 1024.0
-margin_bottom = 614.0
-rect_min_size = Vector2( 0, 600 )
+offset_top = 14.0
+offset_right = 1024.0
+offset_bottom = 614.0
+custom_minimum_size = Vector2( 0, 600 )
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/CenterContainer"]
 visible = false
-margin_left = 505.0
-margin_top = 293.0
-margin_right = 519.0
-margin_bottom = 307.0
+offset_left = 505.0
+offset_top = 293.0
+offset_right = 519.0
+offset_bottom = 307.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
-margin_left = 480.0
-margin_top = 280.0
-margin_right = 544.0
-margin_bottom = 319.0
+offset_left = 480.0
+offset_top = 280.0
+offset_right = 544.0
+offset_bottom = 319.0
 script = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer"]
-margin_left = 32.0
-margin_right = 32.0
-margin_bottom = 35.0
+offset_left = 32.0
+offset_right = 32.0
+offset_bottom = 35.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 4 )
 align = 1
@@ -108,22 +108,22 @@ one_shot = true
 autostart = true
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
-margin_top = 39.0
-margin_right = 64.0
-margin_bottom = 39.0
-custom_constants/margin_right = 32
-custom_constants/margin_left = 32
+offset_top = 39.0
+offset_right = 64.0
+offset_bottom = 39.0
+custom_constants/offset_right = 32
+custom_constants/offset_left = 32
 
 [node name="Evaluations" type="VBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer"]
 visible = false
-margin_left = 32.0
-margin_right = 192.0
-margin_bottom = 24.0
+offset_left = 32.0
+offset_right = 192.0
+offset_bottom = 24.0
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations"]
-margin_right = 32.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 160, 0 )
+offset_right = 32.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 160, 0 )
 size_flags_horizontal = 4
 custom_colors/font_color = Color( 1, 1, 0.784314, 1 )
 custom_fonts/font = ExtResource( 5 )
@@ -132,35 +132,35 @@ align = 1
 
 [node name="AimingAccuracy" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations" instance=ExtResource( 8 )]
 visible = false
-margin_top = 28.0
-margin_right = 84.0
-margin_bottom = 52.0
+offset_top = 28.0
+offset_right = 84.0
+offset_bottom = 52.0
 title_name = ":AIMING_SKILL:"
 
 [node name="Maneuver" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations" instance=ExtResource( 8 )]
 visible = false
-margin_top = 56.0
-margin_right = 84.0
-margin_bottom = 80.0
+offset_top = 56.0
+offset_right = 84.0
+offset_bottom = 80.0
 title_name = ":STEERING_SKILL:"
 
 [node name="Reward" type="HBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations"]
 visible = false
-margin_top = 84.0
-margin_right = 84.0
-margin_bottom = 108.0
+offset_top = 84.0
+offset_right = 84.0
+offset_bottom = 108.0
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Reward"]
-margin_right = 48.0
-margin_bottom = 24.0
+offset_right = 48.0
+offset_bottom = 24.0
 custom_colors/font_color = Color( 0, 1, 0.784314, 1 )
 custom_fonts/font = ExtResource( 5 )
 text = ":REWARD:"
 
 [node name="Point" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Reward"]
-margin_left = 52.0
-margin_right = 84.0
-margin_bottom = 24.0
+offset_left = 52.0
+offset_right = 84.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0.607843, 1, 1 )
 custom_fonts/font = ExtResource( 5 )
@@ -169,110 +169,110 @@ align = 2
 
 [node name="Button" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer"]
 visible = false
-margin_top = 208.0
-margin_right = 132.0
-margin_bottom = 238.0
+offset_top = 208.0
+offset_right = 132.0
+offset_bottom = 238.0
 custom_fonts/font = ExtResource( 5 )
 text = ":RETURN:"
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 614.0
-margin_right = 1024.0
-margin_bottom = 768.0
+offset_top = 614.0
+offset_right = 1024.0
+offset_bottom = 768.0
 size_flags_vertical = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1017.0
-margin_bottom = 147.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 1017.0
+offset_bottom = 147.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/CenterContainer"]
-margin_left = 30.0
-margin_top = 24.0
-margin_right = 980.0
-margin_bottom = 116.0
+offset_left = 30.0
+offset_top = 24.0
+offset_right = 980.0
+offset_bottom = 116.0
 custom_constants/separation = 10
 
 [node name="Durability" type="HBoxContainer" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
-margin_right = 950.0
-margin_bottom = 24.0
+offset_right = 950.0
+offset_bottom = 24.0
 
 [node name="HP" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
-margin_right = 96.0
-margin_bottom = 24.0
+offset_right = 96.0
+offset_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = ":DURABILITY:"
 
 [node name="HPBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
-margin_left = 100.0
-margin_right = 550.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 450, 0 )
+offset_left = 100.0
+offset_right = 550.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 450, 0 )
 size_flags_vertical = 3
 percent_visible = false
 script = ExtResource( 6 )
 
 [node name="Control" type="Control" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
-margin_left = 554.0
-margin_right = 578.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 0 )
+offset_left = 554.0
+offset_right = 578.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 24, 0 )
 
 [node name="RepairTime" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
-margin_left = 582.0
-margin_right = 646.0
-margin_bottom = 24.0
+offset_left = 582.0
+offset_right = 646.0
+offset_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = ":REPAIR:"
 
 [node name="RepairTimeBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/Durability"]
-margin_left = 650.0
-margin_right = 950.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 300, 0 )
+offset_left = 650.0
+offset_right = 950.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 300, 0 )
 size_flags_vertical = 3
 value = 100.0
 percent_visible = false
 script = ExtResource( 10 )
 
 [node name="MainWeapon" type="HBoxContainer" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
-margin_top = 34.0
-margin_right = 950.0
-margin_bottom = 58.0
+offset_top = 34.0
+offset_right = 950.0
+offset_bottom = 58.0
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/MainWeapon"]
-margin_right = 104.0
-margin_bottom = 24.0
+offset_right = 104.0
+offset_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = ":MAIN_WEAPON:"
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/MainWeapon"]
-margin_left = 108.0
-margin_right = 408.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 300, 24 )
+offset_left = 108.0
+offset_right = 408.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 300, 24 )
 size_flags_vertical = 3
 percent_visible = false
 script = ExtResource( 7 )
 player_nodepath = NodePath("../../../../../../Node2DRoot/Player")
 
 [node name="SubWeapon" type="HBoxContainer" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
-margin_top = 68.0
-margin_right = 950.0
-margin_bottom = 92.0
+offset_top = 68.0
+offset_right = 950.0
+offset_bottom = 92.0
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/SubWeapon"]
-margin_right = 96.0
-margin_bottom = 24.0
+offset_right = 96.0
+offset_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 text = ":SUB_WEAPON:"
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/SubWeapon"]
-margin_left = 100.0
-margin_right = 400.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 300, 24 )
+offset_left = 100.0
+offset_right = 400.0
+offset_bottom = 24.0
+custom_minimum_size = Vector2( 300, 24 )
 size_flags_vertical = 3
 percent_visible = false
 script = ExtResource( 11 )
@@ -280,9 +280,9 @@ weapon_key = ""
 player_nodepath = NodePath("../../../../../../Node2DRoot/Player")
 
 [node name="WeaponName" type="Label" parent="VBoxContainer/PanelContainer/CenterContainer/VBoxContainer/SubWeapon"]
-margin_left = 404.0
-margin_right = 404.0
-margin_bottom = 24.0
+offset_left = 404.0
+offset_right = 404.0
+offset_bottom = 24.0
 custom_fonts/font = ExtResource( 5 )
 
 [connection signal="tree_exiting" from="." to="." method="_on_BattleScreen_tree_exiting"]

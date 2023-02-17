@@ -1,9 +1,9 @@
-tool
+@tool
 class_name Fighter
 extends Aircraft
 
 var target_y:=300.0
-onready var timer:Timer=$Timer
+@onready var timer:Timer=$Timer
 var player_node:Player
 
 func _ready():
@@ -23,10 +23,10 @@ func _physics_process(_delta:float):
 func _on_Timer_timeout():
 	var rot_deg:float
 	if position.y<target_y:
-		rot_deg=rand_range(150,180)
+		rot_deg=randf_range(150,180)
 	else:
-		rot_deg=rand_range(180,210)
+		rot_deg=randf_range(180,210)
 	
-	target_velocity=polar2cartesian(get_speed(),deg2rad(rot_deg))
+	target_velocity=polar2cartesian(get_velocity(),deg_to_rad(rot_deg))
 	
-	timer.start(rand_range(0.5,1.0))
+	timer.start(randf_range(0.5,1.0))

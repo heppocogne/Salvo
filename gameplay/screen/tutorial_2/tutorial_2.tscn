@@ -10,7 +10,7 @@ pt_aiming = 10.0
 pt_maneuver = 0.01
 first_reward = 100
 
-[node name="Timer2" type="Timer" parent="VBoxContainer/ViewportContainer/Viewport/Node2DRoot" index="5"]
+[node name="Timer2" type="Timer" parent="VBoxContainer/SubViewportContainer/SubViewport/Node2DRoot" index="5"]
 wait_time = 5.0
 
-[connection signal="timeout" from="VBoxContainer/ViewportContainer/Viewport/Node2DRoot/Timer2" to="." method="_on_Timer2_timeout"]
+[connection signal="timeout" from="VBoxContainer/SubViewportContainer/SubViewport/Node2DRoot/Timer2" to="." method="_on_Timer2_timeout"]

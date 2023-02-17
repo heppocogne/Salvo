@@ -1,13 +1,13 @@
-tool
+@tool
 class_name Weapon
 extends Node2D
 
-export var projectile_scene:PackedScene setget set_projectile_scene
-export var base_muzzle_velocity:float setget set_base_muzzle_velocity
-export var muzzle_position:Vector2
-export var num_barrels:int=1
+@export var projectile_scene:PackedScene : set = set_projectile_scene
+@export var base_muzzle_velocity:float : set = set_base_muzzle_velocity
+@export var muzzle_position:Vector2
+@export var num_barrels:int=1
 
-export var _range:float=-1  setget _set_range,get_range
+@export var _range:float=-1  : get = get_range, set = _set_range
 
 
 func _ready():
@@ -37,7 +37,7 @@ func _set_range(_r:float):
 func get_range()->float:
 	if projectile_scene:
 		if _range<0.0:
-			var instance:Projectile=projectile_scene.instance()
+			var instance:Projectile=projectile_scene.instantiate()
 			if instance:
 				var v:=get_muzzle_velocity()
 				if instance.gravity==0.0:
@@ -55,12 +55,12 @@ func get_range()->float:
 static func get_random_dispersion(dispersion:float,accuracy:float)->float:
 	var disp:float
 	if accuracy==0.0:
-		disp=rand_range(-dispersion,dispersion)
+		disp=randf_range(-dispersion,dispersion)
 	else:
 		var a_eval:=accuracy
 		var sum:=0.0
 		while 0<a_eval:
-			var temp:=rand_range(-dispersion,dispersion)
+			var temp:=randf_range(-dispersion,dispersion)
 			if a_eval<1:
 				temp*=a_eval
 			sum+=temp

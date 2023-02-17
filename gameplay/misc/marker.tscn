@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://gameplay/misc/marker.svg" type="Texture" id=1]
+[ext_resource path="res://gameplay/misc/marker.svg" type="Texture2D" id=1]
 [ext_resource path="res://gameplay/misc/marker.gd" type="Script" id=2]
 
-[node name="Marker" type="Sprite"]
+[node name="Marker" type="Sprite2D"]
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 popup_offset = Vector2( 0, -10 )

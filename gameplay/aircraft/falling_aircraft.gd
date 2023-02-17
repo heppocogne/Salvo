@@ -1,22 +1,22 @@
 class_name FallingAircraft
-extends Sprite
+extends Sprite2D
 
 var duration:=5.0
 var velocity:Vector2
 var gravity:float
-onready var smoke:Particles2D=$Smoke
+@onready var smoke:GPUParticles2D=$Smoke
 
 
 func _ready():
 	var tm:Timer=$Timer
 	var tw:Tween=$Tween
 	tm.wait_time=duration
-	gravity=rand_range(49,98)
+	gravity=randf_range(49,98)
 	tm.start()
 	tw.interpolate_property(
 		self,
 		"modulate",
-		Color.white,
+		Color.WHITE,
 		Color(1,1,1,0),
 		duration,
 		Tween.TRANS_LINEAR,
@@ -31,7 +31,7 @@ func _physics_process(delta:float):
 	rotation=velocity.angle()
 	
 	if GlobalScript.water_level<position.y:
-		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
+		var splash:GPUParticles2D=preload("res://gameplay/effect/water_splash.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(splash)
 		splash.global_position=global_position
 		splash.scale=1.5*Vector2(1,1)
@@ -39,7 +39,7 @@ func _physics_process(delta:float):
 		queue_free()
 
 
-func setup(s:Sprite,init_velocity:Vector2,parent_scale:Vector2=Vector2(1,1)):
+func setup(s:Sprite2D,init_velocity:Vector2,parent_scale:Vector2=Vector2(1,1)):
 	texture=s.texture
 	offset=s.offset
 	scale=s.scale*parent_scale

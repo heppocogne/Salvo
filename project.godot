@@ -6,172 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "NavaelBaseObject",
-"class": "Airbase",
-"language": "GDScript",
-"path": "res://gameplay/base/airbase.gd"
-}, {
-"base": "Area2D",
-"class": "Aircraft",
-"language": "GDScript",
-"path": "res://gameplay/aircraft/aircraft.gd"
-}, {
-"base": "Projectile",
-"class": "AntiAirProjectile",
-"language": "GDScript",
-"path": "res://gameplay/projectile/anti_air_projectile.gd"
-}, {
-"base": "NavaelBaseObject",
-"class": "Artillery",
-"language": "GDScript",
-"path": "res://gameplay/base/artillery.gd"
-}, {
-"base": "Control",
-"class": "BattleScreen",
-"language": "GDScript",
-"path": "res://gameplay/screen/battle_screen.gd"
-}, {
-"base": "Weapon",
-"class": "BombThrower",
-"language": "GDScript",
-"path": "res://gameplay/weapon/bomb_thrower.gd"
-}, {
-"base": "Aircraft",
-"class": "Bomber",
-"language": "GDScript",
-"path": "res://gameplay/aircraft/bomber.gd"
-}, {
-"base": "Projectile",
-"class": "Bullet",
-"language": "GDScript",
-"path": "res://gameplay/projectile/bullet.gd"
-}, {
-"base": "Label",
-"class": "DamageIndicator",
-"language": "GDScript",
-"path": "res://gameplay/ship/damage_indicator.gd"
-}, {
-"base": "Sprite",
-"class": "FallingAircraft",
-"language": "GDScript",
-"path": "res://gameplay/aircraft/falling_aircraft.gd"
-}, {
-"base": "Aircraft",
-"class": "Fighter",
-"language": "GDScript",
-"path": "res://gameplay/aircraft/fighter.gd"
-}, {
-"base": "Weapon",
-"class": "Gun",
-"language": "GDScript",
-"path": "res://gameplay/weapon/gun/gun.gd"
-}, {
-"base": "Gun",
-"class": "MachineGun",
-"language": "GDScript",
-"path": "res://gameplay/weapon/gun/machine_gun.gd"
-}, {
-"base": "Sprite",
-"class": "Marker",
-"language": "GDScript",
-"path": "res://gameplay/misc/marker.gd"
-}, {
-"base": "Area2D",
-"class": "NavaelBaseObject",
-"language": "GDScript",
-"path": "res://gameplay/base/naval_base_object.gd"
-}, {
-"base": "Area2D",
-"class": "NavalFortress",
-"language": "GDScript",
-"path": "res://gameplay/base/naval_fortress.gd"
-}, {
-"base": "Particles2D",
-"class": "OneshotParticles2D",
-"language": "GDScript",
-"path": "res://gameplay/effect/oneshot_particles2d.gd"
-}, {
-"base": "HBoxContainer",
-"class": "PlayEvaluation",
-"language": "GDScript",
-"path": "res://gameplay/screen/play_evaluation.gd"
-}, {
-"base": "Ship",
-"class": "Player",
-"language": "GDScript",
-"path": "res://gameplay/ship/player/player.gd"
-}, {
-"base": "Area2D",
-"class": "Projectile",
-"language": "GDScript",
-"path": "res://gameplay/projectile/projectile.gd"
-}, {
-"base": "Area2D",
-"class": "Ship",
-"language": "GDScript",
-"path": "res://gameplay/ship/ship.gd"
-}, {
-"base": "Sprite",
-"class": "SinkingShip",
-"language": "GDScript",
-"path": "res://gameplay/ship/sinking_ship.gd"
-}, {
-"base": "HBoxContainer",
-"class": "StageDescription",
-"language": "GDScript",
-"path": "res://gameplay/screen/main/stage_description.gd"
-}, {
-"base": "HBoxContainer",
-"class": "UpgradeFeature",
-"language": "GDScript",
-"path": "res://gameplay/screen/main/ship_upgrade/upgrade_feature.gd"
-}, {
-"base": "Node2D",
-"class": "Weapon",
-"language": "GDScript",
-"path": "res://gameplay/weapon/weapon.gd"
-}, {
-"base": "Node",
-"class": "WeaponState",
-"language": "GDScript",
-"path": "res://gameplay/misc/weapon_state.gd"
-} ]
-_global_script_class_icons={
-"Airbase": "",
-"Aircraft": "",
-"AntiAirProjectile": "",
-"Artillery": "",
-"BattleScreen": "",
-"BombThrower": "",
-"Bomber": "",
-"Bullet": "",
-"DamageIndicator": "",
-"FallingAircraft": "",
-"Fighter": "",
-"Gun": "",
-"MachineGun": "",
-"Marker": "",
-"NavaelBaseObject": "",
-"NavalFortress": "",
-"OneshotParticles2D": "",
-"PlayEvaluation": "",
-"Player": "",
-"Projectile": "",
-"Ship": "",
-"SinkingShip": "",
-"StageDescription": "",
-"UpgradeFeature": "",
-"Weapon": "",
-"WeaponState": ""
-}
+config_version=5
 
 [application]
 
 config/name="Warship Salvo"
 run/main_scene="res://gameplay/screen/title.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://salvo_icon.png"
 
 [autoload]
@@ -182,7 +23,7 @@ SystemSaveData="*res://system_save_data.gd"
 
 [display]
 
-window/size/height=768
+window/size/viewport_height=768
 window/size/resizable=false
 
 [gui]
@@ -193,15 +34,15 @@ common/drop_mouse_on_gui_input_disabled=true
 
 game_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":16777231,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":65,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 game_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":16777233,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":68,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 
 [layer_names]
@@ -218,7 +59,7 @@ game_right={
 
 [locale]
 
-translations=PoolStringArray( "res://l10n/languages.en.translation", "res://l10n/languages.ja.translation" )
+translations=PackedStringArray("res://l10n/languages.en.translation", "res://l10n/languages.ja.translation")
 
 [mono]
 

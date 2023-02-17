@@ -1,11 +1,11 @@
 class_name Marker
-extends Sprite
+extends Sprite2D
 
-export var rotation_speed:float=TAU
+@export var rotation_speed:float=TAU
 
 var target_node:Node2D
 var popup_offset:=Vector2(0,-10)
-var disabled:=false setget set_disabled
+var disabled:=false : set = set_disabled
 
 var _scale_x:=scale.x
 var _time:=0.0

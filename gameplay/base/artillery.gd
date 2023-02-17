@@ -1,16 +1,16 @@
-tool
+@tool
 class_name Artillery
 extends NavaelBaseObject
 
 signal weapon_fired(key,n)
 
-export var reload:float=10
-export var projectile_scene:PackedScene setget set_projectile_scene
-export var base_muzzle_velocity:float setget set_base_muzzle_velocity
-export var muzzle_position:Vector2
-export var _range:float=-1  setget _set_range,get_range
+@export var reload:float=10
+@export var projectile_scene:PackedScene : set = set_projectile_scene
+@export var base_muzzle_velocity:float : set = set_base_muzzle_velocity
+@export var muzzle_position:Vector2
+@export var _range:float=-1  : get = get_range, set = _set_range
 
-onready var timer:Timer=$Timer
+@onready var timer:Timer=$Timer
 
 var player_node:Player
 
@@ -32,7 +32,7 @@ func _physics_process(_delta:float):
 	
 	if player_node.position.distance_to(global_position)<=get_range() and timer.time_left==0.0:
 		var v_diff:Vector2=player_node.position-global_position
-		var i:Projectile=projectile_scene.instance()
+		var i:Projectile=projectile_scene.instantiate()
 		var v:float=get_muzzle_velocity()
 		var a:=0.5*i.gravity*v_diff.x*v_diff.x/(v*v)
 		var rot:float
@@ -89,7 +89,7 @@ func _set_range(_r:float):
 func get_range()->float:
 	if projectile_scene:
 		if _range<0.0:
-			var instance:Projectile=projectile_scene.instance()
+			var instance:Projectile=projectile_scene.instantiate()
 			if instance:
 				var v:=get_muzzle_velocity()
 				if instance.gravity==0.0:
@@ -126,7 +126,7 @@ func damage(p:Projectile):
 	GlobalScript.damage_popup(dmg,p.position)
 	if hp<=0:
 		emit_signal("killed")
-		var explosion:Particles2D=preload("res://gameplay/effect/explosion.tscn").instance()
+		var explosion:GPUParticles2D=preload("res://gameplay/effect/explosion.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(explosion)
 		explosion.global_position=global_position
 		explosion.scale=0.2*Vector2(1,1)

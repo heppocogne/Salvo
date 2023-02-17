@@ -49,10 +49,10 @@ func _physics_process(_delta:float):
 				step=KILL_TUTORIAL
 				var ship:=spawn_enemy_ship(preload("res://gameplay/ship/enemy/tutorial_target.tscn"),GlobalScript.water_level)
 				_attach_marker(ship,Vector2(0,-15))
-				ship.connect("killed",self,"_on_Enemy_Killed")
+				ship.connect("killed",Callable(self,"_on_Enemy_Killed"))
 				return
 		
-		if Input.is_mouse_button_pressed(BUTTON_LEFT):
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			for n in GlobalScript.node2d_root.get_children():
 				if n is Projectile:
 					left_clicked=true

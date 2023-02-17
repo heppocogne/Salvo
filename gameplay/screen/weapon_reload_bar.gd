@@ -1,7 +1,7 @@
 extends ProgressBar
 
-export var weapon_key:String="main" setget set_weapon_key
-export var player_nodepath:NodePath
+@export var weapon_key:String="main" : set = set_weapon_key
+@export var player_nodepath:NodePath
 var player_node:Player
 var timer:Timer
 

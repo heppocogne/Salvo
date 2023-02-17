@@ -1,13 +1,13 @@
-tool
+@tool
 class_name StageDescription
 extends HBoxContainer
 
 signal button_pressed(n)
 
-export var unlocked:=false setget set_unlocked
-export var save_data_key:String="stage_#_unlocked"
-export var stage_name:String="Stage #" setget set_stage_name
-export var description:String setget set_description
+@export var unlocked:=false : set = set_unlocked
+@export var save_data_key:String="stage_#_unlocked"
+@export var stage_name:String="Stage #" : set = set_stage_name
+@export var description:String : set = set_description
 
 
 func _ready():

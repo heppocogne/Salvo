@@ -8,6 +8,6 @@ func _ready():
 	
 	for n in get_children():
 		if n is NavaelBaseObject:
-			n.connect("damaged",GlobalScript.battele_screen,"_on_Enemy_damaged")
+			n.connect("damaged",Callable(GlobalScript.battele_screen,"_on_Enemy_damaged"))
 			if n is Artillery:
-				n.connect("weapon_fired",GlobalScript.battele_screen,"_on_Enemy_fired")
+				n.connect("weapon_fired",Callable(GlobalScript.battele_screen,"_on_Enemy_fired"))

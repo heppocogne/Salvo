@@ -13,11 +13,11 @@ func _ready():
 func _on_Timer_timeout():
 	_fadeout_mission_text(tr(":KILL_THEM_ALL:"),4.0)
 	var s:=spawn_enemy_ship(_old_dd_scene,600)
-	s.connect("killed",self,"_on_Enemy_killed")
+	s.connect("killed",Callable(self,"_on_Enemy_killed"))
 	s=spawn_enemy_ship(_old_dd_scene,700)
-	s.connect("killed",self,"_on_Enemy_killed")
+	s.connect("killed",Callable(self,"_on_Enemy_killed"))
 	s=spawn_enemy_ship(_old_dd_scene,800)
-	s.connect("killed",self,"_on_Enemy_killed")
+	s.connect("killed",Callable(self,"_on_Enemy_killed"))
 
 
 func _on_Enemy_killed():
@@ -25,13 +25,13 @@ func _on_Enemy_killed():
 	
 	if kill_count==3:
 		timer.start(2.0)
-		yield(timer,"timeout")
+		await timer.timeout
 		var s:=spawn_enemy_ship(_old_dd_scene,650)
-		s.connect("killed",self,"_on_Enemy_killed")
+		s.connect("killed",Callable(self,"_on_Enemy_killed"))
 		s=spawn_enemy_ship(_old_bb_scene,800)
-		s.connect("killed",self,"_on_Enemy_killed")
+		s.connect("killed",Callable(self,"_on_Enemy_killed"))
 		s=spawn_enemy_ship(_old_dd_scene,950)
-		s.connect("killed",self,"_on_Enemy_killed")
+		s.connect("killed",Callable(self,"_on_Enemy_killed"))
 	elif kill_count==6:
 		stage_complete()
 		SaveData.store("stage_2_unlocked",true)

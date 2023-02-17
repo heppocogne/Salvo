@@ -1,16 +1,16 @@
 class_name DamageIndicator
 extends Label
 
-export var font_color:Color
+@export var font_color:Color
 
 
 func _ready():
-	add_color_override("font_color",font_color)
+	add_theme_color_override("font_color",font_color)
 	$Tween.interpolate_property(
 		self,
-		"rect_position:y",
-		rect_position.y+32,
-		rect_position.y,
+		"position:y",
+		position.y+32,
+		position.y,
 		0.5,
 		Tween.TRANS_QUAD,
 		Tween.EASE_OUT

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/gun15.wav-40825aa614aa5689745680a30fcbe2ac.sample"
+type="AudioStreamWAV"
+uid="uid://dnlwdbt21i6jb"
+path="res://.godot/imported/gun15.wav-40825aa614aa5689745680a30fcbe2ac.sample"
 
 [deps]
 
 source_file="res://gameplay/effect/gun15.wav"
-dest_files=[ "res://.import/gun15.wav-40825aa614aa5689745680a30fcbe2ac.sample" ]
+dest_files=["res://.godot/imported/gun15.wav-40825aa614aa5689745680a30fcbe2ac.sample"]
 
 [params]
 

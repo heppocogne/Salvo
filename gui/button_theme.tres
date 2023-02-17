@@ -4,7 +4,7 @@
 [ext_resource path="res://gui/pressed_styleboxtexture.tres" type="StyleBox" id=2]
 [ext_resource path="res://gui/hoverd_styleboxtexture.tres" type="StyleBox" id=3]
 [ext_resource path="res://gui/disabled_styleboxtexture.tres" type="StyleBox" id=4]
-[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.16.tres" type="DynamicFont" id=5]
+[ext_resource path="res://gui/fonts/SourceHanSansHW-Regular.16.tres" type="FontFile" id=5]
 
 [resource]
 default_font = ExtResource( 5 )

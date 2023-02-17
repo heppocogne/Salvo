@@ -2,7 +2,7 @@
 
 [ext_resource path="res://gameplay/projectile/projectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/projectile/bullet.gd" type="Script" id=2]
-[ext_resource path="res://gameplay/projectile/machinegun_bullet.png" type="Texture" id=3]
+[ext_resource path="res://gameplay/projectile/machinegun_bullet.png" type="Texture2D" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 0.5, 0.5 )
@@ -15,5 +15,5 @@ sync_rotation = false
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 texture = ExtResource( 3 )

@@ -14,13 +14,13 @@ func _on_Projectile_area_entered(area:Area2D):
 		invalid=true
 		
 		area.damage(self)
-		var fragment:Particles2D=preload("res://gameplay/effect/bullet_fragment.tscn").instance()
+		var fragment:GPUParticles2D=preload("res://gameplay/effect/bullet_fragment.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(fragment)
 		fragment.global_position=global_position
 		
 		GlobalScript.play_sound("res://gameplay/effect/metal05.wav")
 	elif area==GlobalScript.water_area:
-		var splash:Particles2D=preload("res://gameplay/effect/water_splash.tscn").instance()
+		var splash:GPUParticles2D=preload("res://gameplay/effect/water_splash.tscn").instantiate()
 		GlobalScript.node2d_root.add_child(splash)
 		splash.scale=_scale_modifier
 		splash.global_position=global_position

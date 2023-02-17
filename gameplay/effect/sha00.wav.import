@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/sha00.wav-449917818310866146f471a2978140c4.sample"
+type="AudioStreamWAV"
+uid="uid://cl5uh0tsoigm6"
+path="res://.godot/imported/sha00.wav-449917818310866146f471a2978140c4.sample"
 
 [deps]
 
 source_file="res://gameplay/effect/sha00.wav"
-dest_files=[ "res://.import/sha00.wav-449917818310866146f471a2978140c4.sample" ]
+dest_files=["res://.godot/imported/sha00.wav-449917818310866146f471a2978140c4.sample"]
 
 [params]
 

@@ -1,11 +1,11 @@
 class_name OneshotParticles2D
-extends Particles2D
+extends GPUParticles2D
 
 signal emission_started()
 signal emission_finished()
 
-export var auto_start:=true
-export var auto_remove:=true
+@export var auto_start:=true
+@export var auto_remove:=true
 
 var _prev_emitting:=false
 

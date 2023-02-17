@@ -13,12 +13,14 @@ var _data:Dictionary
 
 
 func _ready():
-	connect("tree_exiting",self,"_on_SystemSaveData_tree_exiting")
+	connect("tree_exiting",Callable(self,"_on_SystemSaveData_tree_exiting"))
 	
 	var f:=File.new()
 	if f.open(json_path,File.READ)==OK:
 		var s:=f.get_as_text()
-		var parse_result:=JSON.parse(s)
+		var test_json_conv = JSON.new()
+		test_json_conv.parse(s)
+		var parse_result:=test_json_conv.get_data()
 		if parse_result.error==OK:
 			_data=parse_result.result
 		else:
@@ -37,7 +39,7 @@ func _ready():
 func save_to_file():
 	var f:=File.new()
 	if f.open(json_path,File.WRITE)==OK:
-		var json:=to_json(_data)
+		var json:=JSON.new().stringify(_data)
 		f.store_string(json)
 
 
