@@ -28,31 +28,24 @@ var _data:Dictionary
 func _ready():
 	connect("tree_exiting",Callable(self,"_on_SaveData_tree_exiting"))
 	
-	var f:=File.new()
+	var f:FileAccess
 	if OS.has_feature("debug"):
-		if f.open(json_path,File.READ)==OK:
+		f=FileAccess.open(json_path,FileAccess.READ)
+		if f:
 			var s:=f.get_as_text()
 			var test_json_conv = JSON.new()
 			test_json_conv.parse(s)
-			var parse_result:=test_json_conv.get_data()
-			if parse_result.error==OK:
-				_data=parse_result.result
-			else:
-				push_error("Save data corrupted!\nat line:%d\nerror:%s"%[parse_result.error_line,parse_result.error_string])
-				get_tree().quit(1)
+			_data=test_json_conv.data
 		else:
 			_data=_default_savedata
 	else:
-		if f.open_encrypted(path,File.READ,GlobalScript.get_secret_key())==OK:
+		f=FileAccess.open_encrypted(path,FileAccess.READ,GlobalScript.get_secret_key())
+		if f:
 			var s:=f.get_as_text()
 			var test_json_conv = JSON.new()
 			test_json_conv.parse(s)
-			var parse_result:=test_json_conv.get_data()
-			if parse_result.error==OK:
-				_data=parse_result.result
-			else:
-				push_error("Save data corrupted!\nat line:%d\nerror:%s"%[parse_result.error_line,parse_result.error_string])
-				get_tree().quit(1)
+			var parse_result:Dictionary=test_json_conv.data
+			_data=test_json_conv.data
 		else:
 			_data=_default_savedata
 	
@@ -60,13 +53,15 @@ func _ready():
 
 
 func save_to_file():
-	var f:=File.new()
+	var f:FileAccess
 	if OS.has_feature("debug"):
-		if f.open(json_path,File.WRITE)==OK:
+		f=FileAccess.open(json_path,FileAccess.WRITE)
+		if f:
 			var json:=JSON.new().stringify(_data)
 			f.store_string(json)
 	else:
-		if f.open_encrypted(path,File.WRITE,GlobalScript.get_secret_key())==OK:
+		f=FileAccess.open_encrypted(path,FileAccess.WRITE,GlobalScript.get_secret_key())
+		if f:
 			var json:=JSON.new().stringify(_data)
 			f.store_string(json)
 
