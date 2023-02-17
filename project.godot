@@ -23,6 +23,7 @@ SystemSaveData="*res://system_save_data.gd"
 
 [display]
 
+window/size/viewport_width=1024
 window/size/viewport_height=768
 window/size/resizable=false
 
