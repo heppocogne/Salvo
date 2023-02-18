@@ -27,6 +27,6 @@ func _on_Timer_timeout():
 	else:
 		rot_deg=randf_range(180,210)
 	
-	target_velocity=polar2cartesian(get_velocity(),deg_to_rad(rot_deg))
+	target_velocity=Vector2(get_velocity(),0).rotated(deg_to_rad(rot_deg))
 	
 	timer.start(randf_range(0.5,1.0))

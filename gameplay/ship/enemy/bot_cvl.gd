@@ -40,6 +40,6 @@ func _on_FighterTakeoffTimer_timeout():
 		
 	
 	a.position=global_position
-	a.target_velocity=polar2cartesian(a.get_velocity(),deg_to_rad(225))
+	a.target_velocity=Vector2(a.get_velocity(),0).rotated(deg_to_rad(225))
 	a._actual_velocity=a.target_velocity
 	a.target_y=randf_range(fighter_y_min,fighter_y_max)

@@ -44,15 +44,15 @@ func _physics_process(_delta:float):
 	if p.x<=player_node.position.x and weapon_states["main"].ready and 0<=_actual_velocity.y:
 		fire_weapon("main",p)
 		if _action==DIVE:
-			target_velocity=polar2cartesian(get_velocity(),PI)
+			target_velocity=get_velocity()*Vector2.LEFT
 	elif _action==UNDEFINED and 0<=_actual_velocity.y and player_node.position.distance_to(position)<r*1.1:
 		if randf()<0.5:
 			_action=DIVE
-			target_velocity=polar2cartesian(get_velocity(),deg_to_rad(150))
+			target_velocity=Vector2(get_velocity(),0).rotated(deg_to_rad(150))
 		else:
 			_action=NORMAL
 	elif _action==DIVE and 400<position.y:
-		target_velocity=polar2cartesian(get_velocity(),PI)
+		target_velocity=get_velocity()*Vector2.LEFT
 
 
 func fire_weapon(key:String,_pos:Vector2):
