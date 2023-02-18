@@ -16,7 +16,7 @@ func _ready():
 	if !Engine.is_editor_hint:
 		get_projectile_instance().queue_free()
 		weapon_states["main"].timer.stop()
-		weapon_states["main"].ready=true
+		weapon_states["main"].is_ready=true
 		player_node=GlobalScript.node2d_root.get_node("Player")
 
 
@@ -41,7 +41,7 @@ func _physics_process(_delta:float):
 	for n in weapon_states["main"].nodes:
 		n._set_range(r)
 	
-	if p.x<=player_node.position.x and weapon_states["main"].ready and 0<=_actual_velocity.y:
+	if p.x<=player_node.position.x and weapon_states["main"].is_ready and 0<=_actual_velocity.y:
 		fire_weapon("main",p)
 		if _action==DIVE:
 			target_velocity=get_velocity()*Vector2.LEFT
@@ -67,7 +67,7 @@ func fire_weapon(key:String,_pos:Vector2):
 		
 		n+=w.num_barrels
 	
-	ws.ready=false
+	ws.is_ready=false
 
 	emit_signal("weapon_fired",key,n)
 

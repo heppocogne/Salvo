@@ -108,7 +108,7 @@ func _ready():
 	
 	for key in weapon_groups:
 		weapon_states[key].timer.stop()
-		weapon_states[key].ready=true
+		weapon_states[key].is_ready=true
 		emit_signal("weapon_relaod_time_left_changed",key,0)
 
 
@@ -171,7 +171,7 @@ func _input(event:InputEvent):
 						weapon_key=subweapon
 					else:
 						return
-				if weapon_states[weapon_key].ready:
+				if weapon_states[weapon_key].is_ready:
 					var rot:=mouse_pos.angle()
 					var wp:Weapon=weapon_states[weapon_key].nodes[0]
 					var i:Projectile=get_projectile_instance(weapon_key)
@@ -313,7 +313,7 @@ func fire_weapon2(key:String,pos:Vector2,approx_rot:float):
 			else:
 				rot=PI/2
 		w.put_projectile(i,rot,get_weapon_dispersion(key),get_weapon_accuracy(key))
-	ws.ready=false
+	ws.is_ready=false
 	ws.timer.start(get_weapon_reload(key))
 
 
@@ -327,7 +327,7 @@ func fire_aa(pos:Vector2):
 		var acc:=get_weapon_accuracy("aa")
 		i.delay=delay*(1+Weapon.get_random_dispersion(disp,acc))
 		w.put_projectile(i,pos.angle_to_point(w.global_position),disp,acc)
-	ws.ready=false
+	ws.is_ready=false
 	ws.timer.start(get_weapon_reload("aa"))
 
 

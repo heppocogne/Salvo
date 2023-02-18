@@ -16,7 +16,7 @@ func _physics_process(_delta:float):
 	
 	if weakref(player_node).get_ref():
 		var p:Vector2=player_node.position
-		if p.distance_to(position)<weapon_states["main"].nodes[0].get_range() and weapon_states["main"].ready:
+		if p.distance_to(position)<weapon_states["main"].nodes[0].get_range() and weapon_states["main"].is_ready:
 			fire_weapon("main",p)
 
 

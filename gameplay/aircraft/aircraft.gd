@@ -190,7 +190,7 @@ func fire_weapon(key:String,pos:Vector2):
 				rot=PI/2
 		w.put_projectile(get_projectile_instance(key),rot,get_weapon_dispersion(key),get_weapon_accuracy(key))
 		n+=w.num_barrels
-	ws.ready=false
+	ws.is_ready=false
 	ws.timer.start(get_weapon_reload(key))
 	
 	emit_signal("weapon_fired",key,n)
@@ -204,7 +204,7 @@ func damage(p:Projectile):
 	var raw_dmg:=v_norm*p.get_damage()
 	raw_dmg.x=max(0,raw_dmg.x)
 	raw_dmg.y=max(0,raw_dmg.y)
-	var dmg_mod:=max(raw_dmg.length(),0.05*p.get_damage())
+	var dmg_mod:float=max(raw_dmg.length(),0.05*p.get_damage())
 	hp-=dmg_mod
 	emit_signal("damaged",dmg_mod)
 	_damage_popup(dmg_mod,p.position)
@@ -236,5 +236,5 @@ func _add_falling_aircraft():
 
 
 func _on_ReloadTimer_timeout(key:String):
-	weapon_states[key].ready=true
+	weapon_states[key].is_ready=true
 	emit_signal("weapon_reloaded",key)

@@ -165,7 +165,7 @@ func fire_weapon(key:String,pos:Vector2):
 				rot=PI/2
 		w.put_projectile(i,rot,get_weapon_dispersion(key),get_weapon_accuracy(key))
 		n+=w.num_barrels
-	ws.ready=false
+	ws.is_ready=false
 	ws.timer.start(get_weapon_reload(key))
 	
 	emit_signal("weapon_fired",key,n)
@@ -203,7 +203,7 @@ func _add_sinking_ship():
 
 
 func _on_ReloadTimer_timeout(key:String):
-	weapon_states[key].ready=true
+	weapon_states[key].is_ready=true
 	emit_signal("weapon_reloaded",key)
 
 

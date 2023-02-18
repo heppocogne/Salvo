@@ -6,7 +6,7 @@ func _ready():
 	if !Engine.is_editor_hint:
 		get_projectile_instance("main2").queue_free()
 		weapon_states["main2"].timer.stop()
-		weapon_states["main2"].ready=true
+		weapon_states["main2"].is_ready=true
 
 
 func _physics_process(_delta:float):
@@ -30,7 +30,7 @@ func _physics_process(_delta:float):
 	for n in weapon_states["main2"].nodes:
 		n._set_range(r)
 	
-	if p.x<=player_node.position.x and weapon_states["main2"].ready and 0<=_actual_velocity.y:
+	if p.x<=player_node.position.x and weapon_states["main2"].is_ready and 0<=_actual_velocity.y:
 		drop_bomb()
 
 
@@ -46,6 +46,6 @@ func drop_bomb():
 		
 		n+=w.num_barrels
 	
-	ws.ready=false
+	ws.is_ready=false
 
 	emit_signal("weapon_fired","main2",n)

@@ -16,5 +16,5 @@ func _physics_process(_delta:float):
 		var ws:WeaponState=weapon_states[key]
 		if ws.nodes.size()==0:
 			return
-		elif ws.ready and position.distance_to(player_node.position)<=ws.nodes[0].get_range():
+		elif ws.is_ready and position.distance_to(player_node.position)<=ws.nodes[0].get_range():
 			fire_weapon(key,player_node.position)

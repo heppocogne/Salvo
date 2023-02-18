@@ -2,7 +2,7 @@ class_name WeaponState
 extends Node
 
 var nodes:Array
-var ready:bool=false
+var is_ready:bool=false
 var timer:Timer
 var projectile_prototype:Projectile=null
 
