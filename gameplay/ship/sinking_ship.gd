@@ -6,7 +6,7 @@ var duration:=3.0
 
 func _ready():
 	var tm:Timer=$Timer
-	var tw:Tween=$Tween
+	var tw:=Tween.new()
 	rotation=randf_range(-PI,PI)/6.0
 	tm.wait_time=duration
 	tm.start()

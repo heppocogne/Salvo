@@ -9,7 +9,7 @@ var gravity:float
 
 func _ready():
 	var tm:Timer=$Timer
-	var tw:Tween=$Tween
+	var tw:=Tween.new()
 	tm.wait_time=duration
 	gravity=randf_range(49,98)
 	tm.start()

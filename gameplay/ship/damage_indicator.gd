@@ -6,7 +6,8 @@ extends Label
 
 func _ready():
 	add_theme_color_override("font_color",font_color)
-	$Tween.interpolate_property(
+	var tw:=Tween.new()
+	tw.interpolate_property(
 		self,
 		"position:y",
 		position.y+32,
@@ -15,8 +16,8 @@ func _ready():
 		Tween.TRANS_QUAD,
 		Tween.EASE_OUT
 	)
-	$Tween.start()
-	$Tween.interpolate_property(
+	tw.start()
+	tw.interpolate_property(
 		self,
 		"self_modulate",
 		Color(1,1,1,0),
@@ -25,7 +26,7 @@ func _ready():
 		Tween.TRANS_QUAD,
 		Tween.EASE_OUT
 	)
-	$Tween.start()
+	tw.start()
 
 
 func _on_Timer_timeout():

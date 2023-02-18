@@ -18,10 +18,10 @@ var _enemy_hit:=0
 
 @onready var player:Player=$Node2DRoot/Player
 @onready var player_move_timer:Timer=$Node2DRoot/Player/Timer
-@onready var tween:Tween=$Node2DRoot/Tween
 @onready var timer:Timer=$Node2DRoot/Timer
 @onready var aiming:PlayEvaluation=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/AimingAccuracy
 @onready var maneuver:PlayEvaluation=$VBoxContainer/CenterContainer/VBoxContainer/MarginContainer/Evaluations/Maneuver
+var tween:=Tween.new()
 
 
 func _ready():
@@ -75,7 +75,7 @@ func set_label_text(text:String):
 	else:
 		l.visible=true
 		l.percent_visible=0.0
-		var t:Tween=l.get_node("Tween")
+		var t:=Tween.new()
 		t.interpolate_property(
 			l,
 			"percent_visible",
@@ -115,7 +115,7 @@ func _fadeout_mission_text(mission_message:String,duration:float):
 	await tm.timeout
 	
 	var l:Label=$VBoxContainer/CenterContainer/VBoxContainer/Label
-	var t:Tween=l.get_node("Tween")
+	var t:=Tween.new()
 	t.interpolate_property(
 		l,
 		"self_modulate:a",
