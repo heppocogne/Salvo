@@ -16,9 +16,6 @@ const line_length:=64.0
 var subweapon:="" : set = set_subweapon
 var block_user_input:=false
 var mouse_pos:Vector2
-var _class_Ship=load("res://gameplay/ship/ship.gd")
-var _class_NavalBaseObject=load("res://gameplay/base/naval_base_object.gd")
-var _class_Aircraft=load("res://gameplay/aircraft/aircraft.gd")
 
 var _speed_upgrade:int
 var _hp_upgrade:int
@@ -158,7 +155,7 @@ func _physics_process(delta:float):
 func _input(event:InputEvent):
 	if event is InputEventMouseMotion:
 		mouse_pos=get_local_mouse_position()
-		update()
+#		update()
 	elif event is InputEventMouseButton:
 		var mb:=event as InputEventMouseButton
 		if mb.pressed:
@@ -188,7 +185,7 @@ func _input(event:InputEvent):
 						
 						var dist_min:float=INF
 						for n in get_tree().get_nodes_in_group("EnemyObjects"):
-							if n is _class_Ship or n is _class_NavalBaseObject:
+							if n is Ship or n is NavaelBaseObject:
 								if n.global_position.distance_to(pos)<dist_min:
 									dist_min=n.global_position.distance_to(pos)
 						if dist_min!=INF:
@@ -198,7 +195,7 @@ func _input(event:InputEvent):
 						
 						var dist_min:float=INF
 						for n in get_tree().get_nodes_in_group("EnemyObjects"):
-							if n is _class_Aircraft:
+							if n is Aircraft:
 								# wip: dist_min for aircrafts
 								pass
 						if dist_min!=INF:
@@ -297,7 +294,7 @@ func fire_weapon2(key:String,pos:Vector2,approx_rot:float):
 				var diff_min_idx:=-1
 				var diff_min:=INF
 				for idx in range(4):
-					var diff:=abs(rot_candidates[idx]-approx_rot)
+					var diff:float=abs(rot_candidates[idx]-approx_rot)
 					if diff<diff_min:
 						diff_min=diff
 						diff_min_idx=idx
@@ -333,7 +330,7 @@ func fire_aa(pos:Vector2):
 
 func _on_Player_damaged(d:int):
 	repair_timer.stop()
-	var cooldown:=max(damage_timer.time_left,sqrt(d))
+	var cooldown:float=max(damage_timer.time_left,sqrt(d))
 	damage_timer.start(cooldown)
 	emit_signal("repair_cooldown_started",cooldown)
 
