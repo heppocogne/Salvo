@@ -19,7 +19,7 @@ func _ready():
 	set_max_level(max_level)
 	set_costs(costs)
 	
-	if !Engine.editor_hint:
+	if !Engine.is_editor_hint:
 		if !SaveData.has_key(save_data_key):
 			SaveData.store(save_data_key,0)
 		var lvl:int=SaveData.read(save_data_key)

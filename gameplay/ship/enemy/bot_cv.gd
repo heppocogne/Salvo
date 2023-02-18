@@ -16,7 +16,7 @@ const b2_scene:PackedScene=preload("res://gameplay/aircraft/bomber2.tscn")
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint:
 		return
 	$FighterTakeoffTimer.wait_time=fighter_takeoff_duration
 	$FighterTakeoffTimer.start()

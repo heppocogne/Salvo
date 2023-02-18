@@ -30,7 +30,7 @@ func _init():
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint:
 		return
 	
 	for key in weapon_groups:

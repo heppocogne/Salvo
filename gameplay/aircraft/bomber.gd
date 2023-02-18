@@ -13,7 +13,7 @@ var _action:=UNDEFINED
 
 
 func _ready():
-	if !Engine.editor_hint:
+	if !Engine.is_editor_hint:
 		get_projectile_instance().queue_free()
 		weapon_states["main"].timer.stop()
 		weapon_states["main"].ready=true
@@ -21,7 +21,7 @@ func _ready():
 
 
 func _physics_process(_delta:float):
-	if Engine.editor_hint:
+	if Engine.is_editor_hint:
 		return
 	
 	# set bomb range

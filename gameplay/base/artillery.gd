@@ -21,7 +21,7 @@ func _ready():
 
 
 func _physics_process(_delta:float):
-	if Engine.editor_hint:
+	if Engine.is_editor_hint:
 		return
 	
 	if !active:

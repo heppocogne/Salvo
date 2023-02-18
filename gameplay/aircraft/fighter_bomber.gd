@@ -3,14 +3,14 @@ extends Fighter
 
 
 func _ready():
-	if !Engine.editor_hint:
+	if !Engine.is_editor_hint:
 		get_projectile_instance("main2").queue_free()
 		weapon_states["main2"].timer.stop()
 		weapon_states["main2"].ready=true
 
 
 func _physics_process(_delta:float):
-	if Engine.editor_hint:
+	if Engine.is_editor_hint:
 		return
 	
 	# set bomb range
