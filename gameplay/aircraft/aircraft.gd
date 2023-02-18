@@ -27,7 +27,7 @@ func _init():
 
 
 func _ready():
-	if Engine.is_editor_hint:
+	if Engine.is_editor_hint():
 		return
 	
 	for key in weapon_groups:
@@ -69,7 +69,7 @@ func _process(_delta:float):
 
 
 func _physics_process(delta:float):
-	if Engine.is_editor_hint:
+	if Engine.is_editor_hint():
 		return
 	
 	if target_velocity!=_actual_velocity:

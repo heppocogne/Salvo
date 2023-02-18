@@ -11,7 +11,7 @@ func _ready():
 
 
 func _physics_process(_delta:float):
-	if Engine.is_editor_hint:
+	if Engine.is_editor_hint():
 		return
 	
 	if weakref(player_node).get_ref():

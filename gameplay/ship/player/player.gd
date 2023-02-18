@@ -51,7 +51,7 @@ var _sub_weapon_reload_upgrade:float
 
 func _ready():
 	# load from savedata
-	if Engine.is_editor_hint:
+	if Engine.is_editor_hint():
 		return
 	
 	set_subweapon(SaveData.read("subweapon"))
@@ -113,7 +113,7 @@ func _ready():
 
 
 func _process(_delta:float):
-	if Engine.is_editor_hint:
+	if Engine.is_editor_hint():
 		return
 	
 	var mw:Dictionary=weapon_groups["main"]
@@ -132,7 +132,7 @@ func _process(_delta:float):
 
 
 func _physics_process(delta:float):
-	if Engine.is_editor_hint:
+	if Engine.is_editor_hint():
 		return
 	
 	if block_user_input:

@@ -12,7 +12,7 @@ const fb_scene:PackedScene=preload("res://gameplay/aircraft/fighter_bomber.tscn"
 
 
 func _ready():
-	if Engine.is_editor_hint:
+	if Engine.is_editor_hint():
 		return
 	$FighterTakeoffTimer.wait_time=fighter_takeoff_duration
 	$FighterTakeoffTimer.start()
